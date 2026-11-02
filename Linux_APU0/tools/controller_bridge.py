@@ -1,7 +1,7 @@
 """
 手柄桥接脚本（Windows 电脑端）
 ================================
-读取标准微软 Xbox 手柄状态，通过 UDP 发送到飞腾派。
+读取标准微软 Xbox 手柄状态，通过 UDP 发送到板卡。
 
 用法:
     python controller_bridge.py --host 192.168.1.100        # 正常运行
@@ -61,7 +61,7 @@ BTN_MENU = 7       # 菜单键 → 录像开/关
 BTN_LEFT_STICK = 8  # 左摇杆按下 → 重新标定 IMU 航向（2026-10-29 按用户要求恢复）
 BTN_RIGHT_STICK = 9  # R3 → 拍照
 
-# 名称 → 按钮索引（发往飞腾派时用语义名，接收端更清晰）
+# 名称 → 按钮索引（发往板卡时用语义名，接收端更清晰）
 BUTTON_MAP = {
     "a": BTN_A, "b": BTN_B, "x": BTN_X, "y": BTN_Y,
     "lb": BTN_LB, "rb": BTN_RB,
@@ -173,9 +173,9 @@ def run_debug(joystick):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="手柄桥接（Windows → 飞腾派）")
-    parser.add_argument("--host", default="192.168.10.11", help="飞腾派 IP 地址")
-    parser.add_argument("--port", type=int, default=9002, help="飞腾派手柄 UDP 端口")
+    parser = argparse.ArgumentParser(description="手柄桥接（Windows → 板卡）")
+    parser.add_argument("--host", default="192.168.137.100", help="板卡 IP 地址")
+    parser.add_argument("--port", type=int, default=9002, help="手柄 UDP 端口")
     parser.add_argument("--debug", action="store_true", help="调试模式：打印轴/按钮索引")
     parser.add_argument("--learn", action="store_true", help="学习模式：实时显示索引，供生成映射文件")
     parser.add_argument("--map", default="", help="控制器映射 JSON（默认 Xbox 布局）")

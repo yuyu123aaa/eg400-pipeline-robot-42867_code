@@ -43,3 +43,6 @@ Linux_APU0/data/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# IDE
+.dide/
