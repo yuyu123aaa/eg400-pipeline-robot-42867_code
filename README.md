@@ -65,7 +65,6 @@
 │   ├── models/best.onnx        ONNX 模型（PC 端推理/参考）
 │   ├── config/                 环境变量模板
 │   ├── data/                   巡检数据（每次巡检一个 Inspect_ 目录）
-│   ├── reference/legacy_phytium/  旧平台参考实现（仅作对照）
 │   └── tests/                  单元测试
 │
 └── 视觉_NPU/                    NPU 视觉链路
@@ -324,7 +323,6 @@ ENV 帧是在桥接进程里解析的，只重启 Web 没用；`app/comm.py` 与
 
 ## 九、说明
 
-- 仓库中的 `Linux_APU0/reference/legacy_phytium/` 是旧平台（飞腾派）参考实现，仅作对照，不参与 EG400 运行
 - `data/`、`logs/`、`.venv/`、编译中间产物不进版本库
 - 视觉模型与固件二进制随仓库分发，仅供本作品复现使用
 
