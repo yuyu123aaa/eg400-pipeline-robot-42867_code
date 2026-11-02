@@ -46,3 +46,6 @@ desktop.ini
 
 # IDE
 .dide/
+
+# 固件编译产物（只保留可烧录的 BOOT.bin）
+Baremetal_APU1/soc_sdk/my_work/build/
