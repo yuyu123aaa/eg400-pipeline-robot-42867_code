@@ -1,0 +1,239 @@
+Table of Contents
+-----------------
+1. checking no clock(5) (HIGH)
+2. checking clock definition(0) (HIGH)
+3. checking dummy node(2) (HIGH)
+4. checking invalid constraint(1) (HIGH)
+5. checking pll/clock buffer clock constraints(6) (HIGH)
+6. checking combinational loops(0) (HIGH)
+7. checking soft fifo timing exception constraints(0) (HIGH)
+8. checking no path constraints(0) (MEDIUM)
+9. checking shadowed/ignored timing exception constraints(0) (MEDIUM)
+10. checking no input delay(11) (MEDIUM)
+11. checking no output delay(21) (MEDIUM)
+12. checking partial input delay(0) (MEDIUM)
+13. checking partial output delay(0) (MEDIUM)
+14. checking abnormal input delay(0) (MEDIUM)
+
+
+1. checking nets with no clock driven. (HIGH)
+---------------------------------------------
+There is 1 clock net that with no clock driven by root clock pin: design_0_inst/design_0_PLL_3_Inst/dr1_phy_pll_58e32fb6dd07_Inst/u_DR1_PHY_PLL.clkc[0]. (HIGH)
+
+	design_0_inst/design_0_PLL_3_Inst/clk0_buf
+
+There is 1 clock net that with no clock driven by root clock pin: design_0_inst/design_0_PLL_npu_Inst/dr1_phy_pll_dcc52a480158_Inst/u_DR1_PHY_PLL.clkc[0]. (HIGH)
+
+	design_0_inst/design_0_PLL_npu_Inst/clk0_buf
+
+There is 1 clock net that with no clock driven by root clock pin: design_0_inst/design_0_pll_150m_Inst/dr1_phy_pll_bdb046a15d6b_Inst/u_DR1_PHY_PLL.clkc[0]. (HIGH)
+
+	design_0_inst/design_0_pll_150m_Inst/clk0_buf
+
+There is 1 clock net that with no clock driven by root clock pin: design_0_inst/design_0_pll_75m_Inst/dr1_phy_pll_Inst/u_DR1_PHY_PLL.clkc[0]. (HIGH)
+
+	design_0_inst/design_0_pll_75m_Inst/clk0_buf
+
+There is 1 clock net that with no clock driven by root clock pin: design_0_inst/design_0_video_timing_generator_v01_0_Inst/video_timing_generator_v01_e2dadf6740ca_Inst/dr1_pll_vtc_Inst/u_DR1_PHY_PLL.clkc[0]. (HIGH)
+
+	design_0_inst/w_net__video_timing_generator_v01_0__vtg_pclk
+
+2. checking clock definition problems. (HIGH)
+---------------------------------------------
+2.1 There are 0 leaf clock pins driven by multiple clocks. (HIGH)
+
+
+2.2 There are 0 clocks created on internal clock network. (HIGH)
+
+
+2.3 There are 0 unexpandable clock sets. (HIGH)
+
+
+2.4 There are 0 local clocks. (HIGH)
+
+
+2.5 There are 0 generated clocks that are not connected to their master clocks. (HIGH)
+
+
+3. checking dummy nodes. (HIGH)
+---------------------------------------------
+There are 2 nodes are dangling. (HIGH)
+
+DummyNode in Model: DR1_PHY_ERAM
+	design_0_inst/design_0_AXI4_Stream_to_Video_Out_0_Inst/alc_axi4s_vid_out_7d63f5fadd80_Inst/inst/COUPLER_INST/generate_async_fifo$FIFO_INST/ram_inst/ramread0_syn_15.orstb
+	design_0_inst/design_0_AXI4_Stream_to_Video_Out_0_Inst/alc_axi4s_vid_out_7d63f5fadd80_Inst/inst/COUPLER_INST/generate_async_fifo$FIFO_INST/ram_inst/ramread0_syn_15.orsta
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_45.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_21.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_39.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_27.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_15.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_57.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_51.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/GEN_SPRT_FOR_MM2S$MM2S_LINEBUFFER_I/GEN_LINEBUF_NO_SOF$GEN_LINEBUFFER$GEN_ASYNC_FIFO$LB_BUILT_IN$I_LINEBUFFER_FIFO/al_async_fifo/ram_inst/ramread0_syn_33.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_ADDR_CNTL/GEN_ADDR_FIFO$I_ADDR_QUAL_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_CMD_STATUS/GEN_INCLUDE_STATUS_FIFO$I_STS_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_16.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF$I_RD_SF/I_DATA_FIFO/ram_inst/ramread0_syn_15.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF$I_RD_SF/I_DATA_FIFO/ram_inst/ramread0_syn_56.orsta
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF$I_RD_SF/I_DATA_FIFO/ram_inst/ramread0_syn_15.orsta
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_RD_DATA_CNTL/GEN_DATA_CNTL_FIFO$I_DATA_CNTL_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orsta
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_CMD_STATUS/I_CMD_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_CMD_STATUS/I_CMD_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orsta
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_ADDR_CNTL/GEN_ADDR_FIFO$I_ADDR_QUAL_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orsta
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF$I_RD_SF/INCLUDE_DRE_CNTL$I_DRE_CNTL_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF$I_RD_SF/I_DATA_FIFO/ram_inst/ramread0_syn_56.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_CMD_STATUS/I_CMD_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_58.orstb
+	design_0_inst/design_0_VDMA_0_Inst/VDMA_5083a055b14c_Inst/u_vdma_top/I_PRMRY_DATAMOVER/GEN_MM2S_FULL$I_MM2S_FULL_WRAPPER/I_RD_DATA_CNTL/GEN_DATA_CNTL_FIFO$I_DATA_CNTL_FIFO/USE_SRL_FIFO$I_SYNC_FIFO/ram_inst/ramread0_syn_17.orstb
+
+DummyNode in Model: DR1_PHY_LSLICE
+	design_0_inst/design_0_Video_NPU_0_Inst/video_npu_top_77b8d5bfaa14_Inst/soft_npu_top_77b8d5bfaa14/u_resize_top/U_RESIZE/U_RESIZE_MULTIPLY/dataob_reg[53]_syn_2.ofb
+
+4. checking invalid constraints. (HIGH)
+---------------------------------------------
+There is 1 invalid constraint. (HIGH)
+
+	C:/qiansai_FPGA/my_cpu_npu/soc_prj/src/constraint/timing.sdc(30): set_clock_groups -exclusive -group [get_clocks {design_0_inst/design_0_PLL_npu_Inst/dr1_phy_pll_dcc52a480158_Inst/u_DR1_PHY_PLL.clkc[0]}] -group [get_clocks {design_0_inst/design_0_pll_75m_Inst/dr1_phy_pll_1f386b1db2c3_Inst/u_DR1_PHY_PLL.clkc[0]}]
+
+5. checking PLL/buffer clocks. (HIGH)
+---------------------------------------------
+PLL/buffer inst: design_0_inst/design_0_PLL_3_Inst/dr1_phy_pll_58e32fb6dd07_Inst/u_DR1_PHY_PLL
+{
+	There is 1 clock pin that has no clock constraint. (HIGH)
+
+		design_0_inst/design_0_PLL_3_Inst/dr1_phy_pll_58e32fb6dd07_Inst/u_DR1_PHY_PLL.clkc[0]
+
+	There is 1 clock whose clock frequency does not match the PLL setting. (HIGH)
+
+		Clock Name: design_0_inst/design_0_ARM_Processor_System_0_Inst/ARM_Processor_System_Inst/DR1_PHY_PROCESSOR_SYSTEM_Inst.p2f_clk0, Pin Name: design_0_inst/design_0_PLL_3_Inst/dr1_phy_pll_58e32fb6dd07_Inst/u_DR1_PHY_PLL.refclk, Constraint Frequency(MHz): 50.000000, PLL Setting Frequency(MHz): 148.500000
+
+}
+
+PLL/buffer inst: design_0_inst/design_0_PLL_npu_Inst/dr1_phy_pll_dcc52a480158_Inst/u_DR1_PHY_PLL
+{
+	There is 1 clock pin that has no clock constraint. (HIGH)
+
+		design_0_inst/design_0_PLL_npu_Inst/dr1_phy_pll_dcc52a480158_Inst/u_DR1_PHY_PLL.clkc[0]
+
+	There are 0 clocks whose clock frequency do not match the PLL setting. (HIGH)
+
+
+}
+
+PLL/buffer inst: design_0_inst/design_0_pll_150m_Inst/dr1_phy_pll_bdb046a15d6b_Inst/u_DR1_PHY_PLL
+{
+	There is 1 clock pin that has no clock constraint. (HIGH)
+
+		design_0_inst/design_0_pll_150m_Inst/dr1_phy_pll_bdb046a15d6b_Inst/u_DR1_PHY_PLL.clkc[0]
+
+	There are 0 clocks whose clock frequency do not match the PLL setting. (HIGH)
+
+
+}
+
+PLL/buffer inst: design_0_inst/design_0_pll_75m_Inst/dr1_phy_pll_Inst/u_DR1_PHY_PLL
+{
+	There is 1 clock pin that has no clock constraint. (HIGH)
+
+		design_0_inst/design_0_pll_75m_Inst/dr1_phy_pll_Inst/u_DR1_PHY_PLL.clkc[0]
+
+	There are 0 clocks whose clock frequency do not match the PLL setting. (HIGH)
+
+
+}
+
+PLL/buffer inst: design_0_inst/design_0_video_timing_generator_v01_0_Inst/video_timing_generator_v01_e2dadf6740ca_Inst/dr1_pll_vtc_Inst/u_DR1_PHY_PLL
+{
+	There is 1 clock pin that has no clock constraint. (HIGH)
+
+		design_0_inst/design_0_video_timing_generator_v01_0_Inst/video_timing_generator_v01_e2dadf6740ca_Inst/dr1_pll_vtc_Inst/u_DR1_PHY_PLL.clkc[0]
+
+	There are 0 clocks whose clock frequency do not match the PLL setting. (HIGH)
+
+
+}
+
+6. checking combinational loops. (HIGH)
+---------------------------------------------
+There are 0 combinational loops. (HIGH)
+
+
+7. checking soft fifo set_max_delay constraints. (HIGH)
+---------------------------------------------
+There are 0 max-delay datapath-only paths that are part of the provided async clock paths, whereas the timing between other registers is not relaxed or ignored. (HIGH)
+
+
+8. checking no path constraints. (MEDIUM)
+---------------------------------------------
+There are 0 constraints that have no timing paths. (MEDIUM)
+
+
+9. checking path exception constraints shadowed/ignored by other constraints. (MEDIUM)
+---------------------------------------------
+
+MCP/SMD Summary
+--------------------
+
+		Max Check
+		--------------------
+		     Total    Dominated     Shadowed      Ignored   Constraint
+
+		Min Check
+		--------------------
+		     Total    Dominated     Shadowed      Ignored   Constraint
+
+10. checking no input delay (MEDIUM)
+--------------------------
+There are 11 input ports that with no input delay specified. (MEDIUM)
+
+	i2c0_scl
+	i2c0_sda
+	i2c1_scl
+	i2c1_sda
+	led1
+	led2
+	uart0_rx
+	uart_front_rx
+	uart_gas_rx
+	uart_turb_rx
+	uart_ultra_rx
+
+11. checking no output delay (MEDIUM)
+--------------------------
+There are 21 output ports that with no output delay specified. (MEDIUM)
+
+	O_hdmi_clk_p
+	O_hdmi_tx_p[2]
+	O_hdmi_tx_p[1]
+	O_hdmi_tx_p[0]
+	gas_pump
+	gas_valve
+	i2c0_scl
+	i2c0_sda
+	i2c1_scl
+	i2c1_sda
+	led[2]
+	led[1]
+	led[0]
+	led1
+	led2
+	rs485_de
+	uart0_tx
+	uart_front_tx
+	uart_gas_tx
+	uart_turb_tx
+	uart_ultra_tx
+
+12. checking partial input delay (MEDIUM)
+--------------------------
+There are 0 input ports with partial input delay specified. (MEDIUM)
+
+
+13. checking partial output delay (MEDIUM)
+--------------------------
+There are 0 output ports with partial output delay specified. (MEDIUM)
+
+
+14. checking abnormal set_input_delay constraints. (MEDIUM)
+---------------------------------------------
+There are 0 abnormal set_input_delay constraints. (MEDIUM)
+
+

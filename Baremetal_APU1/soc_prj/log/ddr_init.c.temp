@@ -1,0 +1,1020 @@
+DDRC_CONFIG_FIELD_WRITE(0xf8420004, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 19
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8420120); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 93
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x001f0000, 16, 0xa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 94
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0c000000, 26, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 95
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x70000000, 28, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 96
+DDRC_CONFIG_FULL_WRITE(0xf8420120, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 97
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8420124); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 99
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003000, 12, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 100
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07000000, 24, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 101
+DDRC_CONFIG_FULL_WRITE(0xf8420124, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 102
+DDRC_CONFIG_FIELD_WRITE(0xf8420104, 0x00000200, 9, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 5
+DDRC_CONFIG_FIELD_WRITE(0xf8420120, 0x0000007f, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 16
+DDRC_CONFIG_FIELD_WRITE(0xf8420124, 0x0000007f, 0, 0x4f); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 17
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8420148); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 21
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x7f000000, 24, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 22
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000007f, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 23
+DDRC_CONFIG_FULL_WRITE(0xf8420148, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 24
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf842014c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 26
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x7f000000, 24, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 27
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000007f, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 28
+DDRC_CONFIG_FULL_WRITE(0xf842014c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 29
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8420150); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 21
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x7f000000, 24, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 22
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000007f, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 23
+DDRC_CONFIG_FULL_WRITE(0xf8420150, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 24
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8420154); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 26
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x7f000000, 24, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 27
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000007f, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 28
+DDRC_CONFIG_FULL_WRITE(0xf8420154, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 29
+DDRC_CONFIG_FIELD_WRITE(0xf8420104, 0x00000200, 9, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 5
+DDRC_CONFIG_FIELD_WAIT(0xf8420180, 0x00000001, 0, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 35
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf842080c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 153
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 154
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001c00, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 155
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000300, 8, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 156
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000000c0, 6, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 157
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000002, 1, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 158
+DDRC_CONFIG_FULL_WRITE(0xf842080c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 159
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf842083c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 161
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 162
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001c00, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 163
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000300, 8, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 164
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000000c0, 6, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 165
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000002, 1, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 166
+DDRC_CONFIG_FULL_WRITE(0xf842083c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 167
+DDRC_CONFIG_FIELD_WRITE(0xf842080c, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 169
+DDRC_CONFIG_FIELD_WRITE(0xf842083c, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 170
+DDRC_CONFIG_FIELD_WAIT(0xf8420810, 0x00000001, 0, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 173
+DDRC_CONFIG_FIELD_WAIT(0xf8420840, 0x00000001, 0, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_clk.cc : 174
+DDRC_CONFIG_FIELD_WRITE(0xf8420004, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 19
+DDRC_CONFIG_FIELD_WRITE(0xf84230a4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf84238a4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf84230a8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf84238a8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423898, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423094); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423094, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423894); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423894, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf84230f4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf84238f4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf84230f8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf84238f8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf84238e8, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84230e4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf84230e4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84238e4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf84238e4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423144, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423944, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423148, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423948, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423938, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423134); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423134, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423934); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423934, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423194, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423994, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423198, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423998, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423988, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423184); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423184, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423984); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423984, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf84231e4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf84239e4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf84231e8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf84239e8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf84239d8, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84231d4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf84231d4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84239d4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf84239d4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423234, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423a34, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423238, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423a38, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423a28, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423224); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423224, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423a24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423a24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423284, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423a84, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423288, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423a88, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423a78, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423274); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423274, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423a74); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423a74, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf84232d4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423ad4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf84232d8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423ad8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423ac8, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84232c4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf84232c4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423ac4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423ac4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423324, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423b24, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423328, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423b28, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423b18, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423314); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423314, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423b14); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423b14, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423374, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423b74, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423378, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423b78, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423b68, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423364); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423364, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423b64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423b64, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf84233c4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423bc4, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf84233c8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423bc8, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423bb8, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84233b4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf84233b4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423bb4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423bb4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf8423414, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 44
+DDRC_CONFIG_FIELD_WRITE(0xf8423c14, 0x00000fff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 45
+DDRC_CONFIG_FIELD_WRITE(0xf8423418, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf8423c18, 0x0000ff00, 8, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 47
+DDRC_CONFIG_FIELD_WRITE(0xf8423c08, 0x0000ff00, 8, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 50
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423404); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 52
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 53
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 54
+DDRC_CONFIG_FULL_WRITE(0xf8423404, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 55
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423c04); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0xaa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 58
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x55); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 59
+DDRC_CONFIG_FULL_WRITE(0xf8423c04, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 60
+DDRC_CONFIG_FIELD_WRITE(0xf84238d0, 0x00000fff, 0, 0xc80); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 66
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84238e4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 68
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x9100); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 70
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0xee); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 72
+DDRC_CONFIG_FULL_WRITE(0xf84238e4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 73
+DDRC_CONFIG_FIELD_WRITE(0xf8423c88, 0x0000000f, 0, 0xc); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 77
+DDRC_CONFIG_FIELD_WRITE(0xf84239c0, 0x00000fff, 0, 0xc80); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 66
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84239d4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 68
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x9100); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 70
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0xee); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 72
+DDRC_CONFIG_FULL_WRITE(0xf84239d4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 73
+DDRC_CONFIG_FIELD_WRITE(0xf8423c94, 0x0000000f, 0, 0xc); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 77
+DDRC_CONFIG_FIELD_WRITE(0xf8423ab0, 0x00000fff, 0, 0xc80); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 66
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423ac4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 68
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x9100); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 70
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0xee); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 72
+DDRC_CONFIG_FULL_WRITE(0xf8423ac4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 73
+DDRC_CONFIG_FIELD_WRITE(0xf8423ca0, 0x0000000f, 0, 0xc); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 77
+DDRC_CONFIG_FIELD_WRITE(0xf8423ba0, 0x00000fff, 0, 0xc80); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 66
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423bb4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 68
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x9100); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 70
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0xee); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 72
+DDRC_CONFIG_FULL_WRITE(0xf8423bb4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 73
+DDRC_CONFIG_FIELD_WRITE(0xf8423cac, 0x0000000f, 0, 0xc); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 77
+DDRC_CONFIG_FIELD_WRITE(0xf8423348, 0xf0000000, 28, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 80
+DDRC_CONFIG_FIELD_WRITE(0xf8423850, 0x00008000, 15, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 81
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423854); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 83
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x03800000, 23, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 84
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000003, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 85
+DDRC_CONFIG_FULL_WRITE(0xf8423854, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 86
+DDRC_CONFIG_FIELD_WRITE(0xf842b01c, 0x00000007, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 88
+DDRC_CONFIG_FIELD_WRITE(0xf842b024, 0x00000007, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 89
+DDRC_CONFIG_FIELD_WRITE(0xf842b02c, 0x00000007, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 90
+DDRC_CONFIG_FIELD_WRITE(0xf842c020, 0x00007000, 12, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 92
+DDRC_CONFIG_FIELD_WRITE(0xf842c028, 0x00007000, 12, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 93
+DDRC_CONFIG_FIELD_WRITE(0xf842c030, 0x00007000, 12, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 94
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 114
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 115
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000003, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 116
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000030, 4, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 117
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000300, 8, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 118
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 119
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000c, 2, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 120
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000000c0, 6, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 121
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000c00, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 122
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000c000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 123
+DDRC_CONFIG_FULL_WRITE(0xf8423000, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 126
+DDRC_CONFIG_FULL_WRITE(0xf8423800, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 126
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 129
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000000ff, 0, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 130
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ff00, 8, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 131
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ff0000, 16, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 132
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 133
+DDRC_CONFIG_FULL_WRITE(0xf8423004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 137
+DDRC_CONFIG_FULL_WRITE(0xf8423010, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 138
+DDRC_CONFIG_FULL_WRITE(0xf8423480, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 139
+DDRC_CONFIG_FULL_WRITE(0xf8423804, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 137
+DDRC_CONFIG_FULL_WRITE(0xf8423810, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 138
+DDRC_CONFIG_FULL_WRITE(0xf8423c80, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 139
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423820); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 20
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00200000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 21
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x20000000, 29, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 22
+DDRC_CONFIG_FULL_WRITE(0xf8423820, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 23
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423828); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 20
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00200000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 21
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x20000000, 29, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 22
+DDRC_CONFIG_FULL_WRITE(0xf8423828, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 23
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423830); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 20
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00200000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 21
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x20000000, 29, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 22
+DDRC_CONFIG_FULL_WRITE(0xf8423830, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 23
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423838); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 20
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00200000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 21
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x20000000, 29, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 22
+DDRC_CONFIG_FULL_WRITE(0xf8423838, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 23
+DDRC_CONFIG_FIELD_WRITE(0xf842b01c, 0x00000007, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 27
+DDRC_CONFIG_FIELD_WRITE(0xf842b024, 0x00000007, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 28
+DDRC_CONFIG_FIELD_WRITE(0xf842b02c, 0x00000007, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 29
+DDRC_CONFIG_FIELD_WRITE(0xf842c020, 0x00007000, 12, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 31
+DDRC_CONFIG_FIELD_WRITE(0xf842c028, 0x00007000, 12, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 32
+DDRC_CONFIG_FIELD_WRITE(0xf842c030, 0x00007000, 12, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 33
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84238c4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff0000, 16, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf84238c4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84239b4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff0000, 16, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf84239b4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423aa4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff0000, 16, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8423aa4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8423b94); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff0000, 16, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x8899); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8423b94, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 12
+DDRC_CONFIG_FULL_WRITE(0xf8421320, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 489
+DDRC_CONFIG_FULL_WRITE(0xf8421328, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 490
+DDRC_CONFIG_FULL_WRITE(0xf84211b0, 0x00000051); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 492
+DDRC_CONFIG_FULL_WRITE(0xf8421304, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 493
+DDRC_CONFIG_FULL_WRITE(0xf8421030, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 494
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8421000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 496
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xc0000000, 30, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 497
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000400, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 498
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000010, 4, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 499
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 500
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003000, 12, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 503
+DDRC_CONFIG_FULL_WRITE(0xf8421000, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 504
+DDRC_CONFIG_FULL_WRITE(0xf8421010, 0x40001010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 506
+DDRC_CONFIG_FULL_WRITE(0xf8421014, 0x00018954); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 507
+DDRC_CONFIG_FULL_WRITE(0xf842101c, 0xcb918919); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 508
+DDRC_CONFIG_FULL_WRITE(0xf8421030, 0x00000088); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 510
+DDRC_CONFIG_FULL_WRITE(0xf8421034, 0x00080001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 511
+DDRC_CONFIG_FULL_WRITE(0xf8421038, 0x00410002); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 512
+DDRC_CONFIG_FULL_WRITE(0xf8421050, 0x00c17020); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 513
+DDRC_CONFIG_FULL_WRITE(0xf8421060, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 514
+DDRC_CONFIG_FULL_WRITE(0xf8421064, 0x00610068); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 515
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 517
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000002, 1, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 518
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000004, 2, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 519
+DDRC_CONFIG_FULL_WRITE(0xf84210c0, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 520
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 26
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 27
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000e, 1, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 28
+DDRC_CONFIG_FULL_WRITE(0xf8420008, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 29
+DDRC_CONFIG_FULL_WRITE(0xf842107c, 0x00000300); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 73
+DDRC_CONFIG_FULL_WRITE(0xf84210b8, 0x00000bd3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 74
+DDRC_CONFIG_FULL_WRITE(0xf84210bc, 0x0003ffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 75
+DDRC_CONFIG_FULL_WRITE(0xf8421374, 0x0000010d); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 76
+DDRC_CONFIG_FULL_WRITE(0xf842137c, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 77
+DDRC_CONFIG_FULL_WRITE(0xf8421384, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 78
+InstRegVal = 0x40020003; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 235
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000fff, 0, 0x1f4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 236
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x03ff0000, 16, 0xf); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 237
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xc0000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 238
+DDRC_CONFIG_FULL_WRITE(0xf84210d0, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 239
+InstRegVal = 0x00030009; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 241
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x01ff0000, 16, 0xc8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 242
+DDRC_CONFIG_FULL_WRITE(0xf84210d4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 243
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84210dc); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 245
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff0000, 16, 0xb50); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 246
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 247
+DDRC_CONFIG_FULL_WRITE(0xf84210dc, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 248
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84210e0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 250
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff0000, 16, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 251
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 252
+DDRC_CONFIG_FULL_WRITE(0xf84210e0, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 253
+DDRC_CONFIG_FULL_WRITE(0xf84210e4, 0x00110000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 255
+DDRC_CONFIG_FULL_WRITE(0xf84210f0, 0x00000010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 526
+DDRC_CONFIG_FULL_WRITE(0xf8421180, 0x01000040); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 527
+DDRC_CONFIG_FULL_WRITE(0xf8421184, 0x00000070); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 528
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 88
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x7f000000, 24, 0xa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 92
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x003f0000, 16, 0xf); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 96
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00007f00, 8, 0x16); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 101
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0xc); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 106
+DDRC_CONFIG_FULL_WRITE(0xf8421100, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 107
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 109
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x001f0000, 16, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 110
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003f00, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 116
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000007f, 0, 0x11); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 120
+DDRC_CONFIG_FULL_WRITE(0xf8421104, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 121
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 124
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x3f000000, 24, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 127
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x003f0000, 16, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 130
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003f00, 8, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 134
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0x8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 138
+DDRC_CONFIG_FULL_WRITE(0xf8421108, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 139
+DDRC_CONFIG_FULL_WRITE(0xf842110c, 0x0000400c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 141
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 143
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x1f000000, 24, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 146
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000f0000, 16, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 151
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 156
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000001f, 0, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 159
+DDRC_CONFIG_FULL_WRITE(0xf8421110, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 160
+DDRC_CONFIG_FULL_WRITE(0xf8421114, 0x05e20302); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 162
+DDRC_CONFIG_FULL_WRITE(0xf8421120, 0x05050b0b); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 163
+DDRC_CONFIG_FULL_WRITE(0xf8421128, 0x000f0e0d); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 184
+DDRC_CONFIG_FULL_WRITE(0xf842112c, 0x0e060119); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 185
+DDRC_CONFIG_FULL_WRITE(0xf8421130, 0x0c000008); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 186
+DDRC_CONFIG_FULL_WRITE(0xf842113c, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 187
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 189
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0fff0000, 16, 0x51); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 194
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0x57); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 198
+DDRC_CONFIG_FULL_WRITE(0xf8421064, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 199
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 201
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x1f000000, 24, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 203
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00800000, 23, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 205
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x007f0000, 16, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 208
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00008000, 15, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 210
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003f00, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 213
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 216
+DDRC_CONFIG_FULL_WRITE(0xf8421190, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 217
+DDRC_CONFIG_FULL_WRITE(0xf8421194, 0x03070101); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 219
+DDRC_CONFIG_FULL_WRITE(0xf8421198, 0x07007031); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 220
+DDRC_CONFIG_FULL_WRITE(0xf842119c, 0x000000f1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 221
+DDRC_CONFIG_FULL_WRITE(0xf84211a0, 0x40400002); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 222
+DDRC_CONFIG_FULL_WRITE(0xf84211a4, 0x003300e6); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 223
+DDRC_CONFIG_FULL_WRITE(0xf84211a8, 0x80000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 224
+DDRC_CONFIG_FULL_WRITE(0xf84211b8, 0x0000001e); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 225
+DDRC_CONFIG_FULL_WRITE(0xf84211c0, 0x00000005); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 226
+DDRC_CONFIG_FULL_WRITE(0xf84211c4, 0x2a000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 227
+DDRC_CONFIG_FIELD_WRITE(0xf8421060, 0x00000002, 1, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 229
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 319
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 320
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003f00, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 321
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x003f0000, 16, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 322
+DDRC_CONFIG_FULL_WRITE(0xf8421204, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 323
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 325
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 326
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001f00, 8, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 327
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000f0000, 16, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 328
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0f000000, 24, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 329
+DDRC_CONFIG_FULL_WRITE(0xf8421208, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 330
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 332
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000001f, 0, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 333
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001f00, 8, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 334
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x001f0000, 16, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 335
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x1f000000, 24, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 336
+DDRC_CONFIG_FULL_WRITE(0xf842120c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 337
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 339
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000001f, 0, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 340
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001f00, 8, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 341
+DDRC_CONFIG_FULL_WRITE(0xf8421210, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 342
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 344
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 345
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 346
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000f0000, 16, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 347
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0f000000, 24, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 348
+DDRC_CONFIG_FULL_WRITE(0xf8421214, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 349
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 351
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 352
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 353
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000f0000, 16, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 354
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0f000000, 24, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 355
+DDRC_CONFIG_FULL_WRITE(0xf8421218, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 356
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 358
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 359
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 360
+DDRC_CONFIG_FULL_WRITE(0xf842121c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 361
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 363
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 364
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003f00, 8, 0xffffffff); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 365
+DDRC_CONFIG_FULL_WRITE(0xf8421220, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 366
+DDRC_CONFIG_FULL_WRITE(0xf8421240, 0x06000608); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 534
+DDRC_CONFIG_FULL_WRITE(0xf8421244, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 535
+InstRegVal = 0x00000001; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 372
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001f00, 8, 0x1f); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 373
+DDRC_CONFIG_FULL_WRITE(0xf8421250, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 374
+DDRC_CONFIG_FULL_WRITE(0xf8421254, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 377
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 379
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 380
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x40); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 381
+DDRC_CONFIG_FULL_WRITE(0xf842125c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 382
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 384
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 385
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x40); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 386
+DDRC_CONFIG_FULL_WRITE(0xf8421264, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 387
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 389
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xff000000, 24, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 390
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000ffff, 0, 0x40); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 391
+DDRC_CONFIG_FULL_WRITE(0xf842126c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 392
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 394
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000100, 8, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 395
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000010, 4, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 396
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 397
+DDRC_CONFIG_FULL_WRITE(0xf8421400, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 398
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 401
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 402
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 403
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 405
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0xc8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 406
+DDRC_CONFIG_FULL_WRITE(0xf8421404, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 408
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 410
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 411
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 412
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 414
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0xc8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 415
+DDRC_CONFIG_FULL_WRITE(0xf8421408, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 417
+DDRC_CONFIG_FULL_WRITE(0xf8421490, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 420
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 422
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 423
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 424
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 425
+DDRC_CONFIG_FULL_WRITE(0xf8421494, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 426
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 428
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 429
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 430
+DDRC_CONFIG_FULL_WRITE(0xf8421498, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 431
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 433
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 434
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0xa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 435
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 436
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 437
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x03000000, 24, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 438
+DDRC_CONFIG_FULL_WRITE(0xf842149c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 439
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 441
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 442
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 443
+DDRC_CONFIG_FULL_WRITE(0xf84214a0, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 444
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 401
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 402
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 403
+DDRC_CONFIG_FULL_WRITE(0xf84214b4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 408
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 410
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 411
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 412
+DDRC_CONFIG_FULL_WRITE(0xf84214b8, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 417
+DDRC_CONFIG_FULL_WRITE(0xf8421540, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 420
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 422
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 423
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 424
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 425
+DDRC_CONFIG_FULL_WRITE(0xf8421544, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 426
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 428
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 429
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 430
+DDRC_CONFIG_FULL_WRITE(0xf8421548, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 431
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 433
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 434
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0xa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 435
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 436
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 437
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x03000000, 24, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 438
+DDRC_CONFIG_FULL_WRITE(0xf842154c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 439
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 441
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 442
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 443
+DDRC_CONFIG_FULL_WRITE(0xf8421550, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 444
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 401
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 402
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 403
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 405
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0x1f4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 406
+DDRC_CONFIG_FULL_WRITE(0xf8421564, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 408
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 410
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 411
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 412
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 414
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0x1f4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 415
+DDRC_CONFIG_FULL_WRITE(0xf8421568, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 417
+DDRC_CONFIG_FULL_WRITE(0xf84215f0, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 420
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 422
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 423
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 424
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 425
+DDRC_CONFIG_FULL_WRITE(0xf84215f4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 426
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 428
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 429
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 430
+DDRC_CONFIG_FULL_WRITE(0xf84215f8, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 431
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 433
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 434
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0xa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 435
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 436
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 437
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x03000000, 24, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 438
+DDRC_CONFIG_FULL_WRITE(0xf84215fc, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 439
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 441
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 442
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 443
+DDRC_CONFIG_FULL_WRITE(0xf8421600, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 444
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 401
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 402
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 403
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 405
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0x1f4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 406
+DDRC_CONFIG_FULL_WRITE(0xf8421614, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 408
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 410
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 411
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 412
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 414
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003ff, 0, 0x1f4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 415
+DDRC_CONFIG_FULL_WRITE(0xf8421618, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 417
+DDRC_CONFIG_FULL_WRITE(0xf84216a0, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 420
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 422
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 423
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 424
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 425
+DDRC_CONFIG_FULL_WRITE(0xf84216a4, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 426
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 428
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 429
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 430
+DDRC_CONFIG_FULL_WRITE(0xf84216a8, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 431
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 433
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0x5); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 434
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0xa); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 435
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 436
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00300000, 20, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 437
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x03000000, 24, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 438
+DDRC_CONFIG_FULL_WRITE(0xf84216ac, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 439
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 441
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000007ff, 0, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 442
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x07ff0000, 16, 0x64); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 443
+DDRC_CONFIG_FULL_WRITE(0xf84216b0, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 444
+DDRC_CONFIG_FULL_WRITE(0xf8421300, 0x00000010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 539
+DDRC_CONFIG_FULL_WRITE(0xf8421304, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 540
+DDRC_CONFIG_FULL_WRITE(0xf842130c, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 541
+DDRC_CONFIG_FULL_WRITE(0xf8421320, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 542
+DDRC_CONFIG_FULL_WRITE(0xf8421328, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 543
+DDRC_CONFIG_FULL_WRITE(0xf842136c, 0x00110001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 544
+InstRegVal = 0x00000000; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 546
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 547
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000010, 4, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 548
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000040, 6, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 549
+DDRC_CONFIG_FULL_WRITE(0xf84211b0, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 550
+DDRC_CONFIG_FIELD_WRITE(0xf8420804, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 552
+DDRC_CONFIG_FIELD_WRITE(0xf8420188, 0x0000003f, 0, 0x16); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 149
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8420198); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 150
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0x15); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 151
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000fc0, 6, 0x19); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 152
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0003f000, 12, 0x24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 153
+DDRC_CONFIG_FULL_WRITE(0xf8420198, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 154
+DDRC_CONFIG_FIELD_WRITE(0xf842019c, 0x0000003f, 0, 0x21); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 155
+DDRC_CONFIG_FIELD_WRITE(0xf84201a4, 0x00000fc0, 6, 0x1a); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_io.cc : 156
+DDRC_CONFIG_FIELD_WRITE(0xf8422004, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 19
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422014); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 22
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000040, 6, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 23
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00008000, 15, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 24
+DDRC_CONFIG_FULL_WRITE(0xf8422014, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 25
+DDRC_CONFIG_FIELD_WRITE(0xf842201c, 0x01000000, 24, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 28
+DDRC_CONFIG_FIELD_WRITE(0xf842201c, 0x00000018, 3, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 31
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422090); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 33
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x02000000, 25, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 34
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000020, 5, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 35
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000f00, 8, 0xf); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 36
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00400000, 22, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 37
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00040000, 18, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 38
+DDRC_CONFIG_FULL_WRITE(0xf8422090, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 39
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422100); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 42
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000007, 0, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 43
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x08000000, 27, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 44
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x10000000, 28, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 45
+DDRC_CONFIG_FULL_WRITE(0xf8422100, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 46
+DDRC_CONFIG_FIELD_WRITE(0xf842202c, 0x80000000, 31, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 49
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422700); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422700, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422800); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422800, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422900); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422900, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422a00); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422a00, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422b00); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422b00, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422c00); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422c00, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422d00); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422d00, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422e00); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422e00, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422f00); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 9
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 10
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 11
+DDRC_CONFIG_FULL_WRITE(0xf8422f00, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 12
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422724); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422724, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422824); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422824, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422924); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422924, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422a24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422a24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422b24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422b24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422c24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422c24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422d24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422d24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422e24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422e24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422f24); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 56
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000038, 3, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 57
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 58
+DDRC_CONFIG_FULL_WRITE(0xf8422f24, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 59
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422204); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 63
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00030000, 16, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 64
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x001c0000, 18, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 70
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00200000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 71
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00400000, 22, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 72
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x1f000000, 24, 0xf); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 73
+DDRC_CONFIG_FULL_WRITE(0xf8422204, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 74
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422014); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 77
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00008000, 15, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 78
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000180, 7, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 79
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00006000, 13, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 80
+DDRC_CONFIG_FULL_WRITE(0xf8422014, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 81
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf842202c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 84
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x02000000, 25, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 85
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000020, 5, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 86
+DDRC_CONFIG_FULL_WRITE(0xf842202c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 87
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422024); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 89
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000400, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 90
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000800, 11, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 91
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000000f0, 4, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 92
+DDRC_CONFIG_FULL_WRITE(0xf8422024, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 93
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422020); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 95
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00200000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 96
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00400000, 22, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 97
+DDRC_CONFIG_FULL_WRITE(0xf8422020, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 98
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422028); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 100
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0f000000, 24, 0x4); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 101
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xf0000000, 28, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 102
+DDRC_CONFIG_FULL_WRITE(0xf8422028, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 103
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422030); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 105
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0001c000, 14, 0x3); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 106
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000c00, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 107
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 108
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00020000, 17, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 109
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00e00000, 21, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 110
+DDRC_CONFIG_FULL_WRITE(0xf8422030, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 111
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422048); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 113
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000001f, 0, 0x1f); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 114
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003e0, 5, 0x13); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 115
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00007c00, 10, 0x13); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 116
+DDRC_CONFIG_FULL_WRITE(0xf8422048, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 117
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422080); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 119
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000020, 5, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 120
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 121
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000010, 4, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 122
+DDRC_CONFIG_FULL_WRITE(0xf8422080, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 123
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf842201c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 125
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x04000000, 26, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 126
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x02000000, 25, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 127
+DDRC_CONFIG_FULL_WRITE(0xf842201c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 128
+DDRC_CONFIG_FIELD_WRITE(0xf8422010, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 130
+DDRC_CONFIG_FIELD_WRITE(0xf8422090, 0x00000008, 3, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 131
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 213
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000040, 6, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 214
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000020, 5, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 215
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 216
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 217
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000004, 2, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 219
+DDRC_CONFIG_FIELD_WAIT(0xf8422004, 0x00000001, 0, 0x0, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 220
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84227a0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 373
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84228a0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 373
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf84229a0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 373
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422aa0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 373
+DDRC_CONFIG_REG_INFO(0xf8421000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 377
+DDRC_CONFIG_REG_INFO(0xf8421064); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 378
+DDRC_CONFIG_REG_INFO(0xf8420120); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 379
+DDRC_CONFIG_REG_INFO(0xf8420124); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 380
+DDRC_CONFIG_REG_INFO(0xf8420148); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 381
+DDRC_CONFIG_REG_INFO(0xf84227a0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 383
+DDRC_CONFIG_REG_INFO(0xf84228a0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 383
+DDRC_CONFIG_REG_INFO(0xf84229a0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 383
+DDRC_CONFIG_REG_INFO(0xf8422aa0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 383
+DDRC_CONFIG_FIELD_WRITE(0xf8424040, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 251
+DDRC_CONFIG_FIELD_WRITE(0xf8424058, 0x00000080, 7, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 252
+DDRC_CONFIG_FULL_WRITE(0xf8424008, 0x17173232); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 266
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8424000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 269
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x08000000, 27, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 270
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 271
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00010000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 272
+DDRC_CONFIG_FULL_WRITE(0xf8424000, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 273
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8424004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 275
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x80000000, 31, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 276
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 277
+DDRC_CONFIG_FULL_WRITE(0xf8424004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 278
+DDRC_CONFIG_FULL_WRITE(0xf8424018, 0x17173232); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 266
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8424010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 269
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x08000000, 27, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 270
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 271
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00010000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 272
+DDRC_CONFIG_FULL_WRITE(0xf8424010, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 273
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8424014); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 275
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x80000000, 31, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 276
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 277
+DDRC_CONFIG_FULL_WRITE(0xf8424014, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 278
+DDRC_CONFIG_FIELD_WRITE(0xf8424000, 0x08000000, 27, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 280
+DDRC_CONFIG_FIELD_WRITE(0xf8424010, 0x08000000, 27, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 281
+DDRC_CONFIG_FIELD_WRITE(0xf8426040, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 251
+DDRC_CONFIG_FIELD_WRITE(0xf8426058, 0x00000080, 7, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 252
+DDRC_CONFIG_FULL_WRITE(0xf8426008, 0x17173232); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 266
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8426000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 269
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x08000000, 27, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 270
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 271
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00010000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 272
+DDRC_CONFIG_FULL_WRITE(0xf8426000, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 273
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8426004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 275
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x80000000, 31, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 276
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 277
+DDRC_CONFIG_FULL_WRITE(0xf8426004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 278
+DDRC_CONFIG_FULL_WRITE(0xf8426018, 0x17173232); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 266
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8426010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 269
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x08000000, 27, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 270
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 271
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00010000, 16, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 272
+DDRC_CONFIG_FULL_WRITE(0xf8426010, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 273
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8426014); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 275
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x80000000, 31, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 276
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 277
+DDRC_CONFIG_FULL_WRITE(0xf8426014, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 278
+DDRC_CONFIG_FIELD_WRITE(0xf8426000, 0x08000000, 27, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 280
+DDRC_CONFIG_FIELD_WRITE(0xf8426010, 0x08000000, 27, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 281
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422040); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 137
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffe00000, 21, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 138
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x001fffc0, 6, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 139
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000003f, 0, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 140
+DDRC_CONFIG_FULL_WRITE(0xf8422040, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 141
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422044); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 143
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xffff8000, 15, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 144
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001fff, 0, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 145
+DDRC_CONFIG_FULL_WRITE(0xf8422044, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 146
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422048); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 148
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x80000000, 31, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 149
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x40000000, 30, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 150
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x1ff00000, 20, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 151
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000f8000, 15, 0x10); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 152
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00007c00, 10, 0x13); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 153
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000003e0, 5, 0x13); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 154
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000001f, 0, 0x1f); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 155
+DDRC_CONFIG_FULL_WRITE(0xf8422048, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 156
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf842204c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 158
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x3ff00000, 20, 0x180); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 159
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x000fffff, 0, 0x60000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 161
+DDRC_CONFIG_FULL_WRITE(0xf842204c, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 165
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422050); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 167
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x1ffc0000, 18, 0xc8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 168
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0003ffff, 0, 0x30000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 170
+DDRC_CONFIG_FULL_WRITE(0xf8422050, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 174
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422054); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 176
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xfc000000, 26, 0x8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 177
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00ffc000, 14, 0x1ab); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 178
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000fff, 0, 0x356); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 179
+DDRC_CONFIG_FULL_WRITE(0xf8422054, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 180
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422058); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 182
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00003fff, 0, 0x14d8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 183
+DDRC_CONFIG_FULL_WRITE(0xf8422058, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 184
+DDRC_CONFIG_FULL_WRITE(0xf8422180, 0x00000b50); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 189
+DDRC_CONFIG_FULL_WRITE(0xf8422184, 0x00000004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 190
+DDRC_CONFIG_FULL_WRITE(0xf8422188, 0x00000010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 191
+DDRC_CONFIG_FULL_WRITE(0xf842218c, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 192
+DDRC_CONFIG_MRS_INFO(0x00000000, 0x00000b50); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 205
+DDRC_CONFIG_MRS_INFO(0x00000001, 0x00000004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 205
+DDRC_CONFIG_MRS_INFO(0x00000002, 0x00000010); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 205
+DDRC_CONFIG_MRS_INFO(0x00000003, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 205
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 226
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000080, 7, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 227
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000100, 8, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 228
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 229
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 230
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000010, 4, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 231
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422200); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 325
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00001000, 12, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 326
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000c000, 14, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 327
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00002000, 13, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 328
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0xf0000000, 28, 0x8); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 329
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000040, 6, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 330
+DDRC_CONFIG_FULL_WRITE(0xf8422200, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 331
+DDRC_CONFIG_FIELD_WRITE(0xf8422204, 0x00000004, 2, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 333
+DDRC_CONFIG_FIELD_WRITE(0xf8422088, 0x00400000, 22, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 334
+DDRC_CONFIG_FIELD_WRITE(0xf8422644, 0x000e0000, 17, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 336
+DDRC_CONFIG_FIELD_WRITE(0xf8422644, 0x00000800, 11, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 338
+DDRC_CONFIG_FIELD_WRITE(0xf8422658, 0x00000002, 1, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 339
+DDRC_CONFIG_FIELD_WRITE(0xf8422204, 0x00000800, 11, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 7
+DDRC_CONFIG_FIELD_WRITE(0xf8422014, 0x00000004, 2, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 9
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 11
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000200, 9, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 12
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 13
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 14
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000020, 5, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 16
+DDRC_CONFIG_FIELD_WAIT(0xf8422004, 0x00000001, 0, 0x0, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 17
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422200); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 28
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000080, 7, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 29
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000040, 6, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 30
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x0000000f, 0, 0xf); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 31
+DDRC_CONFIG_FULL_WRITE(0xf8422200, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 32
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422204); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 34
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000700, 8, 0x2); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 35
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000070, 4, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 36
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000002, 1, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 37
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 38
+DDRC_CONFIG_FULL_WRITE(0xf8422204, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 39
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 42
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000400, 10, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 43
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 44
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 45
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000040, 6, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 47
+DDRC_CONFIG_FIELD_WAIT(0xf8422004, 0x00000001, 0, 0x0, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 48
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 63
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000800, 11, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 64
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 65
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 66
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000080, 7, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 68
+DDRC_CONFIG_FIELD_WAIT(0xf8422004, 0x00000001, 0, 0x0, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 69
+InstRegVal = DDRC_CONFIG_FIELD_READ(0xf84227e0, 0x0000ff80, 7); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 74
+TempData0 = InstRegVal * 3 / 4; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 75
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf8422780, 0x000001ff, 0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 77
+if (TempData1 > TempData0) { // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 78
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf84227c0, 0x000f0000, 16); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 80
+TempData1 += 1; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 81
+DDRC_CONFIG_FIELD_WRITE(0xf84227c0, 0x000f0000, 16, TempData1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 82
+DDRC_CONFIG_FIELD_WRITE(0xf8422780, 0x000001ff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 83
+} // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 84
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf8422880, 0x000001ff, 0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 77
+if (TempData1 > TempData0) { // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 78
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf84228c0, 0x000f0000, 16); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 80
+TempData1 += 1; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 81
+DDRC_CONFIG_FIELD_WRITE(0xf84228c0, 0x000f0000, 16, TempData1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 82
+DDRC_CONFIG_FIELD_WRITE(0xf8422880, 0x000001ff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 83
+} // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 84
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf8422980, 0x000001ff, 0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 77
+if (TempData1 > TempData0) { // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 78
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf84229c0, 0x000f0000, 16); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 80
+TempData1 += 1; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 81
+DDRC_CONFIG_FIELD_WRITE(0xf84229c0, 0x000f0000, 16, TempData1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 82
+DDRC_CONFIG_FIELD_WRITE(0xf8422980, 0x000001ff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 83
+} // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 84
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf8422a80, 0x000001ff, 0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 77
+if (TempData1 > TempData0) { // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 78
+TempData1 = DDRC_CONFIG_FIELD_READ(0xf8422ac0, 0x000f0000, 16); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 80
+TempData1 += 1; // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 81
+DDRC_CONFIG_FIELD_WRITE(0xf8422ac0, 0x000f0000, 16, TempData1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 82
+DDRC_CONFIG_FIELD_WRITE(0xf8422a80, 0x000001ff, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 83
+} // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 84
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 107
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 108
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 109
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 110
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000400, 10, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 111
+DDRC_CONFIG_FIELD_WAIT(0xf8422004, 0x00000001, 0, 0x0, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 112
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8422004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 116
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00008000, 15, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 117
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 118
+DDRC_CONFIG_FULL_WRITE(0xf8422004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 119
+DDRC_CONFIG_FIELD_WAIT(0xf8422034, 0x00000800, 11, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 120
+DDRC_CONFIG_FIELD_WAIT(0xf8422004, 0x00000001, 0, 0x0, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 121
+DDRC_CONFIG_REG_INFO(0xf8422034); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_train.cc : 129
+DDRC_CONFIG_REG_INFO(0xf84227c0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 355
+DDRC_CONFIG_REG_INFO(0xf8422780); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 356
+DDRC_CONFIG_REG_INFO(0xf8422784); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 357
+DDRC_CONFIG_REG_INFO(0xf8422788); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 358
+DDRC_CONFIG_REG_INFO(0xf842278c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 359
+DDRC_CONFIG_REG_INFO(0xf8422790); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 360
+DDRC_CONFIG_REG_INFO(0xf84228c0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 355
+DDRC_CONFIG_REG_INFO(0xf8422880); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 356
+DDRC_CONFIG_REG_INFO(0xf8422884); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 357
+DDRC_CONFIG_REG_INFO(0xf8422888); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 358
+DDRC_CONFIG_REG_INFO(0xf842288c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 359
+DDRC_CONFIG_REG_INFO(0xf8422890); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 360
+DDRC_CONFIG_REG_INFO(0xf84229c0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 355
+DDRC_CONFIG_REG_INFO(0xf8422980); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 356
+DDRC_CONFIG_REG_INFO(0xf8422984); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 357
+DDRC_CONFIG_REG_INFO(0xf8422988); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 358
+DDRC_CONFIG_REG_INFO(0xf842298c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 359
+DDRC_CONFIG_REG_INFO(0xf8422990); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 360
+DDRC_CONFIG_REG_INFO(0xf8422ac0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 355
+DDRC_CONFIG_REG_INFO(0xf8422a80); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 356
+DDRC_CONFIG_REG_INFO(0xf8422a84); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 357
+DDRC_CONFIG_REG_INFO(0xf8422a88); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 358
+DDRC_CONFIG_REG_INFO(0xf8422a8c); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 359
+DDRC_CONFIG_REG_INFO(0xf8422a90); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 360
+DDRC_CONFIG_FIELD_WRITE(0xf8422014, 0x00000040, 6, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_pub.cc : 398
+DDRC_CONFIG_FULL_WRITE(0xf8421320, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 558
+DDRC_CONFIG_FULL_WRITE(0xf84211b0, 0x00000051); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 560
+DDRC_CONFIG_FIELD_WAIT(0xf84211bc, 0x00000001, 0, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 562
+DDRC_CONFIG_FULL_WRITE(0xf8421320, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 564
+DDRC_CONFIG_FIELD_WAIT(0xf8421324, 0x00000001, 0, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 566
+DDRC_CONFIG_FIELD_WAIT(0xf8421004, 0x00000007, 0, 0x1, -1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 568
+DDRC_CONFIG_FULL_WRITE(0xf8421320, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 570
+DDRC_CONFIG_FULL_WRITE(0xf8421060, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 572
+DDRC_CONFIG_FULL_WRITE(0xf8421030, 0x00000080); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 574
+DDRC_CONFIG_FULL_WRITE(0xf84211b0, 0x00000053); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 576
+DDRC_CONFIG_FULL_WRITE(0xf8421320, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 578
+DDRC_CONFIG_FULL_WRITE(0xf8421060, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 580
+DDRC_CONFIG_FULL_WRITE(0xf8421030, 0x00000088); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 582
+DDRC_CONFIG_FULL_WRITE(0xf8421490, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 583
+DDRC_CONFIG_FULL_WRITE(0xf8421540, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 584
+DDRC_CONFIG_FULL_WRITE(0xf84215f0, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 585
+DDRC_CONFIG_FULL_WRITE(0xf84216a0, 0x00000001); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 586
+DDRC_CONFIG_FULL_WRITE(0xf8421304, 0x00000000); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_mc.cc : 587
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf840e004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 27
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 28
+DDRC_CONFIG_FULL_WRITE(0xf840e004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 29
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf840f004); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 32
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00000001, 0, 0x0); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 33
+DDRC_CONFIG_FULL_WRITE(0xf840f004, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 34
+InstRegVal = DDRC_CONFIG_FULL_READ(0xf8801074); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 37
+DDRC_CONFIG_FIELD_SET(InstRegVal, 0x00004000, 14, 0x1); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 38
+DDRC_CONFIG_FULL_WRITE(0xf8801074, InstRegVal); // Z:\klzhu\data\design_integrator_main\src\hpf_tool\hpf\ddrlib\ddr_init_al9000\src\dr1x90_ddrc_misc.cc : 39

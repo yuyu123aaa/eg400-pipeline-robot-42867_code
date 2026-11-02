@@ -1,0 +1,157 @@
+{
+  "MPU_PROTECT_MODE": {
+    "Name": "MPU_PROTECT_MODE",
+    "Value": "0",
+    "Default": "0",
+    "Type": "array",
+    "Description": "0: disable; 1: protect reserv region; 2: rotect reserve region and set code region to read write; 3: protect reserve region and set code region to read only, data region to read write",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": true,
+    "Values": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "ARMv8_EL": {
+    "Name": "ARMv8_EL",
+    "Value": "EL3",
+    "Default": "EL3",
+    "Type": "string",
+    "Description": "The ARMv8_EL(EL1 or EL3)",
+    "supportedProc": [
+      "apu-0",
+      "apu-1"
+    ],
+    "Permit": false
+  },
+  "ARMv8_SECURE": {
+    "Name": "ARMv8_SECURE",
+    "Value": "SECURE",
+    "Default": "SECURE",
+    "Type": "string",
+    "Description": "ARMv8_SECURE(SECURE or NONSECURE)",
+    "supportedProc": [
+      "apu-0",
+      "apu-1"
+    ],
+    "Permit": false
+  },
+  "ARMv8_CORE": {
+    "Name": "ARMv8_CORE",
+    "Value": "MASTER",
+    "Default": "MASTER",
+    "Type": "array",
+    "Description": "ARMv8_CORE(MASTER or SLAVE)",
+    "supportedProc": [
+      "apu-0",
+      "apu-1"
+    ],
+    "Permit": true,
+    "Values": [
+      "MASTER",
+      "SLAVE"
+    ]
+  },
+  "SILENT": {
+    "Name": "SILENT",
+    "Value": "false",
+    "Default": "false",
+    "Type": "boolean",
+    "Description": "If SILENT\u003d1, it will not display any compiling messsage",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": true
+  },
+  "PFLOAT": {
+    "Name": "PFLOAT",
+    "Value": "true",
+    "Default": "false",
+    "Type": "boolean",
+    "Description": "If FLOAT\u003d1, it will enable float point print when using nano newlib",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": false
+  },
+  "NEWLIB": {
+    "Name": "NEWLIB",
+    "Value": "nano",
+    "Default": "nano",
+    "Type": "string",
+    "Description": "If NEWLIB\u003dnano, it will use nano newlib, otherwise it will use normal newlib",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": false
+  },
+  "NOGC": {
+    "Name": "NOGC",
+    "Value": "false",
+    "Default": "false",
+    "Type": "boolean",
+    "Description": "If NOGC\u003d1, it will not gc any sections during compiling to save code size",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": false
+  },
+  "CODE_READONLY": {
+    "Name": "CODE_READONLY",
+    "Value": "false",
+    "Default": "false",
+    "Type": "boolean",
+    "Description": "code readonly option",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": false
+  },
+  "VERBOSE": {
+    "Name": "VERBOSE",
+    "Value": "false",
+    "Default": "false",
+    "Type": "boolean",
+    "Description": "If VERBOSE\u003d1, it will display compiling message in verbose including compiling options",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": true
+  },
+  "OUTPUT_DEV": {
+    "Name": "OUTPUT_DEV",
+    "Value": "UART1",
+    "Default": "UART1",
+    "Type": "array",
+    "Description": "If OUTPUT_DEV\u003dUART0, it will output to UART0, If OUTPUT_DEV\u003dUART1, it will output to uart1, if OUTPUT_DEV\u003dNONE, it will output nothing",
+    "supportedProc": [
+      "apu-0",
+      "apu-1",
+      "rpu"
+    ],
+    "Permit": true,
+    "Values": [
+      "UART0",
+      "UART1",
+      "NONE"
+    ]
+  }
+}

@@ -1,0 +1,135 @@
+/*
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * apu_pipe_center.h —— 管道居中控制（10Hz）+ 参数校验
+ * ===========================================================================
+ *  【来源】传承项目 pipe_center_control.h/c（241 行），**零改动照抄**（纯逻辑）。
+ *
+ *  【它干什么】
+ *  让车在管道里走中间、并且保持航向。每 100ms 算一次：
+ *
+ *      ① center_error = (左 - 右) / (左 + 右)
+ *           左比右远 -> 车偏右 -> error 为正 -> 该往左打
+ *      ② PID：kp*error + ki*∫error + kd*d(error)/dt
+ *      ③ 加上航向修正：heading_kp * (目标航向 - 当前航向)
+ *         减去阻尼项：yaw_rate_damping * 偏航角速度
+ *      ④ 得到 turn_output，按 front_yaw_share / rear_yaw_share 分配给前后
+ *      ⑤ 四路推进器**都参与直行 + 都参与转向**：
+ *           直行 = base_speed × base_front_share（前）  /  base_speed × (1-share)（后）
+ *           转向 = ∓ turn_output × <该路的 yaw_share>
+ *           然后各乘 left_trim / right_trim，再限幅到 [min_output, max_output]
+ *
+ *  ★★ 2026-10-01 重构：从「后推独扛直行 + 前推只做转向」改成
+ *     「四路共享直行、四路共享转向」。详见 apu_pipe_center.c 的实现说明。
+ *
+ *  ⚠️ 时间单位：调度用 **10ms tick**（PIPE_CENTER_CONTROL_PERIOD_TICKS=10 → 100ms）
+ *     所以直接套用 apu_tick_10ms()，常量一个都不用改。
+ * ===========================================================================
+ */
+
+#ifndef APU_PIPE_CENTER_H
+#define APU_PIPE_CENTER_H
+
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* 调度周期：10 个 10ms tick = 100ms = 10Hz（与传承项目一致） */
+#define PIPE_CENTER_CONTROL_PERIOD_TICKS 10U
+#define PIPE_CENTER_CONTROL_DT_S         0.1f
+
+/* ---- 参数（16 个，可由 CTRL: 命令下发） ----
+ *
+ * ★ 2026-10-01 参数表变更（**Web / Linux 侧必须同步改**）：
+ *     · 新增 `base_front_share`（直行里前推进器占的比例，0~1，默认 0.5）
+ *     · 删除 `front_max_output`（前推进器限幅）
+ *       —— 原因：前推现在也要输出 base_speed，上限就用统一的 max_output，
+ *          不再需要"只给转向用"的独立限幅；4 路上限统一后更好标定。
+ *     ⇒ CTRL: 命令从 **15 个浮点变成 16 个浮点**，顺序见下方结构体。
+ */
+typedef struct {
+	float kp;                 /* 居中 P */
+	float ki;                 /* 居中 I */
+	float kd;                 /* 居中 D */
+	float yaw_rate_damping;   /* 偏航角速度阻尼 */
+	float integral_limit;     /* 积分限幅 */
+	float turn_limit;         /* 转向输出限幅 */
+	float base_speed;         /* 巡航基础速度（**每路**的基准百分比） */
+	float base_front_share;   /* ★新：直行里前推进器占的比例 0.0~1.0 */
+	float min_output;         /* 推进器输出下限（电调死区补偿） */
+	float max_output;         /* 推进器输出上限（四路统一） */
+	float heading_kp;         /* 航向保持 P */
+	float left_trim;          /* 左侧推力修正 0.50..1.00 */
+	float right_trim;         /* 右侧推力修正 0.50..1.00 */
+	float front_yaw_share;    /* 转向里前推进器占的比例 */
+	float rear_yaw_share;     /* 转向里后推进器占的比例 */
+} apu_pipe_center_params_t;
+
+/* ---- 控制器内部状态（复位用 memset 清零） ---- */
+typedef struct {
+	float integral;
+	float last_center_error;
+	float last_yaw_deg;
+	int   center_history_valid;
+	int   yaw_history_valid;
+} apu_pipe_center_state_t;
+
+typedef struct {
+	float left_mm;
+	float right_mm;
+	float yaw_deg;
+	float target_yaw_deg;
+} apu_pipe_center_input_t;
+
+typedef struct {
+	float center_error;
+	float center_rate;
+	float heading_error_deg;
+	float yaw_rate_dps;
+	float turn_output;
+	float left_front;
+	float right_front;
+	float left_rear;
+	float right_rear;
+	int   valid;              /* 1 = 本次输出可用 */
+} apu_pipe_center_output_t;
+
+typedef struct {
+	uint32_t last_tick;
+	int      initialized;
+} apu_pipe_center_schedule_t;
+
+/* 角度归一化到 -180..+180 */
+float apu_pipe_center_wrap180(float angle_deg);
+
+/* 参数合法性校验（CTRL:/PID:/YAWD:/TRIM:/HEADKP:/YAWMIX:/bs= 命令都用它） */
+int apu_pipe_center_params_valid(const apu_pipe_center_params_t *params);
+
+/* 复位控制器状态 */
+void apu_pipe_center_reset(apu_pipe_center_state_t *state);
+
+/* 算一次输出 */
+apu_pipe_center_output_t apu_pipe_center_update(
+	apu_pipe_center_state_t *state,
+	const apu_pipe_center_params_t *params,
+	const apu_pipe_center_input_t *input,
+	float dt_s);
+
+/* ---- 10Hz 调度 ---- */
+
+/* 复位调度器。run_immediately=1 -> 下一次 IsDue 立刻返回 1 */
+void apu_pipe_center_schedule_reset(apu_pipe_center_schedule_t *schedule,
+				    uint32_t now_tick,
+				    int run_immediately);
+
+/* 到点了吗？（内部会把 last_tick 对齐到整周期，避免累积漂移） */
+int apu_pipe_center_schedule_is_due(apu_pipe_center_schedule_t *schedule,
+				    uint32_t now_tick);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* APU_PIPE_CENTER_H */

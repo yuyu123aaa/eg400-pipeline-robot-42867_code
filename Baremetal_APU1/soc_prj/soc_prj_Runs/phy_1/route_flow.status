@@ -1,0 +1,23 @@
+Location         : C:\qiansai_FPGA\my_cpu_npu\soc_prj\soc_prj_Runs\phy_1
+Running with     : Tang Dynasty Release_2026.1_SP2
+                   Copyright (c) 2012-2026 Anlogic Inc.
+Top Model        : system_top
+Device           : DR1M90GEG400
+Speed            : 2
+
+Timing Mode      : final
+Setup            : WNS  6371ps  TNS        0ps  NUM_FEPS     0
+Hold             : WNS -2667ps  TNS   -15088ps  NUM_FEPS     7
+
+Flow Statistics  :
+---------------------------------------------------------------------------------------------------
+     command     |  #calls  |  wall time   |  cpu time(s)  |  used memory(mb)  |  peak memory(mb)  
+---------------------------------------------------------------------------------------------------
+      place      |    1     |  7m11s(58%)  |   1088(71%)   |       2921        |       2921        
+      route      |    1     |  4m34s(37%)  |   397(26%)    |       5019        |       5182        
+    fix_hold     |    1     |   27s(3%)    |    27(1%)     |       5012        |       5182        
+    import_db    |    1     |    3s(0%)    |     1(0%)     |       1004        |       1004        
+  import_device  |    1     |    2s(0%)    |     1(0%)     |        396        |        396        
+---------------------------------------------------------------------------------------------------
+      total      |    5     |    12m17s    |     1514      |       5019        |       5182        
+---------------------------------------------------------------------------------------------------

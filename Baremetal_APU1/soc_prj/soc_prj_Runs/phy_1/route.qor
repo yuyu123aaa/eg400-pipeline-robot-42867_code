@@ -1,0 +1,36 @@
+-----------------------------------------------------------
+| QoR metrics               |         value               |
+-----------------------------------------------------------
+| Timing                    |                             |
+|     Setup WNS             |         6371                |
+|     Setup TNS             |            0                |
+|     Num of violated S-EP  |            0                |
+|     Hold WNS              |        -2667                |
+|     Hold TNS              |       -15088                |
+|     Num of violated H-EP  |            7                |
+-----------------------------------------------------------
+| Routing Resource          |                             |
+|     Wire length           |     14252800                |
+-----------------------------------------------------------
+| Utilization               |                             |
+|     #slices               |        39226                |
+|     slices percentage     |       74.74%                |
+|     #RAMs                 |          173                |
+|     #DSPs                 |           95                |
+|     #DRAMHARDCON          |           56                |
+-----------------------------------------------------------
+Report route stage QoR done.
+
+QoR Evaluation
+---------------------------------------------------------------------------------------------------------------------------------------
+  ID        |  Priority  |  Description                                               |  Suggestion
+---------------------------------------------------------------------------------------------------------------------------------------
+  QOR-1302  |  MEDIUM    |  - Route HWNS -2667ps smaller than 0, do not meet timing.  |  - Try following method to drive timing meet:
+            |            |                                                            |      set_param route fix_hold high
+---------------------------------------------------------------------------------------------------------------------------------------
+Note* (*) means this parameter has been set already.
+      (+) means this parameter has been set, suggest to upgrade higher effort level.
+Note** plesae resolve priority MUST FIX and HIGH issues firstly
+       because these have highly possible to block the timing convergence even stop the flow.
+Note*** some suggested settings are not suitable to use together
+        take care of using them separately if suggestion mentioned.

@@ -1,0 +1,4477 @@
+{
+  "hardware_config": {
+    "schema": "iccoder.hardware_config.v2",
+    "version": "2.0",
+    "status": "complete",
+    "status_meaning": "board_profile_capture_complete_not_final_constraint_ready",
+    "constraint_ready": false,
+    "constraint_readiness": {
+      "ready": false,
+      "scope": "selected_project_assignments_only",
+      "authority": "constraint_preflight_validator_only",
+      "missing_field_policy": "not_ready",
+      "input_fingerprint": null,
+      "evaluated_at": null,
+      "blocking_reasons": [
+        "project_top_ports_not_confirmed",
+        "project_specific_assignments_not_validated",
+        "bank32_j3_voltage_not_physically_confirmed",
+        "shared_pin_route_choices_not_confirmed"
+      ],
+      "invalidation_triggers": [
+        "board_or_template_change",
+        "template_digest_change",
+        "rtl_or_top_module_change",
+        "project_port_change",
+        "selected_interface_or_protocol_mode_change",
+        "clock_or_timing_requirement_change",
+        "bank_voltage_or_io_standard_change",
+        "jumper_or_route_change",
+        "constraint_source_change"
+      ]
+    },
+    "board_identity_confirmed": true,
+    "type": "board",
+    "language": "verilog",
+    "board_id": "mlk-f3p-cz02-dr1m90",
+    "board_name": "米联客 MLK-F3P-CZ02 DR1",
+    "board_summary": "米联客 DR1 系列高端开发平台，核心板搭载 DR1M90GEG400 芯片（双核 ARM Cortex-A35 1GHz + 94K LUT FPGA），集成 DDR3 1GB（32bit，速率需按装配/BOM确认）、EMMC 8GB、QSPI FLASH 256Mbit。底板提供双路千兆以太网、USB2.0 OTG+HOST、HDMI OUT（1080P）、WIFI+BT、4G 模块、CAN、RS485、音频、TF 卡槽、FEP 高速扩展接口等。预装 Linux，可进行 PS/PL 协同开发、HLS 图像算法设计及高速接口应用。",
+    "board_details": {
+      "chip_resources": [
+        "双核 ARM Cortex-A35，最高 1GHz",
+        "94,464 LUT · 240 DSP · 8 PLL",
+        "PS DDR3 1GB（32bit，速率需按装配/BOM确认）",
+        "EMMC 8GB + QSPI FLASH 256Mbit",
+        "PS 晶振 33.3333MHz · PL 晶振 100MHz"
+      ],
+      "onboard_peripherals": [
+        "PS 端千兆网 + PL 端千兆网（YT8531DH-CA PHY）",
+        "USB2.0 OTG Type-C + 2 路 USB2.0 HOST",
+        "HDMI 输出（最大 1080@60fps）",
+        "WIFI+BT 模组 + 4G 接口",
+        "TF 卡槽（不焊 EMMC 时可用预留卡槽）",
+        "CAN + RS485 通信接口",
+        "音频输入/输出（ES8388）",
+        "EEPROM（24LC02）+ RTC（DS1337）",
+        "5 路 LED + 4 路按键",
+        "FEP 高速扩展接口（48 GPIO / 24 对差分）",
+        "CEP GPIO 接口（250Mbps 单端 / 500Mbps LVDS）"
+      ]
+    },
+    "uploads": {
+      "boardInfo": null,
+      "pinmap": null,
+      "schematic": null,
+      "constraints": null,
+      "recommend": {
+        "name": "MLK_F3P_CZ02_DR1开发板硬件使用手册.pdf",
+        "size": 1636412,
+        "path": "doc/refs/fpgahw-352c8b-MLK_F3P_CZ02_DR1开发板硬件使用手册.pdf",
+        "status": "uploaded"
+      }
+    },
+    "constraint_extract_result": {
+      "source_files": [],
+      "pin_assignments": [],
+      "clock_constraints": [],
+      "raw_summary": "Board-level facts are available in board_profile. Project-specific RTL port mappings have not been confirmed, so final assignments are intentionally empty.",
+      "updated_at": null
+    },
+    "updated_at": "2026-10-10T12:02:20.850Z",
+    "blocking_reasons": [
+      "project_top_ports_not_confirmed",
+      "project_specific_assignments_not_validated",
+      "bank32_j3_voltage_not_physically_confirmed",
+      "shared_pin_route_choices_not_confirmed"
+    ],
+    "vendor_id": "anlogic",
+    "vendor_name": "安路科技",
+    "chip_vendor_id": "anlogic",
+    "chip_vendor_name": "上海安路科技股份有限公司",
+    "board_brand_id": "milianke",
+    "board_brand_name": "米联客",
+    "board_manufacturer": "常州米联客信息科技有限公司",
+    "chip_series": "DR1",
+    "chip_device": "DR1M90GEG400",
+    "package_code": "BGA400",
+    "package_label": "GEG400 / BGA400 · DR1M90GEG400",
+    "full_part_number": "DR1M90GEG400",
+    "package_options": [
+      {
+        "package_code": "BGA400",
+        "package_alias": "GEG400",
+        "package_family": "BGA",
+        "pin_count": 400,
+        "catalog_user_io_count": 126,
+        "board_accessible_pl_io_count": 125,
+        "source_type": "official_product_table_and_board_documents"
+      }
+    ],
+    "chip_resources": {
+      "processor": {
+        "architecture": "Arm",
+        "core_count": 2,
+        "core_model": "Cortex-A35",
+        "maximum_frequency_mhz": 1000,
+        "evidence_status": "IC Coder reviewed catalog value; supplied board manuals only state dual-core ARM and 1000 MHz.",
+        "cache": {
+          "l1_per_core": "32 KB instruction + 32 KB data",
+          "l2_kb": 512
+        }
+      },
+      "lut4": 94464,
+      "dff": 104960,
+      "embedded_ram": {
+        "block_type": "ERAM20K",
+        "blocks": 280,
+        "total_kbit": 5600
+      },
+      "distributed_ram_kbit": 1340,
+      "dsp_blocks": 240,
+      "pll": 8,
+      "adc": 1,
+      "on_chip_ram_kb": 256,
+      "package_catalog_user_io": 126,
+      "board_accessible": {
+        "ps_mio_count": 38,
+        "pl_io_count": 125,
+        "pl_differential_pair_count": 60,
+        "total_io_count": 163,
+        "note": "PS MIO count describes occupied board routes, not 38 free GPIO pins."
+      }
+    },
+    "toolchain": [
+      "td"
+    ],
+    "board_profile": {
+      "schema": "iccoder.board_profile.v1",
+      "template_verified_at": "2026-09-02",
+      "identity": {
+        "board_id": "mlk-f3p-cz02-dr1m90",
+        "carrier_board": "MLK-F3P-CZ02-DR1",
+        "carrier_board_revision": "2025-05-26",
+        "core_board": "MLK-CZ02-DR1M90",
+        "core_board_revision": "2024-09-27",
+        "board_brand": "米联客",
+        "chip_vendor": "安路科技",
+        "exact_device": "DR1M90GEG400",
+        "package": {
+          "package_code": "BGA400",
+          "package_alias": "GEG400",
+          "pin_count": 400
+        }
+      },
+      "resources": {
+        "processor": {
+          "architecture": "Arm",
+          "core_count": 2,
+          "core_model": "Cortex-A35",
+          "maximum_frequency_mhz": 1000,
+          "evidence_status": "IC Coder reviewed catalog value; supplied board manuals only state dual-core ARM and 1000 MHz.",
+          "cache": {
+            "l1_per_core": "32 KB instruction + 32 KB data",
+            "l2_kb": 512
+          }
+        },
+        "lut4": 94464,
+        "dff": 104960,
+        "embedded_ram": {
+          "block_type": "ERAM20K",
+          "blocks": 280,
+          "total_kbit": 5600
+        },
+        "distributed_ram_kbit": 1340,
+        "dsp_blocks": 240,
+        "pll": 8,
+        "adc": 1,
+        "on_chip_ram_kb": 256,
+        "package_catalog_user_io": 126,
+        "board_accessible": {
+          "ps_mio_count": 38,
+          "pl_io_count": 125,
+          "pl_differential_pair_count": 60,
+          "total_io_count": 163,
+          "note": "PS MIO count describes occupied board routes, not 38 free GPIO pins."
+        }
+      },
+      "toolchain": {
+        "synthesis_and_implementation": {
+          "id": "td",
+          "product": "Tang Dynasty",
+          "exact_device": "DR1M90GEG400"
+        },
+        "io_constraint": {
+          "format": ".adc",
+          "dialect": "Anlogic Design Constraint"
+        },
+        "timing_constraint": {
+          "format": ".sdc",
+          "dialect": "SDC"
+        },
+        "ps_configuration": "DR1 PS IP configuration",
+        "programming": "Integrated JTAG through SL2.1S / Type-C"
+      },
+      "sources": [
+        {
+          "id": "dr-core-manual",
+          "file_name": "MLK_CZ02_DR1核心板硬件使用手册.pdf",
+          "type": "core_board_manual",
+          "revision": "1.3 / 2024-09-27",
+          "sha256": "FD9E3F44C6BECA824306CC2B833E119173D21A69A6BA057D609262D647D0C075",
+          "pdf_pages": 16
+        },
+        {
+          "id": "dr-dev-manual",
+          "file_name": "MLK_F3P_CZ02_DR1开发板硬件使用手册.pdf",
+          "type": "carrier_board_manual",
+          "revision": "1.0 / 2025-05-26",
+          "sha256": "7E819C78A985E3D497A392DB06CE7AC2F875D053DB5BB24C96B0C4066CD65B9E",
+          "pdf_pages": 25
+        },
+        {
+          "id": "dr-core-schematic",
+          "file_name": "MLK_CZ02_DR1_240926.pdf",
+          "type": "core_board_schematic",
+          "revision": "2024-09-26",
+          "sha256": "491ED7DE0FA94BFAF63BC0AC71AF8A5BDA30C2087D9747ADB9690AF941EB822D",
+          "pdf_pages": 12
+        },
+        {
+          "id": "dr-carrier-schematic",
+          "file_name": "MLK_F3P_250526.pdf",
+          "type": "carrier_board_schematic",
+          "revision": "2025-05-26",
+          "sha256": "157F9765EA64CE44A7FCF9B0F10221A65F989BCD5C97ECF58D779958E4B7D67F",
+          "pdf_pages": 17
+        },
+        {
+          "id": "dr-carrier-dsn",
+          "file_name": "MLK_F3P_250526.DSN",
+          "type": "orcad_capture_binary",
+          "revision": "2025-05-26",
+          "sha256": "932E6F0D96C89E81EAEBEF63254E6F5CABBDFBDC3B0704D93508038DA0916E98",
+          "pdf_pages": null,
+          "verification_scope": "filename and extracted strings only; PDF schematic is the visually reviewed authority"
+        },
+        {
+          "id": "dr-bank-map",
+          "file_name": "ZYNQ&DR1_BANK对应表.xlsx",
+          "type": "bank_mapping_workbook",
+          "revision": null,
+          "sha256": "C1C4168F1AB6147DC69BA506659E62CDC4E3873D83024862953F0AA5EFD69459",
+          "pdf_pages": null,
+          "sheet": "Sheet1",
+          "range": "A1:E8"
+        }
+      ],
+      "evidence_locators": {
+        "dr-core-manual-p5-p15": {
+          "source": "dr-core-manual",
+          "pdf_pages": "5-15",
+          "topic": "resources, PS memories, clocks, boot and core connectors"
+        },
+        "dr-dev-manual-p16-p24": {
+          "source": "dr-dev-manual",
+          "pdf_pages": "16-24",
+          "topic": "carrier-board interface pin tables"
+        },
+        "dr-carrier-sch-p5-p17": {
+          "source": "dr-carrier-schematic",
+          "pdf_pages": "5-17",
+          "topic": "UART, Ethernet, USB, TF, HDMI, I2C, LEDs, keys, field buses and expansions"
+        },
+        "dr-bank-map-sheet1": {
+          "source": "dr-bank-map",
+          "sheet": "Sheet1",
+          "range": "A1:E8",
+          "topic": "legacy Zynq bank labels to DR1 banks"
+        }
+      },
+      "coverage": {
+        "level": "manual_schematic_and_bank_workbook_cross_checked",
+        "ps_mio_routes_normalized": true,
+        "ps_ddr_ball_map_recorded": true,
+        "pl_board_peripherals_normalized": true,
+        "fep_signal_count": 48,
+        "cep_signal_count": 24,
+        "unresolved_items_fail_closed": true
+      },
+      "power": {
+        "core_input_v": 5,
+        "carrier_input_v": 12,
+        "carrier_supply_current_a": null,
+        "conflicting_documented_currents_a": [
+          2,
+          3
+        ],
+        "core_max_power_w_documented": [
+          3,
+          5
+        ],
+        "carrier_max_power_w_documented": [
+          5,
+          7
+        ]
+      },
+      "bank_mapping": [
+        {
+          "legacy_bank": 0,
+          "dr1_bank": 0,
+          "domain": "PL",
+          "purpose": "JTAG/configuration"
+        },
+        {
+          "legacy_bank": 13,
+          "dr1_bank": 11,
+          "domain": "PL",
+          "purpose": "CEP",
+          "voltage_v": 3.3
+        },
+        {
+          "legacy_bank": 34,
+          "dr1_bank": 32,
+          "domain": "PL",
+          "purpose": "FEP and LED1/2",
+          "voltage_v": null
+        },
+        {
+          "legacy_bank": 35,
+          "dr1_bank": 33,
+          "domain": "PL",
+          "purpose": "primary carrier PL peripherals",
+          "voltage_v": 3.3
+        },
+        {
+          "legacy_bank": 500,
+          "dr1_bank": 200,
+          "domain": "PS",
+          "purpose": "MIO0-15",
+          "voltage_v": 3.3
+        },
+        {
+          "legacy_bank": 501,
+          "dr1_bank": 201,
+          "domain": "PS",
+          "purpose": "MIO16-53",
+          "voltage_v": 1.8
+        },
+        {
+          "legacy_bank": 502,
+          "dr1_bank": "202&203",
+          "domain": "PS",
+          "purpose": "DDR3",
+          "voltage_v": 1.35
+        }
+      ],
+      "bank_voltage_profiles": [
+        {
+          "bank": 11,
+          "voltage_v": 3.3,
+          "default_io_standard": "LVCMOS33",
+          "status": "fixed_on_core_board"
+        },
+        {
+          "bank": 32,
+          "voltage_v": null,
+          "allowed_voltage_v": [
+            1.8,
+            2.5,
+            3.3
+          ],
+          "selector_refdes": "J3",
+          "schematic_documented_default_v": 1.8,
+          "manual_documented_default_v": 3.3,
+          "documented_default_conflict": true,
+          "requires_physical_confirmation": true,
+          "status": "not_ready"
+        },
+        {
+          "bank": 33,
+          "voltage_v": 3.3,
+          "default_io_standard": "LVCMOS33",
+          "status": "fixed_on_supplied_carrier"
+        }
+      ],
+      "clocks": [
+        {
+          "role": "ps_clock",
+          "board_net": "PS_CLK",
+          "package_pin": "E7",
+          "bank": "PS dedicated",
+          "frequency_hz": 33333333,
+          "direction": "input",
+          "configuration_method": "DR1 PS IP configuration",
+          "generate_pl_pin_constraint": false,
+          "source_refs": [
+            "dr-core-manual",
+            "dr-core-schematic"
+          ]
+        },
+        {
+          "role": "pl_clock_100mhz",
+          "board_net": "PL_CLK",
+          "package_pin": "H16",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "clock",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "frequency_hz": 100000000,
+          "period_ns": 10,
+          "oscillator_refdes": "X1"
+        }
+      ],
+      "signals": [
+        {
+          "role": "pl_uart_tx",
+          "board_net": "PL_UART_TX",
+          "package_pin": "J16",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "pl_uart_rx",
+          "board_net": "PL_UART_RX",
+          "package_pin": "K16",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "pl_eth_rxd0",
+          "board_net": "ETHA_RXD0",
+          "package_pin": "G18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_rxd1",
+          "board_net": "ETHA_RXD1",
+          "package_pin": "H15",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_rxd2",
+          "board_net": "ETHA_RXD2",
+          "package_pin": "G15",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_rxd3",
+          "board_net": "ETHA_RXD3",
+          "package_pin": "H17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_rx_ctl",
+          "board_net": "ETHA_RXCTL",
+          "package_pin": "G17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_rx_clk",
+          "board_net": "ETHA_RXCK",
+          "package_pin": "L16",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_txd0",
+          "board_net": "ETHA_TXD0",
+          "package_pin": "B19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_txd1",
+          "board_net": "ETHA_TXD1",
+          "package_pin": "A20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_txd2",
+          "board_net": "ETHA_TXD2",
+          "package_pin": "C20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_txd3",
+          "board_net": "ETHA_TXD3",
+          "package_pin": "B20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_tx_ctl",
+          "board_net": "ETHA_TXCTL",
+          "package_pin": "D18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_tx_clk",
+          "board_net": "ETHA_TXCK",
+          "package_pin": "E17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_mdio",
+          "board_net": "ETHA_MDIO",
+          "package_pin": "K14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed",
+            "key_or_ethernet_shared_pin_choice_confirmed"
+          ],
+          "conflicts": [
+            "key1_shared_pin"
+          ],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_mdc",
+          "board_net": "ETHA_MDC",
+          "package_pin": "J14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed",
+            "key_or_ethernet_shared_pin_choice_confirmed"
+          ],
+          "conflicts": [
+            "key2_shared_pin"
+          ],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "pl_eth_reset_n",
+          "board_net": "ETHA_RST_B",
+          "package_pin": "G14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "rgmii",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_rgmii_timing_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "phy": "YT8531DH-CA",
+          "phy_address_documented": "001"
+        },
+        {
+          "role": "hdmi_d2_p",
+          "board_net": "HDMIO_D2_P",
+          "package_pin": "D19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_d2_n",
+          "board_net": "HDMIO_D2_N",
+          "package_pin": "D20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_d1_p",
+          "board_net": "HDMIO_D1_P",
+          "package_pin": "F16",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_d1_n",
+          "board_net": "HDMIO_D1_N",
+          "package_pin": "F17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_d0_p",
+          "board_net": "HDMIO_D0_P",
+          "package_pin": "M14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_d0_n",
+          "board_net": "HDMIO_D0_N",
+          "package_pin": "M15",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_clk_p",
+          "board_net": "HDMIO_CLK_P",
+          "package_pin": "K17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_clk_n",
+          "board_net": "HDMIO_CLK_N",
+          "package_pin": "K18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_cec",
+          "board_net": "HDMIO_CEC",
+          "package_pin": "G19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed",
+            "r98_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_scl",
+          "board_net": "HDMIO_SCL",
+          "package_pin": "E18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_sda",
+          "board_net": "HDMIO_SDA",
+          "package_pin": "E19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "hdmi_hpd",
+          "board_net": "HDMIO_HP",
+          "package_pin": "G20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "hdmi_output",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_video_timing_confirmed",
+            "ordinary_pl_io_hdmi_output_architecture_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "documented_io_standard": "LVCMOS33",
+          "do_not_infer_special_tmds_standard": true,
+          "maximum_documented_mode": "1080p60"
+        },
+        {
+          "role": "i2c_scl",
+          "board_net": "IIC_SCL",
+          "package_pin": "L15",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "open_drain_i2c",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "shared_devices": [
+            "RTC",
+            "EEPROM"
+          ]
+        },
+        {
+          "role": "i2c_sda",
+          "board_net": "IIC_SDA",
+          "package_pin": "L14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "open_drain_i2c",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "shared_devices": [
+            "RTC",
+            "EEPROM"
+          ]
+        },
+        {
+          "role": "user_led_1",
+          "board_net": "LED1",
+          "package_pin": "T19",
+          "bank": 32,
+          "legacy_schematic_bank": 34,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": "high",
+          "io_voltage_v": null,
+          "io_standard": null,
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_confirmed",
+            "j3_bank32_voltage_physically_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "user_led_2",
+          "board_net": "LED2",
+          "package_pin": "R19",
+          "bank": 32,
+          "legacy_schematic_bank": 34,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": "high",
+          "io_voltage_v": null,
+          "io_standard": null,
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_confirmed",
+            "j3_bank32_voltage_physically_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "user_led_3",
+          "board_net": "LED3",
+          "package_pin": "J15",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": "high",
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "user_led_4",
+          "board_net": "LED4",
+          "package_pin": "M20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": "high",
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "user_key_1",
+          "board_net": "KEY1",
+          "package_pin": "K14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": "low",
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_confirmed",
+            "key_or_ethernet_shared_pin_choice_confirmed"
+          ],
+          "conflicts": [
+            "pl_eth_mdio"
+          ],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "user_key_2",
+          "board_net": "KEY2",
+          "package_pin": "J14",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": "low",
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_confirmed",
+            "key_or_ethernet_shared_pin_choice_confirmed"
+          ],
+          "conflicts": [
+            "pl_eth_mdc"
+          ],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null
+        },
+        {
+          "role": "can_tx",
+          "board_net": "CAN0TX_3V3",
+          "package_pin": "F20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "transceiver": "SN65HVD232DR",
+          "termination_ohm": 120
+        },
+        {
+          "role": "can_rx",
+          "board_net": "CAN0RX_3V3",
+          "package_pin": "F19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "transceiver": "SN65HVD232DR",
+          "termination_ohm": 120
+        },
+        {
+          "role": "rs485_tx",
+          "board_net": "RS485_TX0_3V3",
+          "package_pin": "L17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "transceiver": "SP3485EN-L/TR",
+          "termination_ohm": 120
+        },
+        {
+          "role": "rs485_rx",
+          "board_net": "RS485_RX0_3V3",
+          "package_pin": "N16",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "transceiver": "SP3485EN-L/TR",
+          "termination_ohm": 120
+        },
+        {
+          "role": "rs485_de",
+          "board_net": "RS485_DE0_3V3",
+          "package_pin": "N15",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": "high_transmit_low_receive",
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "normal",
+          "usable_for_auto_constraint": true,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_direction_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "transceiver": "SP3485EN-L/TR",
+          "termination_ohm": 120
+        },
+        {
+          "role": "audio_mclk",
+          "board_net": "AUD_FCLK",
+          "package_pin": "J18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_bclk",
+          "board_net": "SCLK",
+          "package_pin": "M18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_dac_data",
+          "board_net": "DSDIN",
+          "package_pin": "L19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_lrck",
+          "board_net": "LRCK",
+          "package_pin": "L20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_adc_data",
+          "board_net": "ASDOUT",
+          "package_pin": "M19",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_i2c_scl",
+          "board_net": "CCLK",
+          "package_pin": "J20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_i2c_sda",
+          "board_net": "CDATA",
+          "package_pin": "H20",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "inout",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_codec_enable",
+          "board_net": "ES8388_CE_R",
+          "package_pin": "H18",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "output",
+          "connection": "direct",
+          "active_level": null,
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        },
+        {
+          "role": "audio_headphone_detect_n",
+          "board_net": "HP_DET_L",
+          "package_pin": "M17",
+          "bank": 33,
+          "legacy_schematic_bank": 35,
+          "direction": "input",
+          "connection": "direct",
+          "active_level": "low",
+          "io_voltage_v": 3.3,
+          "io_standard": "LVCMOS33",
+          "operation_mode": "es8388_audio",
+          "usable_for_auto_constraint": false,
+          "constraint_status": "manual_schematic_and_bank_table_cross_checked",
+          "required_conditions": [
+            "project_port_name_and_audio_clocking_confirmed",
+            "optional_audio_components_population_confirmed"
+          ],
+          "conflicts": [],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic"
+          ],
+          "notes": null,
+          "codec": "ES8388",
+          "optional_12_288mhz_oscillator": "X5 is marked NC"
+        }
+      ],
+      "reserved_signals": [
+        {
+          "role": "ps_power_on_reset_n",
+          "board_net": "PS_POR_N",
+          "package_pin": "C7",
+          "direction": "input",
+          "active_level": "low",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "ps_system_reset_n",
+          "board_net": "PS_SRST_N",
+          "package_pin": "B10",
+          "direction": "input",
+          "active_level": "low",
+          "physical_control": "KEY4",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "program_n",
+          "board_net": "PROGRAMN",
+          "package_pin": "L6",
+          "direction": "input",
+          "active_level": "low",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "init_n",
+          "board_net": "INITN",
+          "package_pin": "R10",
+          "direction": "status",
+          "active_level": "low",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "done",
+          "board_net": "DONE",
+          "package_pin": "R11",
+          "direction": "output",
+          "active_level": "high",
+          "physical_indicator": "core-board blue DONE LED D1",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "jtag_tdi",
+          "board_net": "TDI",
+          "package_pin": "G6",
+          "direction": "input",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "jtag_tdo",
+          "board_net": "TDO",
+          "package_pin": "F6",
+          "direction": "output",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "jtag_tck",
+          "board_net": "TCK",
+          "package_pin": "F9",
+          "direction": "input",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        },
+        {
+          "role": "jtag_tms",
+          "board_net": "TMS",
+          "package_pin": "J6",
+          "direction": "input",
+          "connection": "dedicated_ps_or_configuration",
+          "usable_for_auto_constraint": false,
+          "source_refs": [
+            "dr-core-schematic",
+            "dr-carrier-schematic",
+            "dr-dev-manual"
+          ],
+          "notes": "Dedicated PS/configuration resource; do not bind as an ordinary PL user GPIO."
+        }
+      ],
+      "boot_straps": {
+        "bit_order": [
+          "MIO3",
+          "MIO4",
+          "MIO5"
+        ],
+        "switch_logic": {
+          "ON": 0,
+          "OFF": 1
+        },
+        "modes": {
+          "jtag": {
+            "bits": "000",
+            "switches": [
+              "ON",
+              "ON",
+              "ON"
+            ]
+          },
+          "qspi": {
+            "bits": "001",
+            "switches": [
+              "ON",
+              "ON",
+              "OFF"
+            ]
+          },
+          "sd_card": {
+            "bits": "011",
+            "switches": [
+              "ON",
+              "OFF",
+              "OFF"
+            ]
+          },
+          "emmc": {
+            "bits": "111",
+            "switches": [
+              "OFF",
+              "OFF",
+              "OFF"
+            ]
+          }
+        },
+        "notes": "MIO3/4/5 are sampled as boot straps and are also QSPI DQ1/2/3 after boot."
+      },
+      "ps_interfaces": [
+        {
+          "name": "ps_gigabit_ethernet",
+          "phy": "YT8531DH-CA",
+          "interface": "RGMII",
+          "bank": 201,
+          "voltage_v": 1.8,
+          "signals": [
+            {
+              "role": "ps_eth_rxd0",
+              "mio": 23,
+              "package_pin": "D11",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_rxd1",
+              "mio": 24,
+              "package_pin": "A16",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_rxd2",
+              "mio": 25,
+              "package_pin": "F15",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_rxd3",
+              "mio": 26,
+              "package_pin": "A15",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_rx_ctl",
+              "mio": 27,
+              "package_pin": "D13",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_rx_clk",
+              "mio": 22,
+              "package_pin": "B17",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_txd0",
+              "mio": 17,
+              "package_pin": "E14",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_txd1",
+              "mio": 18,
+              "package_pin": "B18",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_txd2",
+              "mio": 19,
+              "package_pin": "D10",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_txd3",
+              "mio": 20,
+              "package_pin": "A17",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_tx_ctl",
+              "mio": 21,
+              "package_pin": "F14",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_tx_clk",
+              "mio": 16,
+              "package_pin": "A19",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_mdio",
+              "mio": 53,
+              "package_pin": "C11",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_mdc",
+              "mio": 52,
+              "package_pin": "C10",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_eth_reset_controller",
+              "mio": 51,
+              "package_pin": "B9",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [
+                "user_led_5"
+              ],
+              "notes": "The downstream open-drain/inverting circuit means active polarity must not be inferred from the _B net name alone."
+            }
+          ],
+          "constraint_generation": "ps_ip_only",
+          "generate_pl_pin_constraint": false,
+          "shared_resources": [
+            "MIO51 is also user LED5"
+          ]
+        },
+        {
+          "name": "usb2_ulpi",
+          "transceiver": "USB3320",
+          "bank": 201,
+          "voltage_v": 1.8,
+          "signals": [
+            {
+              "role": "usb_ulpi_rst_n",
+              "mio": 46,
+              "package_pin": "D16",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_stp",
+              "mio": 30,
+              "package_pin": "C15",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_dir",
+              "mio": 29,
+              "package_pin": "C13",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_clk",
+              "mio": 36,
+              "package_pin": "A11",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_nxt",
+              "mio": 31,
+              "package_pin": "E16",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data0",
+              "mio": 32,
+              "package_pin": "A14",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data1",
+              "mio": 33,
+              "package_pin": "D15",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data2",
+              "mio": 34,
+              "package_pin": "A12",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data3",
+              "mio": 35,
+              "package_pin": "F12",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data4",
+              "mio": 28,
+              "package_pin": "C16",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data5",
+              "mio": 37,
+              "package_pin": "A10",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data6",
+              "mio": 38,
+              "package_pin": "E13",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "usb_ulpi_data7",
+              "mio": 39,
+              "package_pin": "C18",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            }
+          ],
+          "constraint_generation": "ps_ip_only",
+          "generate_pl_pin_constraint": false,
+          "route_selector": {
+            "refdes": "J18",
+            "switch": "CH442Q/CH9442Q",
+            "host_when_control_high": true,
+            "otg_when_control_low": true,
+            "physical_confirmation_required": true
+          },
+          "downstream_host_devices": [
+            "WiFi+BT",
+            "4G M.2",
+            "USB Host J8",
+            "USB Host J9"
+          ]
+        },
+        {
+          "name": "tf_card_sdio0",
+          "bank": 201,
+          "ps_side_voltage_v": 1.8,
+          "card_side_voltage_v": 3.3,
+          "level_shifter": "TXS02612",
+          "signals": [
+            {
+              "role": "tf_clk",
+              "mio": 40,
+              "package_pin": "D14",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "tf_cmd",
+              "mio": 41,
+              "package_pin": "C17",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "tf_dat0",
+              "mio": 42,
+              "package_pin": "E12",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "tf_dat1",
+              "mio": 43,
+              "package_pin": "A9",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "tf_dat2",
+              "mio": 44,
+              "package_pin": "F13",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "tf_dat3",
+              "mio": 45,
+              "package_pin": "B15",
+              "bank": 201,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "tf_card_detect",
+              "mio": 47,
+              "package_pin": "B14",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            }
+          ],
+          "constraint_generation": "ps_ip_only",
+          "generate_pl_pin_constraint": false
+        },
+        {
+          "name": "ps_uart",
+          "signals": [
+            {
+              "role": "ps_uart_tx",
+              "mio": 48,
+              "package_pin": "B12",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "ps_uart_rx",
+              "mio": 49,
+              "package_pin": "C12",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            }
+          ],
+          "level_shift": "1.8V to 3.3V through RS0102YH8",
+          "bridge": "CH342K",
+          "constraint_generation": "ps_ip_only",
+          "generate_pl_pin_constraint": false
+        },
+        {
+          "name": "ps_user_controls",
+          "signals": [
+            {
+              "role": "user_key_3",
+              "mio": 50,
+              "package_pin": "B13",
+              "bank": 201,
+              "direction": "input",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": "low",
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "user_led_5_and_ps_eth_reset_controller",
+              "mio": 51,
+              "package_pin": "B9",
+              "bank": 201,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [
+                "ps_eth_reset_controller",
+                "user_led_5"
+              ],
+              "notes": null
+            }
+          ],
+          "constraint_generation": "ps_ip_only",
+          "generate_pl_pin_constraint": false
+        }
+      ],
+      "connectors": [
+        {
+          "name": "FEP",
+          "connection": "direct",
+          "bank": 32,
+          "legacy_schematic_bank": 34,
+          "voltage_v": null,
+          "allowed_voltage_v": [
+            1.8,
+            2.5,
+            3.3
+          ],
+          "default_io_standard": null,
+          "voltage_selector": "J3",
+          "signal_pins": [
+            {
+              "connector_pin": "A4",
+              "package_pin": "V20",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A5",
+              "package_pin": "W20",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A6",
+              "package_pin": "Y18",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A7",
+              "package_pin": "Y19",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A8",
+              "package_pin": "Y16",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A9",
+              "package_pin": "Y17",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A10",
+              "package_pin": "W18",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A11",
+              "package_pin": "W19",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A13",
+              "package_pin": "V17",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A14",
+              "package_pin": "V18",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A15",
+              "package_pin": "U14",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A16",
+              "package_pin": "U15",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A17",
+              "package_pin": "T16",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A18",
+              "package_pin": "U17",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A19",
+              "package_pin": "V16",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A20",
+              "package_pin": "W16",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A22",
+              "package_pin": "V15",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A23",
+              "package_pin": "W15",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A24",
+              "package_pin": "T12",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A25",
+              "package_pin": "U12",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A26",
+              "package_pin": "W14",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A27",
+              "package_pin": "Y14",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A28",
+              "package_pin": "V12",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "A29",
+              "package_pin": "W13",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B4",
+              "package_pin": "T20",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B5",
+              "package_pin": "U20",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B6",
+              "package_pin": "N20",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B7",
+              "package_pin": "P20",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B8",
+              "package_pin": "N17",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B9",
+              "package_pin": "P18",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B10",
+              "package_pin": "T17",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B11",
+              "package_pin": "R18",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B13",
+              "package_pin": "R16",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B14",
+              "package_pin": "R17",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B15",
+              "package_pin": "N18",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B16",
+              "package_pin": "P19",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B17",
+              "package_pin": "U18",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B18",
+              "package_pin": "U19",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B19",
+              "package_pin": "P15",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B20",
+              "package_pin": "P16",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B22",
+              "package_pin": "T14",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B23",
+              "package_pin": "T15",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B24",
+              "package_pin": "U13",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B25",
+              "package_pin": "V13",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B26",
+              "package_pin": "P14",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B27",
+              "package_pin": "R14",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B28",
+              "package_pin": "T11",
+              "pair_polarity": "P",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "B29",
+              "package_pin": "T10",
+              "pair_polarity": "N",
+              "bank": 32,
+              "legacy_schematic_bank": 34,
+              "voltage_v": null,
+              "io_standard": null,
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "j3_bank32_voltage_physically_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            }
+          ],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic",
+            "dr-bank-map"
+          ],
+          "notes": "48 signals / 24 native pairs. No I/O standard may be emitted until J3 is physically confirmed."
+        },
+        {
+          "name": "CEP-J12",
+          "connection": "direct",
+          "bank": 11,
+          "legacy_schematic_bank": 13,
+          "voltage_v": 3.3,
+          "allowed_voltage_v": [
+            3.3
+          ],
+          "default_io_standard": "LVCMOS33",
+          "voltage_selector": null,
+          "signal_pins": [
+            {
+              "connector_pin": "J12-3",
+              "package_pin": "Y12",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-4",
+              "package_pin": "Y13",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-5",
+              "package_pin": "T9",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-6",
+              "package_pin": "U10",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-7",
+              "package_pin": "T5",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-8",
+              "package_pin": "U5",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-9",
+              "package_pin": "V6",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-10",
+              "package_pin": "W6",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-11",
+              "package_pin": "U7",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-12",
+              "package_pin": "V7",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-13",
+              "package_pin": "U9",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-14",
+              "package_pin": "U8",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-15",
+              "package_pin": "V11",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-16",
+              "package_pin": "V10",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-17",
+              "package_pin": "Y7",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-18",
+              "package_pin": "Y6",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-19",
+              "package_pin": "Y9",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-20",
+              "package_pin": "Y8",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-21",
+              "package_pin": "V8",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-22",
+              "package_pin": "W8",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-23",
+              "package_pin": "W10",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-24",
+              "package_pin": "W9",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-25",
+              "package_pin": "W11",
+              "pair_polarity": "P",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            },
+            {
+              "connector_pin": "J12-26",
+              "package_pin": "Y11",
+              "pair_polarity": "N",
+              "bank": 11,
+              "legacy_schematic_bank": 13,
+              "voltage_v": 3.3,
+              "io_standard": "LVCMOS33",
+              "usable_for_auto_constraint": false,
+              "required_conditions": [
+                "project_port_name_and_direction_confirmed",
+                "single_ended_or_differential_protocol_confirmed"
+              ],
+              "source_refs": [
+                "dr-dev-manual",
+                "dr-carrier-schematic",
+                "dr-bank-map"
+              ]
+            }
+          ],
+          "source_refs": [
+            "dr-dev-manual",
+            "dr-carrier-schematic",
+            "dr-bank-map"
+          ],
+          "notes": "24 signals / 12 pairs. LVCMOS33 is valid for single-ended GPIO; a differential standard must be selected explicitly."
+        },
+        {
+          "name": "CAN-RS485-J11",
+          "fixed_pins": [
+            {
+              "connector_pin": 1,
+              "net": "GND"
+            },
+            {
+              "connector_pin": 2,
+              "net": "CANL"
+            },
+            {
+              "connector_pin": 3,
+              "net": "CANH"
+            },
+            {
+              "connector_pin": 4,
+              "net": "GND"
+            },
+            {
+              "connector_pin": 5,
+              "net": "RS485_A"
+            },
+            {
+              "connector_pin": 6,
+              "net": "RS485_B"
+            }
+          ],
+          "source_refs": [
+            "dr-carrier-schematic"
+          ]
+        }
+      ],
+      "memories": [
+        {
+          "role": "ps_ddr3",
+          "domain": "ps_hard_ddr",
+          "capacity_mb": 1024,
+          "bus_width": 32,
+          "chip_count": 2,
+          "chip_capacity_mb": 512,
+          "voltage_v": 1.35,
+          "banks": [
+            202,
+            203
+          ],
+          "part_number": null,
+          "part_number_candidates": [
+            "GDP2BFLM-WB",
+            "MT41K256M16TW-107"
+          ],
+          "documented_rate_claims": [
+            "1333 Mbps",
+            "1066 MHz maximum"
+          ],
+          "verified_operating_rate": null,
+          "constraint_generation": "ps_ip_only",
+          "package_ball_map": {
+            "dq0_7": [
+              "C3",
+              "B3",
+              "A2",
+              "A4",
+              "D3",
+              "D1",
+              "C1",
+              "E1"
+            ],
+            "dq8_15": [
+              "E2",
+              "E3",
+              "G3",
+              "H3",
+              "J3",
+              "H2",
+              "H1",
+              "J1"
+            ],
+            "dq16_23": [
+              "P1",
+              "P3",
+              "R3",
+              "R1",
+              "T4",
+              "U4",
+              "U2",
+              "U3"
+            ],
+            "dq24_31": [
+              "V1",
+              "Y3",
+              "W1",
+              "Y4",
+              "Y2",
+              "W3",
+              "V2",
+              "V3"
+            ],
+            "dm0_3": [
+              "A1",
+              "F1",
+              "T1",
+              "Y1"
+            ],
+            "addr0_14": [
+              "N2",
+              "K2",
+              "M3",
+              "K3",
+              "M4",
+              "L1",
+              "L4",
+              "K4",
+              "K1",
+              "J4",
+              "F5",
+              "G4",
+              "E4",
+              "D4",
+              "F4"
+            ],
+            "ba0_2": [
+              "L5",
+              "R4",
+              "J5"
+            ],
+            "control": {
+              "cs": "N1",
+              "ras": "P4",
+              "cas": "P5",
+              "we": "M5",
+              "odt": "N5",
+              "reset": "B4",
+              "cke": "N3"
+            },
+            "clk_p_n": [
+              "L2",
+              "M2"
+            ],
+            "dqs_p_n": [
+              [
+                "C2",
+                "B2"
+              ],
+              [
+                "G2",
+                "F2"
+              ],
+              [
+                "R2",
+                "T2"
+              ],
+              [
+                "W5",
+                "W4"
+              ]
+            ]
+          },
+          "source_refs": [
+            "dr-core-manual",
+            "dr-dev-manual",
+            "dr-core-schematic"
+          ]
+        },
+        {
+          "role": "ps_qspi_flash",
+          "domain": "ps_mio",
+          "part_number": "GD25Q256DYIGR",
+          "capacity_mbit": 256,
+          "bus_modes": [
+            "x1",
+            "x2",
+            "x4"
+          ],
+          "bank": 200,
+          "voltage_v": 3.3,
+          "signals": [
+            {
+              "role": "qspi_cs_n",
+              "mio": 1,
+              "package_pin": "A7",
+              "bank": 200,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": "low",
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "qspi_dq0",
+              "mio": 2,
+              "package_pin": "B8",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "qspi_dq1",
+              "mio": 3,
+              "package_pin": "D6",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "qspi_dq2",
+              "mio": 4,
+              "package_pin": "B7",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "qspi_dq3",
+              "mio": 5,
+              "package_pin": "A6",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "qspi_sck",
+              "mio": 6,
+              "package_pin": "A5",
+              "bank": 200,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            }
+          ],
+          "constraint_generation": "ps_ip_only",
+          "source_refs": [
+            "dr-core-manual",
+            "dr-dev-manual",
+            "dr-core-schematic"
+          ]
+        },
+        {
+          "role": "ps_emmc",
+          "domain": "ps_mio",
+          "part_number": "IS21EF08GA-JCLI",
+          "capacity_gb": 8,
+          "bus_width": 4,
+          "documented_max_clock_mhz": 50,
+          "bank": 200,
+          "voltage_v": 3.3,
+          "signals": [
+            {
+              "role": "emmc_d0",
+              "mio": 10,
+              "package_pin": "E9",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "emmc_cmd",
+              "mio": 11,
+              "package_pin": "C6",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "emmc_clk",
+              "mio": 12,
+              "package_pin": "D9",
+              "bank": 200,
+              "direction": "output",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "emmc_d1",
+              "mio": 13,
+              "package_pin": "E8",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "emmc_d2",
+              "mio": 14,
+              "package_pin": "C5",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            },
+            {
+              "role": "emmc_d3",
+              "mio": 15,
+              "package_pin": "C8",
+              "bank": 200,
+              "direction": "inout",
+              "domain": "ps_mio",
+              "configuration_method": "DR1 PS IP configuration",
+              "generate_pl_pin_constraint": false,
+              "active_level": null,
+              "conflicts": [],
+              "notes": null
+            }
+          ],
+          "constraint_generation": "ps_ip_only",
+          "source_refs": [
+            "dr-core-manual",
+            "dr-dev-manual",
+            "dr-core-schematic"
+          ]
+        }
+      ],
+      "peripheral_components": {
+        "rtc": {
+          "part_number": null,
+          "candidates": [
+            "PT7C4337",
+            "DS1337"
+          ],
+          "oscillator_hz": 32768,
+          "backup_battery": "CR1220"
+        },
+        "eeprom": {
+          "part_number": null,
+          "candidates": [
+            "24LC02B-I/SN",
+            "M24C02",
+            "24LC02"
+          ]
+        },
+        "audio": {
+          "codec": "ES8388",
+          "optional_oscillator": "X5 12.288 MHz marked NC"
+        },
+        "usb": {
+          "ulpi_phy": "USB3320",
+          "hub": "FE1.1S-BSOP28BCN"
+        },
+        "ethernet": {
+          "ps_phy": "YT8531DH-CA",
+          "pl_phy": "YT8531DH-CA",
+          "shared_reference_clock_mhz": 25
+        }
+      },
+      "conflicts": [
+        {
+          "id": "dr-bank32-voltage",
+          "resources": [
+            "Bank32",
+            "FEP",
+            "LED1",
+            "LED2"
+          ],
+          "conflicting_documented_defaults_v": {
+            "carrier_schematic": 1.8,
+            "development_board_manual": 3.3
+          },
+          "rule": "The manual and carrier schematic conflict; confirm J3 physically before choosing an I/O standard."
+        },
+        {
+          "id": "dr-k14-shared",
+          "package_pin": "K14",
+          "resources": [
+            "PL Ethernet MDIO",
+            "KEY1"
+          ],
+          "rule": "Mutually exclusive project functions."
+        },
+        {
+          "id": "dr-j14-shared",
+          "package_pin": "J14",
+          "resources": [
+            "PL Ethernet MDC",
+            "KEY2"
+          ],
+          "rule": "Mutually exclusive project functions."
+        },
+        {
+          "id": "dr-mio51-shared",
+          "controller_signal": "MIO51",
+          "package_pin": "B9",
+          "resources": [
+            "PS Ethernet reset controller",
+            "LED5"
+          ],
+          "rule": "One shared PS MIO output; do not model as independent controls."
+        },
+        {
+          "id": "dr-usb-route",
+          "resources": [
+            "USB OTG Type-C",
+            "USB host hub"
+          ],
+          "selector": "J18",
+          "rule": "Confirm physical jumper route before use."
+        },
+        {
+          "id": "dr-hdmi-cec-nc",
+          "resources": [
+            "HDMI CEC"
+          ],
+          "component": "R98",
+          "rule": "R98 is marked NC; do not use CEC without assembly confirmation."
+        },
+        {
+          "id": "dr-document-bom-conflicts",
+          "resources": [
+            "DDR3 part/rate",
+            "RTC part",
+            "EEPROM part",
+            "12V current"
+          ],
+          "rule": "Keep candidates and verify BOM/assembly; do not select one conflicting value automatically."
+        }
+      ],
+      "constraint_generation_policy": {
+        "overall_readiness": "not_ready_until_project_ports_and_selected_resource_gates_are_confirmed",
+        "can_generate_pl_pin_candidates_for": [
+          "PL clock",
+          "PL UART",
+          "PL Ethernet excluding shared MDIO/MDC until route choice",
+          "HDMI excluding unpopulated CEC",
+          "Bank33 LED3/4",
+          "CAN and RS485",
+          "Bank11 CEP after protocol selection"
+        ],
+        "must_confirm_before_final": [
+          "top-level RTL port names and directions",
+          "selected PS versus PL interface ownership",
+          "K14/J14 shared Ethernet-versus-key choice",
+          "MIO51 shared PS Ethernet-reset-versus-LED behavior",
+          "J3 Bank32 voltage for FEP and LED1/2",
+          "J18 USB host/OTG jumper route",
+          "HDMI CEC population and ordinary-PL-I/O output architecture",
+          "audio optional component population and clock source"
+        ],
+        "never_generate_pl_pin_constraints_for": [
+          "PS DDR3",
+          "PS QSPI",
+          "PS eMMC",
+          "PS Ethernet MIO",
+          "PS USB ULPI MIO",
+          "PS TF/SDIO MIO",
+          "PS UART MIO",
+          "PS clocks, resets, JTAG and configuration pins"
+        ]
+      }
+    },
+    "template_ref": {
+      "schema": "iccoder.board_template.v1",
+      "board_id": "mlk-f3p-cz02-dr1m90",
+      "template_version": "1.0.0",
+      "index_version": "1.0.0",
+      "relative_path": "mlk-f3p-cz02-dr1m90/config.json",
+      "sha256": "5fcb91e04e4c276fe9b081e74e91741d433bdf07739f7a8ee9e5f5f2511a511a"
+    }
+  }
+}

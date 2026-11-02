@@ -1,0 +1,27 @@
+{
+  "device": "ShanWan / Switch Pro class controller",
+  "note": "Switch 模式下的 HID 顺序：0=B 1=A 2=Y 3=X 4=L 5=R 6=ZL 7=ZR 8=- 9=+ 10=L3 11=R3",
+  "axes": {
+    "lx": 0,
+    "ly": 1,
+    "rx": 2,
+    "ry": 3,
+    "lt": null,
+    "rt": null
+  },
+  "buttons": {
+    "b": 0,
+    "a": 1,
+    "y": 2,
+    "x": 3,
+    "lb": 4,
+    "rb": 5,
+    "yaw_left": 8,
+    "yaw_right": 9,
+    "left_stick": 10
+  },
+  "digital_triggers": {
+    "lt": 6,
+    "rt": 7
+  }
+}

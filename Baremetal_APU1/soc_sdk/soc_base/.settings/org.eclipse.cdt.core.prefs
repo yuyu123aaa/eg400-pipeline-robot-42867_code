@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.debug.1168852828/COMPILE_PREFIX/delimiter=;
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.debug.1168852828/COMPILE_PREFIX/operation=append
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.debug.1168852828/COMPILE_PREFIX/value=${IDE_ROOT_PATH}/toolchain/gcc/aarch64/bin/aarch64-none-elf-
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.debug.1168852828/append=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.debug.1168852828/appendContributed=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.release.1022951877/COMPILE_PREFIX/delimiter=;
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.release.1022951877/COMPILE_PREFIX/operation=append
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.release.1022951877/COMPILE_PREFIX/value=${IDE_ROOT_PATH}/toolchain/gcc/aarch64/bin/aarch64-none-elf-
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.release.1022951877/append=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.lib.release.1022951877/appendContributed=true

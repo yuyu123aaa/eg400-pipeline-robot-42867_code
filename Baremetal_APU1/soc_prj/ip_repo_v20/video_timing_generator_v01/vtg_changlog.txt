@@ -1,0 +1,35 @@
+
+/* 寄存器分布
+index addr    purpose
+0     0x00    h_front      (reg0[15:0])
+1     0x04    h_action     (reg1[15:0])
+2     0x08    h_sync       (reg2[15:0])
+3     0x0c    h_back       (reg3[15:0])
+4     0x10    v_front      (reg4[15:0])
+5     0x14    v_action     (reg5[15:0])
+6     0x18    v_sync       (reg6[15:0])
+7     0x1c    v_back       (reg7[15:0])
+8     0x20    [0] : rstn   (reg8[15:0])
+
+...
+
+16    0x1000  pll drp [7:0] write data, [15:8] write addr
+17    0x1004  pll drp [7:0] read  data, [15:8] read addr
+18    0x1008  pll lock  [0] pll lock status
+19    0x100c  pll reset and clk out control:
+                        [0] clk out 0 enable
+                        [8] pll reset
+*/
+
+// 使用axi lite接口配置显示时序参数，生成hs、vs等信号，一般用于对接vdma实现显示器显示
+// 20250810 初始版本
+// 20250811 实现寄存器配置不同的分辨率
+// 20250824 增加RGB位宽，适配RGB5655 和 RGB888
+// 20250909 增加小数分频，实现更高精度的频率输出
+// 20250910 增加display 模块启动判断，避免vdma的初始化顺序会影响显示效果的问题
+// 20250912 修改pll 配置时的地址和数据，低八位为数据，高八位为地址，为了保证与apug1216兼容
+// 20250919 支持通过参数设置视频时序、帧率，以支持非动态调整的模式
+// 20250919 新增vtg_ce信号，以和axis to video out ip 配合使用
+// 20250919 更改ip名称为video timing generator，暂不支持vtc的视频时序检测功能
+// 20251010 增加pll reset和clk out控制寄存器, 已确保lock信号有足够的时间为外部提供复位
+// 20251022 消除vtg内部的时序违例，并去掉加密部分

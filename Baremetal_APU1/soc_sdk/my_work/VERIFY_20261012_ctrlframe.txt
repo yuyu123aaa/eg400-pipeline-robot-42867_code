@@ -1,0 +1,28 @@
+﻿甯? CTRL:20.000,0.000,1.000,0.400,0.150,0.500,15.000,20.000,5.000,35.000,1.000,1.000,0.800,0.200,15.000,60.000,60.000,0.000,0.000,0.000,20.000,1.000
+瀛楁鏁? 22
+閫楀彿鏁? 21
+  # 1 kp                 = 20.000
+  # 2 ki                 = 0.000
+  # 3 kd                 = 1.000
+  # 4 heading_kp         = 0.400
+  # 5 yaw_rate_damping   = 0.150
+  # 6 integral_limit     = 0.500
+  # 7 turn_limit         = 15.000
+  # 8 base_speed         = 20.000
+  # 9 min_output         = 5.000
+  #10 max_output         = 35.000
+  #11 left_trim          = 1.000
+  #12 right_trim         = 1.000
+  #13 front_yaw_share    = 0.800
+  #14 rear_yaw_share     = 0.200
+  #15 front_max_output   = 15.000
+  #16 dive_left          = 60.000
+  #17 dive_right         = 60.000
+  #18 roll_kp            = 0.000
+  #19 roll_ki            = 0.000
+  #20 roll_kd            = 0.000
+  #21 roll_limit         = 20.000
+  #22 roll_sign          = 1.000
+
+OK: Web CTRL 甯у瓧娈垫暟/椤哄簭涓庡浐浠?22 瀛楁缁撴瀯浣撳畬鍏ㄤ竴鑷?
+EXIT=0

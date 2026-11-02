@@ -1,0 +1,7 @@
+CHIP=dr1m90
+HPF_FILE=soc_prj.hpf
+MSS_FILE=system.mss
+OS=standalone
+PROCESSOR=apu-1
+PROJECT_LOCATION=C:/qiansai_FPGA/my_cpu_npu/soc_sdk/soc_base
+PROJECT_NAME=soc_base

@@ -1,0 +1,3 @@
+PROJECT_NAME=fsbl
+BSP_NAME=soc_base
+LANGUAGE_TYPE=C

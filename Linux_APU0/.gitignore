@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+runtime-logs/
+logs/*.log
+logs/*.pid
+logs/eg400_linux_baseline.txt
+data/images/*
+data/videos/*
+data/defects/*

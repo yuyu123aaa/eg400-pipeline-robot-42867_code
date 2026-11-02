@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作站控制台</title>
+
+    <script src="/static/tailwind.js"></script>
+    <script src="/static/echarts.min.js"></script>
+    <script src="/static/three.min.js"></script>
+    <script src="/static/GLTFLoader.js"></script>
+    <link rel="stylesheet" href="/dashboard/style.css?v=20260927">
+
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <aside id="sidebar" class="sidebar custom-scrollbar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon" onclick="toggleSidebar()" title="展开/收起菜单" style="cursor:pointer;">🛠</div>
+                <div class="sidebar-logo-text-area">
+                    <div class="sidebar-logo-text">管道巡检系统</div>
+                    <div class="sidebar-logo-sub">Pipeline Inspection</div>
+                </div>
+                <button class="sidebar-collapse-btn" onclick="toggleSidebar()" title="收起菜单">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="sidebar-nav-item active" onclick="switchView('overview');" data-nav="overview">
+                    <span class="sidebar-nav-icon">📊</span> <span class="sidebar-nav-text">系统概览</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('camera');" data-nav="camera">
+                    <span class="sidebar-nav-icon">📷</span> <span class="sidebar-nav-text">实时画面</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('gis');" data-nav="gis">
+                    <span class="sidebar-nav-icon">🗺️</span> <span class="sidebar-nav-text">巡检轨迹</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('3d');" data-nav="3d">
+                    <span class="sidebar-nav-icon">🎯</span> <span class="sidebar-nav-text">3D 姿态</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('corridor');" data-nav="corridor">
+                    <span class="sidebar-nav-icon">🚇</span> <span class="sidebar-nav-text">3D 走廊</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('controls');" data-nav="controls">
+                    <span class="sidebar-nav-icon">🎮</span> <span class="sidebar-nav-text">设备控制</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('pid');" data-nav="pid">
+                    <span class="sidebar-nav-icon">⚙️</span> <span class="sidebar-nav-text">PID 调参</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('logs');" data-nav="logs">
+                    <span class="sidebar-nav-icon">📋</span> <span class="sidebar-nav-text">缺陷日志</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('report');" data-nav="report">
+                    <span class="sidebar-nav-icon">📝</span> <span class="sidebar-nav-text">评估报告</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('history');" data-nav="history">
+                    <span class="sidebar-nav-icon">📂</span> <span class="sidebar-nav-text">历史记录</span>
+                </button>
+                <button class="sidebar-nav-item" onclick="switchView('environment');" data-nav="environment">
+                    <span class="sidebar-nav-icon">🌡️</span> <span class="sidebar-nav-text">环境监测</span>
+                </button>
+            </nav>
+
+            <div id="status-badge">系统已停止</div>
+
+            <button class="sidebar-expand-btn" onclick="toggleSidebar()" title="展开菜单">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <div class="sidebar-footer">
+                &copy; 2026 管道巡检工作站 v2.0
+            </div>
+        </aside>
+
+        <main id="main-content" class="main-content">
+            <header class="mobile-toolbar">
+                <button id="mobile-menu-button" class="mobile-menu-button" onclick="toggleSidebar()"
+                    title="打开功能导航" aria-label="打开功能导航">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="mobile-toolbar-heading">
+                    <span class="mobile-toolbar-label">管道巡检系统</span>
+                    <strong id="mobile-view-title">系统概览</strong>
+                </div>
+            </header>
+
+            <div id="sonar-fault-banner" class="sonar-fault-banner" role="alert"
+                aria-live="assertive" hidden>
+                <strong>超声波报警</strong>
+                <span id="sonar-fault-message">超声波传感器异常，裸机已制动</span>
+            </div>
+
+            <div class="content-area">
+
+                <div class="content-inner view-overview">
+
+                    <section class="stats-row animate-in" id="stats-row">
+                    <div class="stat-card stat-card-mileage">
+                        <div class="stat-icon blue">📏</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-mileage">0.00 m</div>
+                            <div class="stat-label">今日巡检里程</div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-temp">
+                        <div class="stat-icon red">🌡️</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-temp">-- °C</div>
+                            <div class="stat-label">管道温度</div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-defects">
+                        <div class="stat-icon purple">🔍</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-defects">0 个</div>
+                            <div class="stat-label">今日发现缺陷</div>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-battery">
+                        <div class="stat-icon orange">🔋</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-battery">-- %</div>
+                            <div class="stat-label">设备电量</div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="sensor-bar animate-in" id="sensor-bar">
+                    <div class="sensor-group attitude-group">
+                        <div class="sensor-group-head">
+                            <span class="sensor-kicker">IMU</span>
+                            <span class="sensor-group-label">姿态角</span>
+                        </div>
+                        <div class="sensor-items">
+                            <div class="sensor-data-item sensor-roll">
+                                <span class="sensor-chip">R</span>
+                                <div class="sensor-copy">
+                                    <span class="sensor-reading">
+                                        <span class="sc-value" id="val-roll">0.0</span>
+                                        <span class="sc-unit">°</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="sensor-data-item sensor-pitch">
+                                <span class="sensor-chip">P</span>
+                                <div class="sensor-copy">
+                                    <span class="sensor-reading">
+                                        <span class="sc-value" id="val-pitch">0.0</span>
+                                        <span class="sc-unit">°</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="sensor-data-item sensor-yaw">
+                                <span class="sensor-chip">Y</span>
+                                <div class="sensor-copy">
+                                    <span class="sensor-reading">
+                                        <span class="sc-value" id="val-yaw">0.0</span>
+                                        <span class="sc-unit">°</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sensor-group sonar-group">
+                        <div class="sensor-group-head">
+                            <span class="sensor-kicker">SONAR</span>
+                            <span class="sensor-group-label">超声波</span>
+                        </div>
+                        <div class="sensor-items">
+                            <div class="sensor-data-item sensor-front">
+                                <span class="sensor-chip">前</span>
+                                <div class="sensor-copy">
+                                    <span class="sensor-reading">
+                                        <span class="sc-value" id="val-sonar-front">0</span>
+                                        <span class="sc-unit">mm</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="sensor-data-item sensor-left">
+                                <span class="sensor-chip">左</span>
+                                <div class="sensor-copy">
+                                    <span class="sensor-reading">
+                                        <span class="sc-value" id="val-sonar-left">0</span>
+                                        <span class="sc-unit">mm</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="sensor-data-item sensor-right">
+                                <span class="sensor-chip">右</span>
+                                <div class="sensor-copy">
+                                    <span class="sensor-reading">
+                                        <span class="sc-value" id="val-sonar-right">0</span>
+                                        <span class="sc-unit">mm</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="middle-row">
+                    <div class="middle-card" id="section-camera">
+                        <div class="middle-card-header">
+                            <h2 class="middle-card-title">
+                                <span>📷</span> 相机画面
+                            </h2>
+                            {% if show_stream_stats %}
+                            <div id="stream-stats-panel" class="stream-stats-panel">
+                                <div class="stream-stat">
+                                    <span class="stream-stat-label">FPS</span>
+                                    <span id="stream-fps-value" class="stream-stat-value">--</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="camera-display-row">
+                            <div class="middle-card-body">
+                                <img id="video-stream" src=""
+                                    class="absolute inset-0 w-full h-full object-contain hidden" />
+                                <canvas id="vision-overlay"
+                                    class="absolute inset-0 w-full h-full pointer-events-none"
+                                    style="z-index:5;"></canvas>
+                                <div id="vision-summary"
+                                    class="absolute top-2 right-2 px-2 py-1 rounded text-xs font-semibold"
+                                    style="z-index:6;background:rgba(17,24,39,.72);color:#F9FAFB;display:none;"></div>
+                                <div id="video-placeholder" class="absolute inset-0 flex items-center justify-center">
+                                    <div class="flex flex-col items-center gap-3">
+                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        <div style="text-align:center;">
+                                            <div style="font-weight:600;color:#6B7280;margin-bottom:2px;">信号离线 / 待启动</div>
+                                            <div style="font-size:12px;color:#9CA3AF;">请启动设备开始巡检</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="middle-card" id="section-gis">
+                        <div class="middle-card-header">
+                            <h2 class="middle-card-title" id="view-title" style="margin:0;">
+                                <span>🗺️</span> 实时巡检轨迹图 (GIS)
+                                <span id="pipe-diameter" style="margin-left:12px;font-size:14px;font-weight:600;color:#64748b;">管径 —</span>
+                            </h2>
+                            <div class="gis-header-tools">
+                                <div class="gis-legend" id="gis-legend">
+                                    <span class="gis-legend-item">
+                                        <span class="gis-legend-line"></span>
+                                        <span>机器人轨迹</span>
+                                    </span>
+                                    <span class="gis-legend-item">
+                                        <span class="gis-legend-dot left"></span>
+                                        <span>左侧管壁</span>
+                                    </span>
+                                    <span class="gis-legend-item">
+                                        <span class="gis-legend-dot right"></span>
+                                        <span>右侧管壁</span>
+                                    </span>
+                                    <span class="gis-legend-item">
+                                        <span aria-hidden="true">📏</span>
+                                        <span>实测管径 <b id="gis-diameter" style="color:#1d4ed8;">——</b></span>
+                                    </span>
+                                </div>
+                                <button id="btn-toggle-view" onclick="toggleView()" class="text-btn view-toggle-btn"
+                                    title="切换 3D 姿态" aria-label="切换 3D 姿态">
+                                    <span aria-hidden="true">🔄</span>
+                                    <span class="btn-text">切换 3D 姿态</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="middle-card-body">
+                            <div id="gis-container" class="absolute inset-0 w-full h-full"></div>
+                            <div id="3d-container" class="absolute inset-0 w-full h-full hidden"></div>
+                            <div id="corridor-container" class="absolute inset-0 w-full h-full hidden"
+                                style="background:#070d18;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="controls-card" id="section-controls">
+                    <h2 class="section-title">🎮 设备控制面板</h2>
+                    <div class="controls-grid">
+                        <button id="btn-start" onclick="sendCommand('start')" class="ctrl-btn btn-start-style">▶
+                            启动</button>
+                        <button id="btn-stop" onclick="sendCommand('stop')" class="ctrl-btn btn-stop-style" disabled>⏹
+                            关闭</button>
+                        <button id="btn-photo" onclick="takePhoto()" class="ctrl-btn btn-photo-style" disabled>📸
+                            拍照</button>
+                        <button id="btn-record" onclick="toggleRecord()" class="ctrl-btn btn-record-style" disabled>⏺
+                            开始录像</button>
+                        <button id="btn-calibrate" onclick="reCalibrate()" class="ctrl-btn btn-calibrate-style"
+                            disabled>🔄 重新标定/清空图</button>
+                        <button id="btn-yolo" onclick="toggleYolo()" class="ctrl-btn btn-yolo-style" disabled>📝
+                            停止记录</button>
+                        <button id="btn-light1" onclick="toggleLight1()" class="ctrl-btn btn-light-style" disabled>💡
+                            开左灯</button>
+                        <button id="btn-light2" onclick="toggleLight2()" class="ctrl-btn btn-light-style" disabled>💡
+                            开右灯</button>
+                        <button id="btn-gas-sample" onclick="gasSampleStart()" class="ctrl-btn btn-light-style"
+                            disabled>🫧 吸气采样</button>
+                        <button id="btn-gas-stop" onclick="gasStop()" class="ctrl-btn btn-stop-style"
+                            disabled>⏹ 停气路</button>
+                        <button id="btn-motor-start" onclick="sendCommand('motor_start')" class="ctrl-btn btn-fwd-style"
+                            disabled>⬆ 向前</button>
+                        <button id="btn-motor-stop" onclick="sendCommand('motor_stop')"
+                            class="ctrl-btn btn-stop-motor-style" disabled>⏸ 停止</button>
+                        <!-- 2026-10-04: 航向基准切换（弯道航向纠正，队友方案）。UI 不出现角度字样 -->
+                        <button id="btn-yaw-left" onclick="sendCommand('yaw_left')"
+                            class="ctrl-btn" style="padding:8px 10px;font-size:13px;" disabled>↰ 左转</button>
+                        <button id="btn-yaw-right" onclick="sendCommand('yaw_right')"
+                            class="ctrl-btn" style="padding:8px 10px;font-size:13px;" disabled>↱ 右转</button>
+                        <span id="heading-phase-badge"
+                            style="display:none;font-size:11px;padding:3px 10px;border-radius:10px;background:#243247;color:#8fb7e8;font-weight:600;">直道段</span>
+                    </div>
+
+                    <!-- 2026-09-27: Web 手动运动控制（真实下发 MANUAL_START/SPEED 到裸机） -->
+                    <div id="manual-control-panel"
+                        style="margin-top:14px;padding-top:12px;border-top:1px dashed #D1D5DB;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                            <strong style="font-size:13px;color:#374151;">🕹️ 手动控制</strong>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <label style="font-size:11px;color:#6B7280;">速度
+                                    <input type="range" id="manual-speed" min="10" max="60" step="5" value="30"
+                                        style="vertical-align:middle;width:90px;">
+                                    <span id="manual-speed-val" style="font-weight:600;color:#111827;">30</span>
+                                </label>
+                                <button id="btn-manual-toggle" onclick="toggleManualMode()"
+                                    class="ctrl-btn" style="padding:6px 12px;font-size:12px;">进入手动</button>
+                            </div>
+                        </div>
+                        <div id="manual-pad"
+                            style="display:grid;grid-template-columns:repeat(3,64px);grid-template-rows:repeat(2,48px);gap:6px;justify-content:center;user-select:none;">
+                            <div></div>
+                            <button id="mb-fwd" class="ctrl-btn" style="padding:0;font-size:18px;">▲</button>
+                            <div></div>
+                            <button id="mb-left" class="ctrl-btn" style="padding:0;font-size:18px;">◀</button>
+                            <button id="mb-stop" class="ctrl-btn btn-stop-style" style="padding:0;font-size:12px;">停</button>
+                            <button id="mb-right" class="ctrl-btn" style="padding:0;font-size:18px;">▶</button>
+                        </div>
+                        <div id="mb-rev-row" style="display:flex;justify-content:center;margin-top:6px;">
+                            <button id="mb-rev" class="ctrl-btn" style="width:196px;padding:0;font-size:18px;">▼ 后退</button>
+                        </div>
+                        <div style="margin-top:8px;text-align:center;font-size:11px;color:#9CA3AF;">
+                            按住方向键持续行驶，松开即停（需先启动系统 + 进入手动模式）
+                        </div>
+                    </div>
+
+                    <!-- 2026-10-05: 垂向推进（下潜）控制 —— 队友固件契约 CMD:DIVE / CMD:DIVE:STOP。
+                         两路速度经 CTRL: 帧第 16/17 字段随「应用速度」下发（复用应用参数路径，不为速度新增命令）；
+                         不做"上浮"按钮：本艇正浮力，上浮 = 把速度调小或按「停」。 -->
+                    <div id="dive-control-panel"
+                        style="margin-top:14px;padding-top:12px;border-top:1px dashed #D1D5DB;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                            <strong style="font-size:13px;color:#374151;">⬇ 下潜控制</strong>
+                            <span id="dive-state-badge"
+                                style="font-size:11px;padding:3px 10px;border-radius:10px;background:#243247;color:#8fb7e8;font-weight:600;">下潜：停</span>
+                        </div>
+                        <div style="display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;">
+                            <label style="font-size:11px;color:#6B7280;">ch8 速度
+                                <input type="range" id="dive-left" min="-100" max="100" step="1" value="0"
+                                    style="vertical-align:middle;width:90px;">
+                                <span id="dive-left-val" style="font-weight:600;color:#111827;">0</span>
+                            </label>
+                            <label style="font-size:11px;color:#6B7280;">ch9 速度
+                                <input type="range" id="dive-right" min="-100" max="100" step="1" value="0"
+                                    style="vertical-align:middle;width:90px;">
+                                <span id="dive-right-val" style="font-weight:600;color:#111827;">0</span>
+                            </label>
+                            <button id="btn-dive-apply" onclick="applyDiveSpeed()" class="ctrl-btn"
+                                style="padding:6px 12px;font-size:12px;">应用速度</button>
+                        </div>
+                        <div style="display:flex;justify-content:center;gap:10px;margin-top:10px;">
+                            <button id="btn-dive" onclick="sendCommand('dive')" class="ctrl-btn" disabled>⬇ 下潜</button>
+                            <button id="btn-dive-stop" onclick="sendCommand('dive_stop')"
+                                class="ctrl-btn btn-stop-style" disabled>⏹ 停</button>
+                        </div>
+                        <div id="dive-apply-status" style="margin-top:6px;text-align:center;font-size:11px;color:#6B7280;"></div>
+                        <div style="margin-top:4px;text-align:center;font-size:11px;color:#9CA3AF;">
+                            速度随 CTRL: 参数帧一起下发；上浮：把下潜速度调小或按「停」
+                        </div>
+                    </div>
+                    <div id="motor-control-message"
+                        data-state="stopped"
+                        style="margin-top:10px;text-align:center;font-size:12px;color:#6B7280;">
+                        电机已停止
+                    </div>
+
+                    <div style="margin-top:10px;text-align:center;">
+                        <span style="font-size:11px;color:#9CA3AF;font-weight:500;">系统存储路径: {{ save_dir }}</span>
+                    </div>
+                </section>
+
+                <section class="motion-params-page focus-hidden" id="section-pid">
+                    <div class="motion-params-header">
+                        <div>
+                            <span class="motion-params-kicker">MOTION CONTROL</span>
+                            <h2>运动控制参数</h2>
+                            <p>所有参数将一次下发并整体生效，避免出现不完整的参数组合。</p>
+                        </div>
+                        <div class="motion-params-badge">10 Hz 自动控制</div>
+                    </div>
+
+                    <form id="motion-params-form" onsubmit="updateMotionParams(event)">
+                        <div class="motion-param-groups">
+                            <section class="motion-param-group">
+                                <div class="motion-param-group-title">
+                                    <span>01</span>
+                                    <div>
+                                        <h3>居中 PID</h3>
+                                        <p>根据左右超声波距离差保持居中。</p>
+                                    </div>
+                                </div>
+                                <div class="motion-param-grid">
+                                    <label class="motion-param-field">
+                                        <span>Kp <small>比例增益</small></span>
+                                        <input type="number" id="pid-kp" min="0" max="100"
+                                            step="0.1" value="20.0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>Ki <small>积分增益</small></span>
+                                        <input type="number" id="pid-ki" min="0" max="20"
+                                            step="0.01" value="0.0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>Kd <small>微分增益</small></span>
+                                        <input type="number" id="pid-kd" min="0" max="20"
+                                            step="0.1" value="1.0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>积分限制 <small>integral_limit</small></span>
+                                        <input type="number" id="integral-limit" min="0" max="100"
+                                            step="0.1" value="0.5" required>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="motion-param-group">
+                                <div class="motion-param-group-title">
+                                    <span>02</span>
+                                    <div>
+                                        <h3>航向与阻尼</h3>
+                                        <p>控制 Yaw 航向保持、旋转阻尼及纠偏上限。</p>
+                                    </div>
+                                </div>
+                                <div class="motion-param-grid">
+                                    <label class="motion-param-field">
+                                        <span>航向 Kp <small>heading_kp</small></span>
+                                        <input type="number" id="heading-kp" min="0" max="2"
+                                            step="0.05" value="0.40" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>Yaw 阻尼 <small>yaw_rate_damping</small></span>
+                                        <input type="number" id="yaw-rate-damping" min="0" max="2"
+                                            step="0.01" value="0.15" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>转向限制 <small>turn_limit</small></span>
+                                        <input type="number" id="turn-limit" min="0.001" max="100"
+                                            step="0.5" value="15.0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>前电机最大输出 <small>front_max_output</small></span>
+                                        <input type="number" id="front-max-output" min="0" max="100"
+                                            step="0.5" value="15.0" required>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="motion-param-group">
+                                <div class="motion-param-group-title">
+                                    <span>03</span>
+                                    <div>
+                                        <h3>推进输出</h3>
+                                        <p>设置后电机基础推进力和输出限幅。</p>
+                                    </div>
+                                </div>
+                                <div class="motion-param-grid">
+                                    <label class="motion-param-field">
+                                        <span>基础速度 <small>base_speed</small></span>
+                                        <input type="number" id="base-speed" min="0" max="100"
+                                            step="0.5" value="20.0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>最小输出 <small>min_output</small></span>
+                                        <input type="number" id="min-output" min="-100" max="100"
+                                            step="0.5" value="5.0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>最大输出 <small>max_output</small></span>
+                                        <input type="number" id="max-output" min="0" max="100"
+                                            step="0.5" value="35.0" required>
+                                    </label>
+                                </div>
+                                <p class="motion-param-rule">必须满足：最小输出 ≤ 基础速度 ≤ 最大输出，且转向限制不大于输出范围。</p>
+                            </section>
+
+                            <section class="motion-param-group">
+                                <div class="motion-param-group-title">
+                                    <span>04</span>
+                                    <div>
+                                        <h3>推力平衡与 Yaw 分配</h3>
+                                        <p>修正左右后电机差异，并分配前后电机纠偏比例。</p>
+                                    </div>
+                                </div>
+                                <div class="motion-param-grid">
+                                    <label class="motion-param-field">
+                                        <span>左侧比例 <small>left_trim</small></span>
+                                        <input type="number" id="left-trim" min="0.5" max="1"
+                                            step="0.01" value="1.00" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>右侧比例 <small>right_trim</small></span>
+                                        <input type="number" id="right-trim" min="0.5" max="1"
+                                            step="0.01" value="1.00" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>前电机占比 <small>front_yaw_share (%)</small></span>
+                                        <input type="number" id="front-yaw-share" min="0" max="100"
+                                            step="1" value="80" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>后电机占比 <small>rear_yaw_share (%)</small></span>
+                                        <input type="number" id="rear-yaw-share" min="0" max="100"
+                                            step="1" value="20" required>
+                                    </label>
+                                </div>
+                                <p class="motion-param-rule">前后占比合计必须为 100%；设置为 100/0 时，仅前电机负责 Yaw 纠偏。</p>
+                            </section>
+
+                            <!-- 2026-10-05: 横滚稳定（防侧翻），队友固件契约 CTRL: 18~22 字段 -->
+                            <section class="motion-param-group">
+                                <div class="motion-param-group-title">
+                                    <span>05</span>
+                                    <div>
+                                        <h3>横滚稳定（防侧翻）</h3>
+                                        <p>下潜时 ch8(左)+corr / ch9(右)-corr 纠平艇体；增益全 0 = 功能关闭。</p>
+                                    </div>
+                                </div>
+                                <div class="motion-param-grid">
+                                    <label class="motion-param-field">
+                                        <span>横滚 P <small>roll_kp</small></span>
+                                        <input type="number" id="roll-kp" min="0" max="20"
+                                            step="0.1" value="0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>横滚 I <small>roll_ki</small></span>
+                                        <input type="number" id="roll-ki" min="0" max="5"
+                                            step="0.05" value="0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>横滚 D <small>roll_kd</small></span>
+                                        <input type="number" id="roll-kd" min="0" max="5"
+                                            step="0.1" value="0" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>修正上限 <small>roll_limit (%)</small></span>
+                                        <input type="number" id="roll-limit" min="0" max="100"
+                                            step="1" value="20" required>
+                                    </label>
+                                    <label class="motion-param-field">
+                                        <span>修正方向 <small>roll_sign (-1/0/+1)</small></span>
+                                        <input type="number" id="roll-sign" min="-1" max="1"
+                                            step="1" value="1" required>
+                                    </label>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+                                    <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+                                        <input type="checkbox" id="roll-enable-toggle" onchange="toggleRollStab(this.checked)">
+                                        <span>启用横滚稳定</span>
+                                    </label>
+                                    <span style="font-size:11px;color:#9CA3AF;">⚠ 首次启用必须先确认修正方向（见交接单 §5 第一步）</span>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div class="motion-params-actions">
+                            <p id="motion-params-status" role="status">修改参数后点击应用，裸机校验通过后整体更新。</p>
+                            <button id="btn-apply-motion-params" type="submit">应用全部参数</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card focus-hidden" style="padding:18px;border-color:#BFDBFE;border-width:2px;" id="section-logs">
+                    <h2
+                        style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+                        <span style="color:#EF4444;">🚨</span> 缺陷标记与实时日志
+                    </h2>
+                    <div id="defect-logs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="text-gray-400 text-sm py-4 w-full col-span-full text-center">暂无缺陷记录...</div>
+                    </div>
+                </section>
+
+                <section class="card focus-hidden" style="padding:18px;border-color:#BFDBFE;border-width:2px;" id="section-report">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+                        <h2 style="font-size:16px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin:0;">
+                            <span style="color:#2563EB;">📝</span> 管段评估报告
+                            <span style="font-size:11px;font-weight:400;color:#94a3b8;">依据 CJJ 181-2012</span>
+                        </h2>
+                        <div style="display:flex;gap:8px;">
+                            <select id="report-history-select" onchange="loadEvaluationReport(this.value)"
+                                style="font-size:12px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#334155;">
+                                <option value="">当前巡检（实时）</option>
+                            </select>
+                            <button onclick="loadEvaluationReport()"
+                                style="font-size:12px;padding:6px 14px;border:none;border-radius:8px;background:#2563EB;color:#fff;cursor:pointer;">↻ 重新计算</button>
+                            <button onclick="printEvaluationReport()"
+                                style="font-size:12px;padding:6px 14px;border:none;border-radius:8px;background:#0f766e;color:#fff;cursor:pointer;">🖨 打印报告</button>
+                        </div>
+                    </div>
+                    <div id="report-container"></div>
+                    <div id="maintenance-plan-container"
+                        style="margin-top:16px;border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:14px;">
+                        <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px;">
+                            📅 年度体检计划（全部管段汇总）
+                        </div>
+                        <div id="maintenance-plan-body"
+                            style="font-size:12.5px;color:#64748b;">切换到评估报告页后加载…</div>
+                    </div>
+                </section>
+
+                <section class="history-page focus-hidden" id="section-history">
+                    <div class="history-page-header">
+                        <h2 class="history-page-title">
+                            <span>📂</span> 巡检历史归档
+                        </h2>
+                        <button class="history-refresh-btn" onclick="loadHistoryList(true)" title="刷新历史记录"
+                            aria-label="刷新历史记录">
+                            ↻
+                        </button>
+                    </div>
+
+                    <div id="network-overview-container"
+                        style="border:1px solid #e2e8f0;border-radius:14px;background:#fff;padding:14px;margin-bottom:14px;">
+                        <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px;">
+                            🗺️ 管网健康总览（多趟巡检汇总，按综合等级着色）
+                        </div>
+                        <div id="network-overview-body"
+                            style="font-size:12.5px;color:#64748b;">切换到历史记录页后加载…</div>
+                    </div>
+
+                    <div class="history-shell">
+                        <div class="history-list-pane custom-scrollbar" id="history-list">
+                            <div class="text-gray-400 text-sm text-center mt-10">切换到历史记录后加载...</div>
+                        </div>
+
+                        <div class="history-detail-pane custom-scrollbar" id="history-detail">
+                            <div class="history-empty-state">
+                                <svg width="72" height="72" opacity="0.2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>请在左侧选择要查看的巡检记录</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card focus-hidden" style="padding:18px;border-color:#BFDBFE;border-width:2px;" id="section-environment">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+                        <h2 style="font-size:16px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;margin:0;">
+                            <span style="color:#0EA5E9;">🌡️</span> 环境监测
+                            <span style="font-size:11px;font-weight:400;color:#94a3b8;">气体 / 浊度 / 下潜深度</span>
+                        </h2>
+                        <span id="env-last-update" style="font-size:11px;color:#94a3b8;">等待数据…</span>
+                    </div>
+
+                    <div id="env-alarm-banner"
+                        style="display:none;padding:10px 14px;border-radius:10px;background:#FEF2F2;border:1px solid #FECACA;color:#DC2626;font-size:13px;font-weight:600;margin-bottom:14px;">
+                        <span id="env-alarm-text"></span>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px;">
+
+                        <div class="env-card" id="env-card-depth"
+                            style="padding:14px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;text-align:center;">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:4px;">📏 下潜深度</div>
+                            <div id="env-depth-value" style="font-size:24px;font-weight:700;color:#0f172a;">——</div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:2px;">mm</div>
+                        </div>
+
+                        <div class="env-card" id="env-card-turb"
+                            style="padding:14px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;text-align:center;">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:4px;">💧 浊度</div>
+                            <div id="env-turb-value" style="font-size:24px;font-weight:700;color:#0f172a;">——</div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:2px;">UNT（待标定）</div>
+                        </div>
+
+                    </div>
+
+                    <!-- 浊度分级对照（2026-10-18 评委向：让每一级浊度有直观概念。
+                         量程依据 XM3318B 手册 0~1000 UNT、误差 ±5%） -->
+                    <div style="margin-bottom:14px;padding:10px 12px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
+                        <div style="font-size:11px;font-weight:600;color:#475569;margin-bottom:6px;">
+                            💧 浊度分级对照
+                            <span style="font-weight:400;color:#94a3b8;">（XM3318B 量程 0~1000 UNT · 误差 ±5%）</span>
+                        </div>
+                        <div style="display:flex;gap:4px;">
+                            <div id="env-turb-lv0" style="flex:1;padding:5px 6px;border-radius:7px;background:#e0f2fe;border:2px solid transparent;">
+                                <div style="font-size:10.5px;font-weight:700;color:#0369a1;">0~1</div>
+                                <div style="font-size:10px;color:#475569;">清澈 · 饮用水级</div>
+                            </div>
+                            <div id="env-turb-lv1" style="flex:1;padding:5px 6px;border-radius:7px;background:#d1fae5;border:2px solid transparent;">
+                                <div style="font-size:10.5px;font-weight:700;color:#047857;">1~10</div>
+                                <div style="font-size:10px;color:#475569;">基本清澈 · 轻微悬浮物</div>
+                            </div>
+                            <div id="env-turb-lv2" style="flex:1;padding:5px 6px;border-radius:7px;background:#fef9c3;border:2px solid transparent;">
+                                <div style="font-size:10.5px;font-weight:700;color:#a16207;">10~50</div>
+                                <div style="font-size:10px;color:#475569;">轻度浑浊 · 可见细颗粒</div>
+                            </div>
+                            <div id="env-turb-lv3" style="flex:1;padding:5px 6px;border-radius:7px;background:#ffedd5;border:2px solid transparent;">
+                                <div style="font-size:10.5px;font-weight:700;color:#c2410c;">50~200</div>
+                                <div style="font-size:10px;color:#475569;">明显浑浊 · 水体发白发黄</div>
+                            </div>
+                            <div id="env-turb-lv4" style="flex:1;padding:5px 6px;border-radius:7px;background:#fee2e2;border:2px solid transparent;">
+                                <div style="font-size:10.5px;font-weight:700;color:#b91c1c;">200~1000</div>
+                                <div style="font-size:10px;color:#475569;">重度浑浊 · 泥浆状</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:8px;">🌫️ 气体（4 合 1）</div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;">
+
+                        <div class="env-card env-gas-card" id="env-card-co"
+                            style="padding:14px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;text-align:center;">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:4px;">CO 一氧化碳</div>
+                            <div id="env-gas-co" style="font-size:24px;font-weight:700;color:#0f172a;">——</div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:2px;">ppm · 低报 35</div>
+                        </div>
+
+                        <div class="env-card env-gas-card" id="env-card-h2s"
+                            style="padding:14px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;text-align:center;">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:4px;">H₂S 硫化氢</div>
+                            <div id="env-gas-h2s" style="font-size:24px;font-weight:700;color:#0f172a;">——</div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:2px;">ppm · 低报 10</div>
+                        </div>
+
+                        <div class="env-card env-gas-card" id="env-card-o2"
+                            style="padding:14px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;text-align:center;">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:4px;">O₂ 氧气</div>
+                            <div id="env-gas-o2" style="font-size:24px;font-weight:700;color:#0f172a;">——</div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:2px;">%VOL · 19.5~23.5</div>
+                        </div>
+
+                        <div class="env-card env-gas-card" id="env-card-ch4"
+                            style="padding:14px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;text-align:center;">
+                            <div style="font-size:11px;color:#64748b;margin-bottom:4px;">CH₄ 甲烷</div>
+                            <div id="env-gas-ch4" style="font-size:24px;font-weight:700;color:#0f172a;">——</div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:2px;">%LEL · 低报 20</div>
+                        </div>
+
+                    </div>
+                </section>
+
+                </div>
+                <!-- /.content-inner -->
+            </div>
+            <!-- /.content-area -->
+        </main>
+    </div>
+    <div id="image-preview" class="image-preview hidden" onclick="closeImagePreview()">
+        <div class="image-preview-frame" onclick="event.stopPropagation()">
+            <div class="image-preview-toolbar">
+                <button class="image-preview-button" onclick="closeImagePreview()" title="关闭预览"
+                    aria-label="关闭预览">×</button>
+            </div>
+            <div class="image-preview-body">
+                <button id="image-preview-prev" class="image-preview-button image-preview-nav image-preview-prev"
+                    onclick="shiftImagePreview(-1)" title="上一张" aria-label="上一张">‹</button>
+                <div class="image-preview-figure">
+                    <img id="image-preview-img" class="image-preview-img" src="" alt="巡检图片预览">
+                </div>
+                <button id="image-preview-next" class="image-preview-button image-preview-nav image-preview-next"
+                    onclick="shiftImagePreview(1)" title="下一张" aria-label="下一张">›</button>
+            </div>
+            <div class="image-preview-footer">
+                <div id="image-preview-caption" class="image-preview-caption"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/dashboard/app.js?v=20261027b"></script>
+    <script src="/dashboard/corridor.js?v=20261027g"></script>
+
+</body>
+
+</html>

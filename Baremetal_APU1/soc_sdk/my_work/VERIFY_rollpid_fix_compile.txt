@@ -1,0 +1,11 @@
+﻿=== syntax check (roll PID write-out fix) ===
+header dirs = 145
+----- FS: apu_app.c -----
+EXITCODE=0
+----- FS: apu_pipe_center.c -----
+EXITCODE=0
+----- FS: apu_pca9685.c -----
+EXITCODE=0
+----- FS: apu_testlink.c -----
+EXITCODE=0
+=== done ===

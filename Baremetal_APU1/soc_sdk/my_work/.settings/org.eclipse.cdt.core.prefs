@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/COMPILE_PREFIX/delimiter=;
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/COMPILE_PREFIX/operation=append
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/COMPILE_PREFIX/value=${IDE_ROOT_PATH}/toolchain/gcc/aarch64/bin/aarch64-none-elf-
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/append=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/appendContributed=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/bsp_loc/delimiter=;
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/bsp_loc/operation=append
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.668021124/bsp_loc/value=C\:/qiansai_FPGA/my_cpu_npu/soc_sdk/soc_base
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/COMPILE_PREFIX/delimiter=;
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/COMPILE_PREFIX/operation=append
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/COMPILE_PREFIX/value=${IDE_ROOT_PATH}/toolchain/gcc/aarch64/bin/aarch64-none-elf-
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/append=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/appendContributed=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/bsp_loc/delimiter=;
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/bsp_loc/operation=append
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.release.2040517566/bsp_loc/value=C\:/qiansai_FPGA/my_cpu_npu/soc_sdk/soc_base

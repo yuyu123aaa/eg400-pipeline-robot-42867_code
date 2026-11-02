@@ -1,0 +1,1947 @@
+/*
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * apu_app.c —— APU1 裸机侧"业务层"
+ * ===========================================================================
+ *  【分层位置】
+ *
+ *      main.c  ──>  apu_app_periodic()  ──>  驱动层 (dr1m90/: led/i2c/sonar/imu/pca9685/wdt)
+ *         │              │
+ *         │              └──>  纯逻辑 (common/: nav_safety / manual / pipe_center / filter)
+ *         └──回调──>  apu_dispatch()  ──命令──>  apu_app_handle_command()
+ *
+ *  【本文件的规矩】
+ *      · 不许 include 任何 al_*.h（业务层不碰寄存器）
+ *      · 时间一律走 apu_time.h（不许直接调 SDK 计时器）
+ *      · 发消息一律走 apu_msg_api.h 的 apu_send_*（不许自己拼包）
+ *
+ *  【已完成阶段】
+ *      P0  ACK 文案修正 + DEVICE_CORE_STOP 真停机
+ *      P1  时间基 + 业务层拆分 + 开机自检
+ *      P2  双 I2C 总线 + 扫描
+ *      P3  照明灯（PL GPIO 54/55）+ 安全联动
+ *      P4  超声波（I2C1 + 中值滤波 + 10Hz 上报）
+ *      P5  IMU（UART0 收行解析）
+ *      P6  导航安全门 + 硬件看门狗 + 心跳看门狗
+ *      P7  PCA9685 推进器
+ *      P8  10Hz 居中控制 + 手动混控 + 完整调参命令
+ * ===========================================================================
+ */
+
+#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <math.h>             /* fmodf：航向基准角归一化（CMD:YAW:* 用） */
+
+#include "apu_app.h"
+#include "apu_msg.h"
+#include "apu_msg_api.h"      /* 传输层发送接口 */
+#include "apu_time.h"
+
+#include "al_core.h"          /* AL_LOG / al_printf / AL_REG32_READ */
+
+/* ★ 驱动层（dr1m90/）—— 业务层可以调驱动，但不许直接碰寄存器 */
+#include "apu_led.h"          /* P3：PL GPIO 54/55 */
+#include "apu_i2c.h"          /* P2：双 I2C 总线 */
+#include "apu_sonar.h"        /* P4：I2C1 超声波（左/右） */
+#include "apu_front.h"        /* P4b：UART-D 前向超声波（直连） */
+#include "apu_sonar_filter.h" /* P4：滤波（注入路径也用它） */
+#include "apu_imu.h"          /* P5：UART0 姿态 */
+#include "apu_wdt.h"          /* P6：硬件看门狗 */
+#include "apu_pca9685.h"      /* P7：推进器 PWM */
+#include "apu_gasflow.h"      /* ★ 气路：电磁阀 + 吸气泵（CMD:GAS_*）*/
+
+/* ★ 纯逻辑（common/）*/
+#include "apu_nav_safety.h"   /* P6：导航安全评估 */
+#include "apu_manual.h"       /* P8：手动混控 */
+#include "apu_pipe_center.h"  /* P8：10Hz 居中控制 */
+
+/* ---------------------------------------------------------------------------
+ *  ★ 为什么需要这个函数：SDK 的 AL_LOG **打不出 %f**
+ * ---------------------------------------------------------------------------
+ *  实读 soc_base\...\lib\log\src\al_printf.c:264-330 的 switch 确认：
+ *  SDK 自己的 al_vprintf 只支持 %d %u %i %p %x %X %s %c —— **没有 %f**。
+ *  所以 AL_LOG(...) 里写 %.2f 会打成空白
+ *  （上板实测：`control params OK (kp= ki= kd= base=)` 后面全是空的）。
+ *
+ *  但 **newlib 的 vsnprintf 是支持 %f 的**（链接带了 -u _printf_float），
+ *  而且上报路径本来就在用它（apu_msg_api / apu_link / apu_console）。
+ *  所以这里借它先把浮点格式化成字符串，再用 %s 交给 AL_LOG。
+ *
+ *  ⚠️ 返回的是**同一个静态缓冲**，所以一条 AL_LOG 里**只能用一次**本函数：
+ *      ✅ 对：AL_LOG(..., "PID -> %s", apu_fmt("Kp=%.2f Ki=%.2f Kd=%.2f", kp, ki, kd));
+ *      ❌ 错：AL_LOG(..., "Kp=%s Kd=%s", apu_fmt("%.2f", kp), apu_fmt("%.2f", kd));
+ *           （两次调用共用一块缓冲，前一个会被后一个覆盖）
+ * --------------------------------------------------------------------------- */
+static const char *apu_fmt(const char *fmt, ...)
+{
+	static char buf[128];
+	va_list ap;
+
+	va_start(ap, fmt);
+	(void)vsnprintf(buf, sizeof(buf), fmt, ap);
+	va_end(ap);
+	return buf;
+}
+
+/* 数某个字符出现几次。
+ * ★ 2026-10-05：CTRL: 靠**逗号个数**判字段数（见 CTRL: 分支的说明）——
+ *    只看 sscanf 返回值会把"末尾字段写坏了"误判成"少发了几个字段"。 */
+static int apu_count_char(const char *s, char c)
+{
+	int n = 0;
+
+	if (s == NULL)
+		return 0;
+
+	while (*s != '\0') {
+		if (*s == c)
+			n++;
+		s++;
+	}
+	return n;
+}
+
+/* ===========================================================================
+ * 编译期开关
+ * =========================================================================== */
+
+/* 1 = 打出每秒 tick 自检行（验证时间基；与手机秒表比误差 < 1%）
+ * 0 = 关闭（★ 2026-09-25 出水前改为 0）
+ *
+ * ⚠️ 为什么默认关：这是一行**每秒**打印的调试脚手架，长期开着会把日志串口刷满，
+ *    真出问题时（心跳超时、超声损坏、导航故障）的关键行会被淹掉。
+ *    要复验时间基精度时，临时改成 1 重编，或用控制台 `@mode` 看 tick/ms 当前值。
+ *
+ * ★★ 2026-09-25 19:50：**临时改为 1，用于定位看门狗复位点** ★★
+ *   背景：加了切片喂狗之后仍被狗咬（FSBL 打印 history reset reason: 00000060，
+ *         bit6=SWDT0）。日志停在 "business layer init done" 之后，
+ *         主循环一个字都没输出 —— 看不出卡在哪一步。
+ *   做法：打开这一行，主循环**每秒**会打一行 tick。
+ *         · 若每秒都打 → 主循环活着，说明卡在 testlink_poll 那一段或更晚
+ *         · 若只打了几行就停 → **停在的那一行就是罪魁祸首**
+ *   定位完成后请改回 0 再出水（否则每秒一行会淹掉关键日志）。
+ *
+ * ★★ 2026-09-26：**已改回 0（删除该调试打印）** ★★
+ *   原因：看门狗复位点已定位完毕；而且这行每秒一条会把日志串口刷满，
+ *        在排查"Web 控制电机无响应"时，真正的关键行（ACK / FAULT:NAV）
+ *        会被它淹没。需要复验时间基精度时，用控制台 `@mode` 看 tick/ms。 */
+#define APU_TIME_SELFCHECK_PRINT    0
+#define APU_TIME_PRINT_PERIOD_MS    1000U
+
+/* ⚪ 2026-09-21：原 `APU_DEMO_SENSOR_PERIODIC`（兜底上报开关）与
+ *    `APU_REPORT_PERIOD_MS`（兜底节拍）**已删除** —— 那个块的两块内容都不存在了：
+ *    · 硬编码假姿态 → 2026-09-20 删（**F-27**）
+ *    · 注入兜底超声 → 2026-09-21 删（**F-30**）
+ *    ⚠️ **不要恢复它** —— 一恢复就会重新引入"SONAR 帧重复上报"，
+ *       原因见 `apu_app_periodic()` ⑥ 处的说明。 */
+
+/* ===========================================================================
+ * 单次航向基准转量（CMD:YAW:LEFT / CMD:YAW:RIGHT 用）
+ * ===========================================================================
+ *  正数 = LEFT（逆时针 / 左转），负数 = RIGHT（顺时针 / 右转）。
+ *
+ *  ★ 2026-10-04 实测改版：规范 v1.0 §2.2 定的是 ±90°，实测 90° 弯管给
+ *    ±80° 就够了（±90° 偏大）；当前值进一步收到 **76°**。
+ *    单次转量只在这里改，改完必须同步 Web 侧（见下）。
+ *
+ *  ⚠️ 这个值**两端必须一致**：Web 端 app.js 的 heading_offset_deg 也按同一步长
+ *     累加来显示"直道段 / 左弯段 / 右弯段 / 回转段"徽标（规范 §1：基准角只存在
+ *     固件一处，Web 那份只用于显示）。**改这里必须同步改 Web 端**，
+ *     否则连点几次之后徽标会和真实基准角漂开。
+ *
+ *  ⚠️ 连按 N 次的结果由 apu_yaw_wrap180() 收进 [-180, +180)：
+ *     进弯 +76、出弯 -76 -> **精确回到原基准**（这是正常用法，必须成立）。
+ *     76 不能整除 360，连按多次不会自动回到 0，这是正常的，按需重新标定即可。 */
+#define APU_YAW_STEP_DEG   85.0f
+
+/* ===========================================================================
+ * 弯道模式（2026-10-26）
+ * ===========================================================================
+ *  CMD:YAW:LEFT / CMD:YAW:RIGHT 后自动进入，持续 g_turn_mode_ms（默认 4 s）：
+ *    · 关闭管道居中 PID：弯道内左右壁距离在剧变，居中项会和转向叠加，
+ *      是"过度转弯"的主要来源之一；
+ *    · 基础速度 ×0.70：降低入弯动量；
+ *    · 转向限幅 ×0.90：轻微收一点，不压死转向能力；
+ *    · 偏航阻尼 ×1.30：给转向"刹车"（上限 2.0，受参数校验约束）。
+ *
+ *  到时自动退出，恢复原参数并清一次居中状态（防止积分在弯道里攒住）。
+ *  持续时间可用控制台 `@turn:<ms>` 在线调（500~15000 ms），不用重编。
+ * =========================================================================== */
+#define APU_TURN_MODE_MS_DEFAULT   2000U
+#define APU_TURN_MODE_MS_MIN        500U
+#define APU_TURN_MODE_MS_MAX      15000U
+#define APU_TURN_SPEED_SCALE        0.55f
+#define APU_TURN_LIMIT_SCALE        1.0f
+#define APU_TURN_DAMP_SCALE         2.50f
+
+/* ===========================================================================
+ * 心跳门限（单位：**10ms tick**）
+ * ===========================================================================
+ *  Linux 侧每 500ms 发一次心跳；连续 5 次没收到（2.5s）判定主机失联。
+ *  ⚠️ 单位是 tick 不是 ms —— 与传承项目 slaver_00_example.c:52-53 一致。
+ * =========================================================================== */
+#define APU_HB_TIMEOUT_TICKS            250U    /* 2.5 s  */
+#define APU_HB_STARTUP_TIMEOUT_TICKS    750U    /* 7.5 s  */
+
+/* ===========================================================================
+ * 状态变量（全部 static，只通过 apu_app_* 接口访问）
+ * =========================================================================== */
+
+#define APU_LED1_BIT    0x01U
+#define APU_LED2_BIT    0x02U
+
+static uint8_t  g_led_state;         /* bit0=灯1, bit1=灯2 */
+static uint32_t g_sonar_damage_mask; /* 见 APU_SONAR_FAULT_* */
+static volatile int g_shutdown_req;  /* DEVICE_CORE_STOP 收到后置 1 */
+
+/* ---- 传感器数据（真驱动 / 测试注入 共用）---- */
+static int      g_imu_seen;
+static float    g_roll, g_pitch, g_yaw;
+static uint32_t g_imu_last_tick;     /* 供 NavSafety 判陈旧（10ms 单位） */
+
+static int      g_sonar_seen;
+/* ★★ 2026-09-21（以传承为准）：超声数据按**用途**分开存，别再合成一份。
+ *    安全门   -> 原始值 + 从原始值算的有效性
+ *                （对应传承 sonar_raw_front_mm / sonar_*_valid）
+ *    居中控制 -> 滤波值（对应传承 sonar_data.left/right）
+ *  混用会让安全门的近墙判断迟到 ~400ms，详见 apu_app.h 里的说明。 */
+static uint16_t g_sonar_raw_front;                      /* -> NavSafety.front_mm */
+static int      g_sonar_raw_left, g_sonar_raw_right;    /* 原始值，仅供诊断/显示 */
+static int      g_sonar_front_valid, g_sonar_left_valid, g_sonar_right_valid;
+static int      g_sonar_ctrl_left, g_sonar_ctrl_right;  /* 滤波值 -> 居中控制 */
+static uint32_t g_sonar_last_tick;
+
+/* ★ 2026-09-21：原来的"注入路径滤波器"（g_filt_*_inj / g_sonar_filtered）**已删除** ——
+ *  注入命令没了，滤波只在真驱动 apu_sonar.c 里做（与传承一致）。 */
+
+/* ---- 主机心跳看门狗 ---- */
+static uint32_t g_last_hb_tick;
+static int      g_hb_seen;
+static int      g_hb_link_failed;
+
+/* ---- 控制状态（P8）---- */
+static int motor_enabled;                          /* 自动居中控制已启动 */
+static int remote_mode_flag;                       /* 手动遥控模式已启动 */
+static int remote_throttle_percent;
+static int remote_turn_percent;
+
+static float target_yaw_deg;                       /* 航向保持目标 */
+/* ★ 2026-10-12：横滚保持目标（与 target_yaw_deg 完全同构的处理方式）。
+ *  · 默认 0.0 = 水平；按 CMD:CALIBRATE（网页「重新标定」）时把当前横滚角存进来。
+ *  · 与航向的区别只在"物理含义"：航向目标是"你想朝哪"，横滚目标是"你认为哪算平"。
+ *  · 极性约定与 g_roll 一致：正值 = 右倾。 */
+static float target_roll_deg;
+
+static apu_pipe_center_state_t    g_center_state;
+static apu_pipe_center_schedule_t g_center_sched;
+static apu_pipe_center_params_t   g_center_params;
+
+/* ---- 弯道模式状态（2026-10-26）----
+ *  g_turn_mode_ms        : 本次弯道模式持续时间（可由 @turn:<ms> 在线改）
+ *  g_turn_mode_start_tick: 进入时刻（10ms tick）
+ *  g_turn_mode_active    : 1 = 正在弯道模式 */
+static uint32_t g_turn_mode_ms = APU_TURN_MODE_MS_DEFAULT;
+static uint32_t g_turn_mode_start_tick;
+static int      g_turn_mode_active;
+
+/* ★ 2026-10-12：横滚稳定 PID 内部状态（下潜防侧翻）。
+ *  ⚠️ 它**不依赖** g_center_state —— 居中控制跑 10Hz、只在自动巡航时活；
+ *     横滚纠平要跟着"下潜开没开"，两条腿各自的状态必须分开。
+ *  ⚠️ 只在 CMD:DIVE / 参数变更重下发 时用；所有"停"路径都要 reset 它。 */
+static apu_roll_stab_state_t      g_roll_stab;
+/* 最近一次算出的差动修正量（%）。0 = 不修正。
+ * ⚠️ 单独存一份而不是每拍现算：apu_dive_reapply() 只在下潜开着时被调，
+ *    且不在 10Hz 节拍上 —— 没这份缓存它就不知道该加多少。 */
+static float                      g_roll_corr;
+
+static int g_nav_safety_fault;                     /* 最近一次评估结果 */
+static int g_nav_reported_fault;                   /* 边沿触发上报用 */
+
+/* ---- 周期任务时间戳 ---- */
+static uint32_t g_last_print_ms;
+/* ⚪ 2026-09-21：`g_last_demo_ms`（兜底上报节拍）随 ⑥ 兜底块一起删除 */
+
+/* ===========================================================================
+ * 一、安全动作
+ * =========================================================================== */
+
+/* ---- 弯道模式（2026-10-26）--------------------------------------------- */
+static void apu_turn_mode_reset(void)
+{
+	g_turn_mode_active = 0;
+}
+
+static void apu_turn_mode_enter(void)
+{
+	g_turn_mode_active = 1;
+	g_turn_mode_start_tick = apu_tick_now();
+	/* 弯道内左右壁距离不可信，居中状态清零，避免旧积分带进弯道 */
+	apu_pipe_center_reset(&g_center_state);
+	AL_LOG(AL_LOG_LEVEL_INFO,
+	       "[APU1][app] 弯道模式 ON (%u ms: 居中PID关, 速度x%.2f, 限幅x%.2f, 阻尼x%.2f)",
+	       (unsigned)g_turn_mode_ms,
+	       (double)APU_TURN_SPEED_SCALE,
+	       (double)APU_TURN_LIMIT_SCALE,
+	       (double)APU_TURN_DAMP_SCALE);
+}
+
+static void apu_turn_mode_exit(const char *why)
+{
+	if (!g_turn_mode_active)
+		return;
+	g_turn_mode_active = 0;
+	/* 退出时再清一次：弯道期间 kp/ki/kd=0，但积分仍在累加，
+	 * 不清会在恢复居中控制的瞬间喷出去 */
+	apu_pipe_center_reset(&g_center_state);
+	AL_LOG(AL_LOG_LEVEL_INFO,
+	       "[APU1][app] 弯道模式 OFF (%s)", (why != NULL) ? why : "");
+}
+
+void apu_app_set_turn_mode_ms(uint32_t ms)
+{
+	if (ms < APU_TURN_MODE_MS_MIN)
+		ms = APU_TURN_MODE_MS_MIN;
+	if (ms > APU_TURN_MODE_MS_MAX)
+		ms = APU_TURN_MODE_MS_MAX;
+	g_turn_mode_ms = ms;
+	/* 正在弯道中改时长：从当前时刻重新计时，避免"改短了立刻退出"的突兀 */
+	if (g_turn_mode_active)
+		g_turn_mode_start_tick = apu_tick_now();
+}
+
+uint32_t apu_app_turn_mode_ms(void)
+{
+	return g_turn_mode_ms;
+}
+
+int apu_app_turn_mode_active(void)
+{
+	return g_turn_mode_active;
+}
+
+void apu_app_safe_stop(const char *reason)
+{
+	/* ★ 统一停车路径：所有"停"的场景都走这里，别各写各的 */
+	apu_esc_stop_all();     /* P7：四个推进器通道回 neutral */
+	apu_led_all_off();      /* P3：两盏照明灯熄灭 */
+
+	g_led_state = 0U;
+	motor_enabled = 0;
+	remote_mode_flag = 0;
+	remote_throttle_percent = 0;
+	remote_turn_percent = 0;
+	apu_turn_mode_reset();
+	apu_pipe_center_reset(&g_center_state);
+	g_center_sched.initialized = 0;
+
+	/* ★ 2026-10-12：横滚 PID 也跟着停 —— 停车后残留的积分会让下次下潜
+	 *  第一拍就喷一个修正量出去，这里必须清。 */
+	apu_roll_stab_reset(&g_roll_stab);
+	g_roll_corr = 0.0f;
+
+	if (reason != NULL)
+		AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] safe stop: %s", reason);
+}
+
+void apu_app_on_shutdown(void)
+{
+	apu_app_safe_stop("DEVICE_CORE_STOP (core shutdown)");
+	g_shutdown_req = 1;
+	AL_LOG(AL_LOG_LEVEL_INFO,
+	       "[APU1][app] shutdown hook done -> motor stop + lights off");
+}
+
+/* ===========================================================================
+ * 二、主机心跳看门狗
+ * =========================================================================== */
+
+int apu_app_note_host_heartbeat(void)
+{
+	int first_time = !g_hb_seen;
+
+	g_hb_seen = 1;
+	g_last_hb_tick = apu_tick_now();
+
+	if (g_hb_link_failed) {
+		g_hb_link_failed = 0;
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "[APU1][app] host heartbeat recovered, motor stays stopped");
+	}
+	return first_time;
+}
+
+int apu_app_host_heartbeat_healthy(void)
+{
+	uint32_t timeout_ticks;
+	uint32_t elapsed;
+
+	/* 启动宽限：还一次都没收到过心跳时算"健康"，
+	 * 否则刚上电那几秒任何运动命令都会被拒绝，联调时极易误判。 */
+	if (!g_hb_seen)
+		return 1;
+
+	/* 已经判定失联过，就一直保持"不健康"，直到重新收到心跳 */
+	if (g_hb_link_failed)
+		return 0;
+
+	timeout_ticks = APU_HB_TIMEOUT_TICKS;
+	elapsed = (uint32_t)(apu_tick_now() - g_last_hb_tick);
+	return elapsed < timeout_ticks;
+}
+
+/* 心跳看门狗处理（对应传承项目 slaver_00_example.c:457-486）
+ *   · 启动后从未收到心跳 → 7.5s 后进入"失联"，安全停车 + 关灯
+ *   · 收到过心跳后        → 2.5s 没再来，进入"失联"，安全停车 + 关灯
+ *   · 失联后【不会自动恢复运动】，必须重新收到心跳 + 重新点启动
+ */
+static void apu_host_heartbeat_watchdog_proc(void)
+{
+	uint32_t timeout_ticks;
+	uint32_t elapsed;
+
+	if (g_hb_link_failed)
+		return;
+
+	timeout_ticks = g_hb_seen ? APU_HB_TIMEOUT_TICKS
+				  : APU_HB_STARTUP_TIMEOUT_TICKS;
+	elapsed = (uint32_t)(apu_tick_now() - g_last_hb_tick);
+
+	if (elapsed < timeout_ticks)
+		return;
+
+	apu_app_safe_stop(g_hb_seen ? "host heartbeat timeout"
+				    : "no host heartbeat since boot");
+	g_hb_link_failed = 1;
+
+	if (g_hb_seen) {
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] 主机心跳超时，已自动制动并关闭照明灯!");
+	} else {
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] 启动后未收到主机心跳，已保持制动并关闭照明灯!");
+	}
+}
+
+/* ===========================================================================
+ * 三、导航安全门（P6）
+ * ===========================================================================
+ *  组装 NavSafety 输入 -> 评估。评估结果为"不 OK"就拒绝启动电机。
+ * =========================================================================== */
+
+/* 最近一次评估结果（已应用旁路开关） */
+static int apu_nav_evaluate(void)
+{
+	apu_nav_safety_input_t in;
+
+	in.now_tick_10ms      = apu_tick_now();
+	in.imu_last_tick_10ms = g_imu_last_tick;
+	in.sonar_last_tick_10ms = g_sonar_last_tick;
+
+	/* ★★ 2026-09-21（以传承为准）：安全门吃**原始值** ★★
+	 *  传承 NavSafety_BuildInput()：.front_mm = sonar_raw_front_mm（原始）；
+	 *  三路有效性也是在 Sonar_Proc() 里从原始读数算的（slaver:1051-1056）。
+	 *  ⚠️ **不要改回滤波值** —— 滤波器的跳变抑制 + 5 点中值会让近墙判断最多迟到
+	 *     ~400ms；而且原始值无效时滤波值会留着旧值，判有效性会**漏报**。 */
+	in.front_mm           = g_sonar_raw_front;
+	in.imu_seen           = g_imu_seen;
+	in.sonar_seen         = g_sonar_seen;
+	in.left_valid         = g_sonar_left_valid;
+	in.front_valid        = g_sonar_front_valid;
+	in.right_valid        = g_sonar_right_valid;
+
+	/* ★ 旁路开关：NAV_SAFETY_BYPASS_FOR_TUNING=1 时永远返回 OK。
+	 *   🔴 比赛前必须改回 0（P9 收尾检查项）。 */
+	if (NAV_SAFETY_BYPASS_FOR_TUNING) {
+		g_nav_safety_fault = NAV_SAFETY_OK;
+		return NAV_SAFETY_OK;
+	}
+
+	g_nav_safety_fault = (int)apu_nav_safety_evaluate(&in);
+	return g_nav_safety_fault;
+}
+
+int apu_app_nav_fault(void)
+{
+	return g_nav_safety_fault;
+}
+
+const char *apu_app_nav_fault_name(void)
+{
+	return apu_nav_safety_fault_name((apu_nav_safety_fault_t)g_nav_safety_fault);
+}
+
+int apu_app_last_reported_nav_fault(void)
+{
+	return g_nav_reported_fault;
+}
+
+/* 自动导航故障停车（边沿触发上报，对应原项目 :1091-1106） */
+static void apu_auto_nav_fault_stop(int fault)
+{
+	if (g_nav_reported_fault == fault && !motor_enabled)
+		return;         /* 同一个故障且已经停了 -> 不重复报 */
+
+	g_nav_reported_fault = fault;
+	apu_app_safe_stop("NAV safety fault");
+	g_nav_safety_fault = fault;
+
+	AL_LOG(AL_LOG_LEVEL_ERROR,
+	       "[APU1][app] FAULT:NAV:%d,%s -> safe stop",
+	       fault, apu_nav_safety_fault_name((apu_nav_safety_fault_t)fault));
+
+	apu_send_nav_fault_fmt(fault,
+			       apu_nav_safety_fault_name((apu_nav_safety_fault_t)fault));
+}
+
+/* ===========================================================================
+ * 四、运动类命令的安全闸门
+ * ===========================================================================
+ *  返回 1 = 放行；0 = 已回拒绝 ACK。
+ *  ⚠️ STOP / MOTOR_STOP / LED 命令**绝不能**过闸门，必须永远放行。
+ * =========================================================================== */
+static int apu_motion_gate(void)
+{
+	if (g_sonar_damage_mask != 0U) {
+		apu_send_ack("REJECTED, SONAR DAMAGED");
+		return 0;
+	}
+	if (!apu_app_host_heartbeat_healthy()) {
+		apu_send_ack("REJECTED, HOST HEARTBEAT LOST");
+		return 0;
+	}
+	return 1;
+}
+
+/* ===========================================================================
+ * 五、控制流水线（P8）
+ * =========================================================================== */
+
+/* 复位"导航相关"的状态（原项目 Nav_Reset，:381-385） */
+static void apu_nav_reset(void)
+{
+	apu_pipe_center_reset(&g_center_state);
+	g_center_sched.initialized = 0;
+	/* 进/出模式或重新启动时，弯道模式一并清掉 */
+	apu_turn_mode_reset();
+	/* ★ 2026-10-12：进出遥控模式也会走这里 —— 横滚 PID 一起清，
+	 *  避免切模式时把上一模式的积分带过去。 */
+	apu_roll_stab_reset(&g_roll_stab);
+	g_roll_corr = 0.0f;
+}
+
+/* 进入手动遥控模式（原项目 Remote_Mode_Start，:395-403） */
+static void apu_remote_mode_start(void)
+{
+	motor_enabled = 0;
+	remote_throttle_percent = 0;
+	remote_turn_percent = 0;
+	apu_nav_reset();
+	remote_mode_flag = 1;
+	apu_esc_stop_all();
+}
+
+/* 退出手动遥控模式（原项目 Remote_Mode_Stop，:405-413） */
+static void apu_remote_mode_stop(void)
+{
+	remote_mode_flag = 0;
+	remote_throttle_percent = 0;
+	remote_turn_percent = 0;
+	motor_enabled = 0;
+	apu_nav_reset();
+	apu_esc_stop_all();
+}
+
+/* 手动混控处理（原项目 Remote_Control_Proc，:488-505）
+ * ⚠️ 原项目只驱动**两个后推进器**，前推进器恒 0 —— 照抄。 */
+static void apu_remote_control_proc(void)
+{
+	apu_manual_output_t out;
+
+	if (remote_mode_flag != 1)
+		return;
+
+	apu_manual_mix(remote_throttle_percent, remote_turn_percent, &out);
+
+	apu_esc_set_speed(APU_ESC_LEFT_FRONT, 0.0f);
+	apu_esc_set_speed(APU_ESC_RIGHT_FRONT, 0.0f);
+	apu_esc_set_speed(APU_ESC_LEFT_REAR, (float)out.left_rear);
+	apu_esc_set_speed(APU_ESC_RIGHT_REAR, (float)out.right_rear);
+}
+
+/* 10Hz 自动居中控制流水线（原项目 ESC_Proc_Pipeline_Auto_Nav，:1108-1155） */
+static void apu_esc_proc_auto_nav(void)
+{
+	int fault;
+	apu_pipe_center_input_t in;
+	apu_pipe_center_output_t out;
+	apu_pipe_center_params_t turn_params;
+	const apu_pipe_center_params_t *params = &g_center_params;
+
+	if (!motor_enabled) {
+		/* ★ 2026-10-05 改：这里只停**四路水平推进器**，不再把 6 路一起停。
+		 *   原来调 apu_esc_stop_all() 会**每轮主循环**把 ch8/ch9 也压回中位，
+		 *   等于把下潜命令立刻抹掉 —— 这就是"必须先点『向前』才能下潜"的
+		 *   第二层原因（第一层是 CMD:DIVE 的门禁）。
+		 * ⚠️ "停命令对六个电机都适用"这条保证没变：CMD:STOP / MOTOR_STOP /
+		 *    心跳超时 / 导航故障 / 超声损坏 / 关核 / @esc:stop 走的仍然是
+		 *    6 路的 apu_esc_stop_all()。 */
+		apu_esc_stop_drive();
+		return;
+	}
+
+	/* ① 安全门先过 */
+	fault = apu_nav_evaluate();
+	if (fault != NAV_SAFETY_OK) {
+		apu_auto_nav_fault_stop(fault);
+		return;
+	}
+
+	/* ② 到 10Hz 的点了吗 */
+	if (!apu_pipe_center_schedule_is_due(&g_center_sched, apu_tick_now()))
+		return;
+
+	/* ②.5 弯道模式：关居中、降速、降转向限幅、加阻尼
+	 * ------------------------------------------------------------------
+	 *  只有 CMD:YAW:LEFT/RIGHT 会把它打开（见命令分发）。
+	 *  固定持续 g_turn_mode_ms（默认 4s），到时退出并恢复原参数。
+	 *  ⚠️ 参数校验要求 min_output <= base_speed <= max_output，
+	 *     所以降速后要抬到 min_output，否则整帧参数会被判非法。 */
+	if (g_turn_mode_active) {
+		uint32_t elapsed_ms = (apu_tick_now() - g_turn_mode_start_tick) * 10U;
+
+		if (elapsed_ms >= g_turn_mode_ms) {
+			apu_turn_mode_exit("timeout");
+		} else {
+			turn_params = g_center_params;
+			turn_params.kp = 0.0f;
+			turn_params.ki = 0.0f;
+			turn_params.kd = 0.0f;
+			turn_params.base_speed *= APU_TURN_SPEED_SCALE;
+			if (turn_params.base_speed < turn_params.min_output)
+				turn_params.base_speed = turn_params.min_output;
+			turn_params.turn_limit *= APU_TURN_LIMIT_SCALE;
+			turn_params.yaw_rate_damping *= APU_TURN_DAMP_SCALE;
+			if (turn_params.yaw_rate_damping > 2.0f)
+				turn_params.yaw_rate_damping = 2.0f;
+			params = &turn_params;
+		}
+	}
+
+	/* ③ 算一次居中控制 */
+	/* ★ 2026-09-21：居中控制吃**滤波值**（对应传承 slaver:1134-1135 的
+	 *  sonar_data.left/right）—— 控制要平滑。和"安全门吃原始值"是两条不同的路，
+	 *  别混（安全门那边等不起滤波的滞后）。 */
+	in.left_mm        = (float)g_sonar_ctrl_left;
+	in.right_mm       = (float)g_sonar_ctrl_right;
+	in.yaw_deg        = g_yaw;
+	in.target_yaw_deg = target_yaw_deg;
+
+	out = apu_pipe_center_update(&g_center_state, params,
+				     &in, PIPE_CENTER_CONTROL_DT_S);
+
+	if (!out.valid) {
+		/* 输入不合法（比如距离为 0）-> 当故障处理 */
+		apu_auto_nav_fault_stop(NAV_SAFETY_BAD_INPUT);
+		return;
+	}
+
+	/* ④ 四个通道一起写 */
+	apu_esc_set_all(out.left_front, out.right_front,
+			out.left_rear, out.right_rear);
+}
+
+/* ★ 2026-10-12：横滚稳定一步（下潜防侧翻）。
+ * ---------------------------------------------------------------------------
+ *  【为什么不放在 apu_esc_proc_auto_nav() 里】
+ *    居中控制只在"自动巡航"时跑（motor_enabled=1）；但下潜可以在
+ *    CMD:MOTOR_START（自动）或 CMD:MANUAL_START（手动）任一状态下开。
+ *    横滚纠平要**只要下潜在开就一直跑**，所以挂在控制流水线的公共入口。
+ *  【为什么不每轮都算】
+ *    用同一套 10Hz 调度（PIPE_CENTER_CONTROL_PERIOD_TICKS）—— IMU 上报
+ *    本身也就 ~10~20Hz，算得比它快只是白烧 CPU。
+ *  【差动怎么下发】
+ *    ★ 2026-10-12 修正：本函数**算完就写**（末尾 apu_esc_set_dive）——
+ *    这里才是横滚修正的**唯一常规下发点**，10Hz 一拍。
+ *    另有两条"参数变了立刻重下发"的路径，也要叠上 corr：
+ *      · CMD:DIVE 首次按下（把当前 corr 叠上去，通常刚 reset 是 0）
+ *      · CTRL: 改速度后 apu_dive_reapply()
+ *    ⚠️ 早先的写法是"只算不写，指望上面两处带出去"——那是**错的**：
+ *       那两处都是一次性触发，之后 10Hz 算出的新值永远到不了电机。
+ *       症状就是"roll_sign 填 ±1 都没反应，像 PID 没生效"。
+ *  ⚠️ "下潜没开时绝不碰 ch8/ch9"这条铁律不变：函数开头 on==0 就直接 return。
+ * --------------------------------------------------------------------------- */
+static void apu_roll_stab_step(void)
+{
+	static apu_pipe_center_schedule_t sched;
+	static uint32_t last_tick;
+	static int      tick_valid;
+	float  roll = 0.0f, pitch = 0.0f, yaw = 0.0f;
+	uint32_t now;
+	uint32_t elapsed_ticks;
+	float  dt_s;
+	int    on = 0;
+	int    enabled;
+
+	/* 下潜没开 -> 修正量归 0、清状态；一个字都不写给 ch8/ch9。
+	 *  ⚠️ 必须先判这个：否则 apu_dive_reapply 里缓存的 g_roll_corr
+	 *    会在下潜停着的时候被新值覆盖，下次下潜第一拍就是错的。 */
+	apu_esc_get_dive(&on, NULL, NULL);
+	if (on == 0) {
+		apu_roll_stab_reset(&g_roll_stab);
+		g_roll_corr = 0.0f;
+		sched.initialized = 0;
+		tick_valid        = 0;
+		return;
+	}
+
+	/* 到 10Hz 的点了没（与居中控制同节奏，但各自独立计时） */
+	now = apu_tick_now();
+	if (!apu_pipe_center_schedule_is_due(&sched, now))
+		return;
+
+	/* 用真实经过的 tick 算 dt，而不是死套 0.1f —— 调度对齐到整周期，
+	 * 正常情况下就是 10 tick，但晚了几拍时 D 项要按真实时间算才不失真。
+	 * ⚠️ 首次（刚开下潜）没有上一拍，直接用标称周期，别拿 0 去减。 */
+	if (tick_valid) {
+		elapsed_ticks = now - last_tick;
+		dt_s = (float)elapsed_ticks * 0.01f;   /* 1 tick = 10ms */
+		if (dt_s <= 0.0f || dt_s > 1.0f)
+			dt_s = PIPE_CENTER_CONTROL_DT_S;
+	} else {
+		dt_s = PIPE_CENTER_CONTROL_DT_S;
+	}
+	last_tick  = now;
+	tick_valid = 1;
+
+	/* 姿态源：IMU 横滚角。陈旧/未收到时 apu_roll_stab_update 内部会返回 0
+	 * 并保留积分（等数据恢复），这里只需把 enabled 传对。 */
+	apu_imu_get_angles(&roll, &pitch, &yaw);
+
+	/* enabled：IMU 数据要新鲜。陈旧时不修正（返回 0），但也不清积分 ——
+	 * 短暂的丢帧不该把已经建立的纠偏量扔掉。 */
+	enabled = apu_imu_seen() && !apu_imu_is_stale();
+
+	g_roll_corr = apu_roll_stab_update(&g_roll_stab, &g_center_params,
+					   roll, target_roll_deg, dt_s, enabled);
+
+	/* ★★ 2026-10-12 致命修复：算完必须**真的写出去**！★★
+	 * ---------------------------------------------------------------------------
+	 *  症状：roll_sign 填 +1 / -1 都没反应，艇就是不纠偏 —— 看着像 PID 没生效。
+	 *
+	 *  根因：本函数只把 corr 存进 g_roll_corr，**从不下发**。真正写 ch8/ch9 的
+	 *        只有两处：CMD:DIVE（按一次「下潜」，一次性）和 apu_dive_reapply()
+	 *        （只在 CTRL: 参数变更时触发）。于是：
+	 *          · 按下「下潜」那一刻 corr 还是 0（刚 reset）→ 写下的是纯 dive 速度
+	 *          · 之后每 100ms 算出的新 corr **永远停在内存里**，到不了电机
+	 *        ⇒ 输出被冻结在"按下去那一瞬间"的值，PID 算什么都白算。
+	 *
+	 *  修复：算完立刻把 (dive_left+corr, dive_right-corr) 写下去。
+	 *        这里在 10Hz 节拍内，写一次即可（PCA9685 会保持输出）。
+	 *
+	 *  ⚠️ 只在"下潜在开"时才会走到这里（函数开头 on==0 已 return），
+	 *     所以不存在"下潜停着却被写 ch8/ch9"的问题。
+	 *  ⚠️ 增益全 0 时 corr 恒为 0，写下去 == 原样下发，行为与改前一致。 */
+	apu_esc_set_dive(1,
+			 g_center_params.dive_left  + g_roll_corr,
+			 g_center_params.dive_right - g_roll_corr);
+}
+
+/* 主控制调度（每轮调用）
+ * 优先级：手动遥控 > 自动居中 > 停车
+ * ⚠️ 顺序照抄传承项目 FRpmsgEchoApp 的 while 循环（slaver_00_example.c:1224-1235）：
+ *      if (sonar_damage_mask) ESC_StopAll();
+ *      else if (remote_mode_flag == 1) Remote_Control_Proc();
+ *      else ESC_Proc_Pipeline_Auto_Nav();
+ *    （原来是"台架测试 > 手动 > 自动"，台架单通道直通已于 2026-09-25 删除） */
+static void apu_control_pipeline(void)
+{
+	if (g_sonar_damage_mask != 0U) {
+		apu_esc_stop_all();
+		/* ★ 2026-10-12：超声损坏分支会连 ch8/ch9 一起停，下潜等于被抹掉 ——
+		 *  横滚修正量同步清零，别留一份"下潜停了但 corr 还在"的脏状态。 */
+		apu_roll_stab_reset(&g_roll_stab);
+		g_roll_corr = 0.0f;
+	} else if (remote_mode_flag == 1) {
+		apu_remote_control_proc();
+		apu_roll_stab_step();
+	} else {
+		apu_esc_proc_auto_nav();
+		apu_roll_stab_step();
+	}
+
+	/* ★ 2026-09-25：三个分支**都会往 PCA9685 写 I2C**（停四路 / 遥控 / 自动居中），
+	 *  走的都是 SDK 的 I2C 阻塞版 API —— 即 apu_sonar.c:58 提到的
+	 *  "无超时忙等"那条路径。若总线异常，这里同样会长时间不返回。
+	 *  主循环唯一的常规喂狗点在 apu_app_periodic() 最后，本函数在它前面，
+	 *  所以这里补喂一次，避免"控制写入卡住 → 狗咬 → 整板复位"。
+	 *
+	 *  ⚠️ 补喂是"防误咬"，不是"取消保护"：
+	 *     如果真卡死在这里且无法返回，本行之后仍然到不了喂狗点，
+	 *     狗依然会咬 —— 保护语义不变。 */
+	apu_wdt_feed();
+}
+
+/* ===========================================================================
+ * 六、命令分发
+ * ===========================================================================
+ *  ★ 文案必须与传承项目逐字一致（slaver_00_example.c:554-919），
+ *    因为 Linux 侧 comm.py 会对 ACK 做字符串匹配来决定网页状态。
+ *
+ *  🔴 未知命令必须回 "收到未知指令 [%s]"，【绝不能】以 "REJECTED" 开头 ——
+ *     否则 Linux 每次启动的预热包 "WakeUp" 都会被误判成"运动被拒绝"。
+ * =========================================================================== */
+/* ★ 2026-10-04 新增：航向基准角归一化 —— 把角度收进 [-180, +180)。
+ * ---------------------------------------------------------------------------
+ *  【为什么单独写一个函数，而不复用 apu_pipe_center_wrap180()】
+ *    两者只差在 ±180 这一个点上：
+ *      · apu_pipe_center_wrap180() 用 `> 180` / `< -180`，**保留 +180**
+ *        （区间 [-180, +180]）。它服务的是"两个角度之差"—— heading_error
+ *        和 yaw_rate —— 边界取哪一边物理上完全等价。
+ *      · 本函数按《EG400 航向基准角协议对齐规范 v1.0》§2.4 实现，用 `>= 180`，
+ *        **把 +180 归到 -180**（区间 [-180, +180)）。这是给**绝对基准角**
+ *        定的规则，Web 端按同一条规则累计显示，两端必须逐点一致。
+ *
+ *  【为什么不照抄规范里的 while 写法】
+ *    规范的 while 版遇到 inf / nan **永不退出**（会把主循环挂死）。
+ *    对**有限**输入，fmodf 版与 while 版逐点等价：
+ *        270 -> -90，720 -> 0，-270 -> 90，540 -> -180，180 -> -180
+ *    而且它是 O(1)；inf/nan 进来会得到 nan 原样返回，不会死循环。
+ *    target_yaw 实际只会由 g_yaw（IMU 驱动已保证 ±180 内）和 APU_YAW_STEP_DEG 累加得到，
+ *    但这条命令是**外部输入路径**，不能留一个能把主循环挂死的写法。
+ * --------------------------------------------------------------------------- */
+static float apu_yaw_wrap180(float angle_deg)
+{
+	angle_deg = fmodf(angle_deg, 360.0f);
+
+	if (angle_deg >= 180.0f)
+		angle_deg -= 360.0f;
+	else if (angle_deg < -180.0f)
+		angle_deg += 360.0f;
+
+	return angle_deg;
+}
+
+/* ★ 2026-10-05：下潜速度参数（CTRL: 末两位）改了之后，如果**下潜正在开**，
+ * 就用新速度**重下发一次** —— Web 边调滑块边看效果，不用反复按"下潜"。
+ * 这也是"上浮"的实现路径：把速度拖小 / 拖到 0，船靠正浮力自然上浮。
+ *
+ * ⚠️ 只在"下潜在开"（on != 0）时重下发；停着的时候**绝不**去碰那两路，
+ *    否则一次跟下潜无关的 CTRL: 就可能让停着的潜水泵突然转起来。
+ * ⚠️ 调用点必须在 g_center_params 已经更新成新值之后。
+ * ★ 2026-10-12：下发时叠上横滚修正量 g_roll_corr（增益全 0 时为 0，等价原样下发）。 */
+static void apu_dive_reapply(void)
+{
+	int on = 0;
+
+	apu_esc_get_dive(&on, NULL, NULL);
+	if (on != 0)
+		apu_esc_set_dive(1,
+				 g_center_params.dive_left  + g_roll_corr,
+				 g_center_params.dive_right - g_roll_corr);
+}
+
+int apu_app_handle_command(const char *cmd)
+{
+	int throttle = 0;
+	int turn = 0;
+
+	if (cmd == NULL)
+		return 0;
+
+	/* ---- ★ 气路控制：吸样开始 / 急停 ----
+	 *  识别 CMD:GAS_SAMPLE_START / CMD:GAS_START / CMD:GAS_STOP /
+	 *       CMD:GAS_SAMPLE_STOP。时序铁律由 apu_gasflow.c 的状态机保证：
+	 *           开：阀 → 2s → 泵        关：泵 → 0.5s → 阀
+	 *  ⚠️ 刻意放在**运动安全门之前**：气路不驱动推进器，
+	 *     不该被"导航安全门/心跳门"挡住（比赛中泵要能在任意状态下工作）。 */
+	if (apu_gasflow_handle_command(cmd))
+		return 1;
+
+	/* ---- 看门狗自检（最先判，且要先停车关灯）---- */
+	if (strcmp(cmd, "CMD:WDT_TEST") == 0) {
+		apu_app_safe_stop("WDT self-test armed");
+		apu_send_ack("WDT TEST ARMED");                     /* :560 */
+		apu_wdt_arm_selftest();                             /* P6：停止喂狗 */
+		return 1;
+	}
+
+	/* ---- 手动遥控模式（运动，过闸门）---- */
+	if (strcmp(cmd, "CMD:MANUAL_START") == 0) {
+		if (g_sonar_damage_mask != 0U) {
+			apu_app_safe_stop("sonar damaged");
+			apu_send_ack("REJECTED, SONAR DAMAGED");
+			return 1;
+		}
+		if (!apu_app_host_heartbeat_healthy()) {
+			apu_remote_mode_stop();
+			apu_send_ack("REJECTED, HOST HEARTBEAT LOST");
+			return 1;
+		}
+		apu_remote_mode_start();
+		AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] 执行动作: 进入手动遥控模式");
+		apu_send_ack("MANUAL MODE STARTED");                /* :581 */
+		return 1;
+	}
+
+	/* ---- 系统启停 ---- */
+	if (strcmp(cmd, "CMD:START") == 0) {
+		if (!apu_motion_gate())
+			return 1;
+		apu_nav_reset();
+		AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] 执行动作: 巡检系统启动!");
+		apu_send_ack("系统已启动");                          /* :674 */
+		return 1;
+	}
+	if (strcmp(cmd, "CMD:STOP") == 0) {
+		/* ★ 停止命令永远放行，不过闸门 */
+		AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] 执行动作: 紧急停车!");
+		apu_app_safe_stop("CMD:STOP emergency stop");
+		apu_send_ack("系统已停止");                          /* :680 */
+		return 1;
+	}
+	if (strcmp(cmd, "CMD:CALIBRATE") == 0) {
+		if (!apu_motion_gate())
+			return 1;
+		/* 把当前航向设成目标航向（原项目 :682-695） */
+		target_yaw_deg = g_yaw;
+		/* ★ 2026-10-12：横滚也做同一件事 —— 把当前横滚角设成目标横滚角。
+		 *  与航向并排，语义完全对称："按一下标定 = 我认为现在这个姿态就是基准"。
+		 *  ⚠️ 必须同时清横滚 PID 的积分：标定前后目标变了，旧的积分是按旧零点
+		 *     攒出来的，不清掉会导致标定完还残留一股往旧方向的修正力。 */
+		target_roll_deg = g_roll;
+		apu_roll_stab_reset(&g_roll_stab);
+		g_roll_corr = 0.0f;
+
+		apu_turn_mode_reset();
+		apu_pipe_center_reset(&g_center_state);
+		apu_pipe_center_schedule_reset(&g_center_sched, apu_tick_now(), 1);
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "[APU1][app] 执行动作: 设置当前航向/横滚为目标 (yaw=%s roll=%s)",
+		       apu_fmt("%.2f/%.2f", g_yaw, g_roll));
+		apu_send_ack("HEADING TARGET RESET");               /* :694 */
+		return 1;
+	}
+
+	/* ---- 电机（运动，过闸门）---- */
+	if (strcmp(cmd, "CMD:MOTOR_START") == 0) {
+		int start_fault;
+
+		if (g_sonar_damage_mask != 0U) {
+			apu_app_safe_stop("sonar damaged");
+			apu_send_ack("REJECTED, SONAR DAMAGED");
+			return 1;
+		}
+		if (!apu_app_host_heartbeat_healthy()) {
+			apu_remote_mode_stop();
+			apu_send_ack("REJECTED, HOST HEARTBEAT LOST");
+			return 1;
+		}
+
+		/* ★ P6：真的过导航安全门（原项目 :634-661） */
+		start_fault = apu_nav_evaluate();
+		apu_remote_mode_stop();     /* 先退到安全状态 */
+
+		if (start_fault != NAV_SAFETY_OK) {
+			g_nav_reported_fault = start_fault;
+			AL_LOG(AL_LOG_LEVEL_ERROR,
+			       "[APU1][app] MOTOR_START rejected by NAV safety: %s",
+			       apu_nav_safety_fault_name((apu_nav_safety_fault_t)start_fault));
+			apu_send_ack("REJECTED, NAV SAFETY %s",
+				     apu_nav_safety_fault_name((apu_nav_safety_fault_t)start_fault));
+			return 1;
+		}
+
+		AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] 执行动作: 启动电机!");
+		apu_nav_reset();
+		target_yaw_deg = g_yaw;
+		/* ★ 2026-10-12：启动时横滚基准与航向基准一起取（与航向对称）。
+		 *  这样"启动瞬间的姿态"就是后续保持的基准 —— 与航向同一套语义。 */
+		target_roll_deg = g_roll;
+		g_nav_safety_fault = NAV_SAFETY_OK;
+		g_nav_reported_fault = NAV_SAFETY_OK;
+		apu_pipe_center_schedule_reset(&g_center_sched, apu_tick_now(), 1);
+		motor_enabled = 1;
+		apu_send_ack("10HZ CENTER CONTROL STARTED, NAV SAFETY BYPASSED"); /* :660 */
+		return 1;
+	}
+	if (strcmp(cmd, "CMD:MOTOR_STOP") == 0) {
+		/* ★ 永远放行 */
+		AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] 执行动作: 停止电机!");
+		apu_remote_mode_stop();
+		apu_send_ack("电机已关闭");                          /* :668 */
+		return 1;
+	}
+
+	/* ---- 航向基准角切换：CMD:YAW:LEFT / CMD:YAW:RIGHT ----
+	 * ★ 2026-10-04 新增，实现《EG400 航向基准角协议对齐规范 v1.0》§2：
+	 *   Web 端"左转 / 右转"按钮 -> 裸机把**航向基准 target_yaw** 加 / 减
+	 *   APU_YAW_STEP_DEG（当前 76°），之后完全由**现有 10Hz 航向 PID**
+	 *   接管转向与保持（规范 §1 的方案）。
+	 *
+	 *  ⚠️ 本分支**只改一个设定值**，三件事故意不做：
+	 *     · 不碰 base_speed / 任何 PID 参数 / 前后转向分配（规范 §2.2 要求）
+	 *     · 不当场写 ESC —— 真正的输出在 apu_esc_proc_auto_nav() 的 10Hz 节拍里，
+	 *       它下一拍就会用新基准算 heading_error 并差动转向
+	 *     · 不调 apu_pipe_center_reset() —— 那会清掉 center/yaw 历史，
+	 *       下一拍 yaw_rate_dps 会凭空冒出一个尖峰；规范没有要求，不加
+	 *
+	 *  ⚠️ 允许条件**严格照规范**：只在自动巡航运行中（motor_enabled=1 且不在
+	 *     手动遥控模式）。这里**不再**叠加 apu_motion_gate()：
+	 *       motor_enabled 本身就是更严的门 —— 心跳丢失 / 导航故障 / CMD:STOP /
+	 *       MOTOR_STOP 都会经 apu_app_safe_stop() 或 apu_remote_mode_stop()
+	 *       把它清 0，那些场景天然走下面的 ERR 分支。
+	 *
+	 *  ⚠️ 规范 §2.1 那个可选的 500ms 同向去抖**故意不实现**：
+	 *     连点必须每次都生效（验收用例 W3 就是"连发 N 次"，去抖会把后续几次
+	 *     吃掉，累计角度就跟 Web 徽标对不上了）。规范本身也标它"可选"，
+	 *     而 Web 端本就是人工点击触发。 */
+	if (apu_str_prefix(cmd, "CMD:YAW:LEFT") ||
+	    apu_str_prefix(cmd, "CMD:YAW:RIGHT")) {
+		if (!motor_enabled || remote_mode_flag != 0) {
+			/* 规范 §2.3：未在自动巡航时回的是 "ERR: ..."，
+			 * 与成功那条（带 ACK: 前缀）**不同**，所以这里用 apu_send()
+			 * 在 CHECK 通道上原样发；不能借 apu_send_ack()，因为它会加 "ACK: "。
+			 * ⚠️ apu_send() 的 ept 参数在本工程里是被忽略的（真正用哪个端点
+			 *    由链路层 apu_link 决定），所以控制台路径下即使
+			 *    apu_get_endpoint() 还是 NULL 也不会丢包。 */
+			apu_send(apu_get_endpoint(), DEVICE_CORE_CHECK,
+				 "ERR: YAW NOT IN AUTO CRUISE");
+			return 1;
+		}
+
+		/* LEFT = 基准 +APU_YAW_STEP_DEG（逆时针），RIGHT = 基准 -APU_YAW_STEP_DEG
+		 * （顺时针）。cmd[8] 就是方向字母：C M D : Y A W : L / R
+		 * （上面的 apu_str_prefix 已经比完 12 个字符，下标 8 必在串内） */
+		target_yaw_deg = apu_yaw_wrap180(
+			target_yaw_deg + ((cmd[8] == 'L') ? APU_YAW_STEP_DEG
+							 : -APU_YAW_STEP_DEG));
+
+		/* ★ 2026-10-26：进入弯道模式（4s，可在控制台 @turn:<ms> 调）。
+		 *  居中 PID 关、降速、降转向限幅、加阻尼，专治"过度转弯"。 */
+		apu_turn_mode_enter();
+
+		/* ⚠️ 一条 AL_LOG 里只能用**一次** apu_fmt()（它返回同一个静态缓冲），
+		 *    所以这里把"方向 + 步长 + 新基准"整句交给 apu_fmt 拼，别拆成两个。 */
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "[APU1][app] 执行动作: %s",
+		       apu_fmt("航向基准 %s%.0f 度 -> target_yaw=%.1f",
+			       (cmd[8] == 'L') ? "+" : "-",
+			       (double)APU_YAW_STEP_DEG, target_yaw_deg));
+
+		/* 规范 §2.3 成功应答：ACK: YAW TARGET <val>，保留 1 位小数 */
+		apu_send_ack("YAW TARGET %.1f", target_yaw_deg);
+		return 1;
+	}
+
+	/* ---- 下潜（ch8/ch9）：**命令不带数据**，两路速度走 CTRL: 参数表 ----
+	 * ★ 2026-10-05 定版：只有两条命令，**没有"上浮"命令**
+	 *     CMD:DIVE        下潜：ch8 = dive_left，ch9 = dive_right（原样下发）
+	 *     CMD:DIVE:STOP   只停这两路（回 neutral），**不影响**四路水平推进器
+	 *   两路速度是参数：CTRL: 第 16/17 个（dive_left / dive_right，±100）。
+	 *
+	 *  ⚠️ **为什么没有"上浮"命令**：本艇正浮力，把这两路速度**减小/停掉**，
+	 *     船自然就上浮 —— 所以"上浮" = 改小参数（发 CTRL:）或按 CMD:DIVE:STOP，
+	 *     不需要、也不应该给反向推力。哪一路方向相反，把**它的参数**写成负值即可。
+	 *
+	 *  ⚠️ 用 **strcmp 精确匹配**（不是 apu_str_prefix）：
+	 *     "CMD:DIVE" 是 "CMD:DIVE:STOP" 的前缀，用前缀匹配会把 STOP 吃掉。
+	 *     所以先判 STOP 再判 DIVE，两条都要求整串相等。
+	 *
+	 *  ⚠️ 与四路水平推进器的关系（"单独控制"的落点）：
+	 *     · 自动巡航的 10Hz 居中、手动混控都只写 ch4~7 -> 下潜的值一直保持
+	 *     · 但**任何"停"都会连这两路一起停**：CMD:STOP / CMD:MOTOR_STOP /
+	 *       CMD:WDT_TEST / 心跳超时 / 导航故障 / 超声损坏 / 进手动模式 / 关核
+	 *       —— 全部经 apu_esc_stop_all()（那里是 6 路 + 状态清零）
+	 *
+	 *  ⚠️ 门禁：CMD:DIVE:STOP **永远放行**（与 CMD:STOP / CMD:MOTOR_STOP 同一条规矩）；
+	 *     CMD:DIVE 要求**运行态**（自动巡航或手动遥控）—— 没启动时每轮主循环都会
+	 *     apu_esc_stop_all() 把这两路压回 neutral，接受命令也没有意义。
+	 *
+	 *  ⚠️ 失败帧一律 "ERR: ..." 而不是 "REJECTED, ..."：后者会被 Linux 侧 comm.py
+	 *     当成"水平推进器被拒绝"，把网页的电机状态机改掉（motor_command_state
+	 *     = rejected / is_moving=False）。下潜是独立通道，不该污染那个状态 ——
+	 *     与 CMD:YAW 的失败帧保持同一套约定。 */
+	if (strcmp(cmd, "CMD:DIVE:STOP") == 0) {
+		/* ★ 停车命令永远放行，不设任何前置条件 */
+		apu_esc_set_dive(0, 0.0f, 0.0f);
+		/* ★ 2026-10-12：下潜停了，横滚 PID 也清 —— 不然停着的时候
+		 *  积分还在攒，下次下潜要等好几拍才回到 0。 */
+		apu_roll_stab_reset(&g_roll_stab);
+		g_roll_corr = 0.0f;
+		apu_send_ack("DIVE STOP");
+		return 1;
+	}
+
+	if (strcmp(cmd, "CMD:DIVE") == 0) {
+		/* ★ 2026-10-05 改：**不再要求"运行态"**。
+		 *   原来这里是 `if (!motor_enabled && remote_mode_flag == 0)` → 回
+		 *   "ERR: DIVE NOT IN RUN MODE"。而 motor_enabled 只有 CMD:MOTOR_START
+		 *   （网页「⬆ 向前」）才会置 1，所以"必须先点向前才能下潜"，很不直观。
+		 *   下潜是独立通道：**点『下潜』就能下潜**（网页侧仍有"先点启动"的
+		 *   自家拦截 is_running，所以实际流程是「启动」→「下潜」）。
+		 *
+		 *  ⚠️ 只保留一条硬保护：超声损坏时拒绝。因为那种状态下
+		 *     apu_control_pipeline() 每轮都会 6 路全停，接受了也立刻被抹掉 ——
+		 *     回 ERR 比"回 ACK 但什么都不动"诚实（与 CMD:MOTOR_START 的口径一致）。 */
+		if (g_sonar_damage_mask != 0U) {
+			apu_send(apu_get_endpoint(), DEVICE_CORE_CHECK,
+				 "ERR: DIVE SONAR DAMAGED");
+			return 1;
+		}
+
+		/* 两路速度都是 0 = CTRL: 里这两个字段还没下发过（Web 没加 / 填了 0）。
+		 * 这时回一条明确的 ERR，而不是"回 ACK 但什么都不动"—— 后者最难查。 */
+		if (g_center_params.dive_left == 0.0f &&
+		    g_center_params.dive_right == 0.0f) {
+			apu_send(apu_get_endpoint(), DEVICE_CORE_CHECK,
+				 "ERR: DIVE STRENGTH ZERO (set CTRL: fields 16,17)");
+			return 1;
+		}
+
+		/* ★ 2026-10-12：开机第一拍横滚修正量还没算（那时下潜没开，step 里把它
+		 *  清成了 0）。这里显式 reset 一次 PID，让积分从 0 开始 ——
+		 *  之后 apu_control_pipeline() 的 10Hz 节拍会接手算实际修正量。 */
+		apu_roll_stab_reset(&g_roll_stab);
+		g_roll_corr = 0.0f;
+
+		apu_esc_set_dive(1,
+				 g_center_params.dive_left  + g_roll_corr,
+				 g_center_params.dive_right - g_roll_corr);
+
+		/* 日志打**实际写下去**的值（从驱动读回，不在这里重算） */
+		{
+			float l = 0.0f, r = 0.0f;
+
+			apu_esc_get_dive(NULL, &l, &r);
+			/* 一条 AL_LOG 只能用一次 apu_fmt()（同一个静态缓冲） */
+			AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] 执行动作: %s",
+			       apu_fmt("下潜 ON -> ch8=%+.1f%% ch9=%+.1f%%", l, r));
+		}
+
+		apu_send_ack("DIVE ON");
+		return 1;
+	}
+	/* ---- 照明：驱动真 LED（PL GPIO 54/55）+ 回 ACK ---- */
+	if (apu_str_prefix(cmd, "CMD:LED1ON")) {
+		apu_led_left_on();
+		g_led_state |= APU_LED1_BIT;
+		apu_send_ack("LED1 已开启");                         /* :598 */
+		return 1;
+	}
+	if (apu_str_prefix(cmd, "CMD:LED1OFF")) {
+		apu_led_left_off();
+		g_led_state &= (uint8_t)~APU_LED1_BIT;
+		apu_send_ack("LED1 已关闭");                         /* :604 */
+		return 1;
+	}
+	if (apu_str_prefix(cmd, "CMD:LED2ON")) {
+		apu_led_right_on();
+		g_led_state |= APU_LED2_BIT;
+		apu_send_ack("LED2 已开启");                         /* :610 */
+		return 1;
+	}
+	if (apu_str_prefix(cmd, "CMD:LED2OFF")) {
+		apu_led_right_off();
+		g_led_state &= (uint8_t)~APU_LED2_BIT;
+		apu_send_ack("LED2 已关闭");                         /* :616 */
+		return 1;
+	}
+
+	/* ---- 遥控速度：SPEED:<油门>,<转向> ----
+	 * ★ 原项目这条【不回 ACK】，避免高频刷屏（:584-593）
+	 * ★ 只有在手动遥控模式下才接受（原项目 :588 的条件） */
+	if (sscanf(cmd, "SPEED:%d,%d", &throttle, &turn) == 2) {
+		if (remote_mode_flag == 1) {
+			remote_throttle_percent = throttle;
+			remote_turn_percent = turn;
+		} else {
+			AL_LOG(AL_LOG_LEVEL_INFO,
+			       "[APU1][app] SPEED ignored (not in MANUAL mode) "
+			       "throttle=%d turn=%d", throttle, turn);
+		}
+		return 1;
+	}
+
+	/* ---- 调参类（P8 全部实现，共 10 类）----
+	 *  这些命令 rpmsg-demo-single.c 会发。文案与传承项目逐字一致。 */
+	{
+		apu_pipe_center_params_t cand;
+
+		/* CTRL:<15 / 17 / 22 个浮点> —— 一次设全部参数（原项目 :696-734）
+		 * ★ 2026-10-02 复原传承写法（四路重构已回退）：
+		 *   第 9 个字段回到 **min_output**，末位回到 **front_max_output**。
+		 *   顺序：kp, ki, kd, heading_kp, yaw_rate_damping, integral_limit,
+		 *         turn_limit, base_speed, min_output, max_output,
+		 *         left_trim, right_trim, front_yaw_share, rear_yaw_share,
+		 *         front_max_output
+		 *   ⚠️ 这 15 个数的顺序必须与 Linux/Web 侧一致
+		 *      （现用：eg400_linux_app\app\main.py 的 _motion_params_command()）。
+		 *
+		 * ★ 2026-10-05 扩展：末尾**追加 2 个**下潜速度 -> 共 17 个：
+		 *         ..., front_max_output, dive_left, dive_right
+		 *   · 收到 **17** 个 -> 17 个全部生效（含下潜两路速度）
+		 *   · 收到 **15** 个 -> 只更新前 15 个，下潜速度保持原值
+		 *     （★ 故意兼容：老 Web 一行不改也能继续调 PID，不会因为少两个
+		 *       字段被整体拒绝）
+		 *   · 其它个数 -> 整条拒绝
+		 * ★ 2026-10-12 扩展：再**追加 5 个**横滚稳定 -> 共 22 个：
+		 *         ..., dive_right, roll_kp, roll_ki, roll_kd, roll_limit, roll_sign
+		 *   · 该顺序与 Web 侧 eg400_linux_app/app/main.py 的
+		 *     _motion_params_command() 完全一致（那里固定发 22 个）。
+		 *   · 收到 22 个 -> 22 个全部生效；17/15 个时 roll_* 保持原值。
+		 *   ⚠️ 字段个数用**逗号个数**判定，不能只看 sscanf 返回值：
+		 *      "…,50,abc,def" 时 sscanf 会停在字段 16、返回 15，只看返回值
+		 *      会把"末尾两个字段写坏了"当成"老 Web 发的 15 字段"而**静默接受**
+		 *      —— 那样网页以为速度生效了，其实没生效。
+		 *   ⚠️ 机械计数核对：%f 个数(22) == 实参个数(22) == 结构体字段数 == 22。 */
+		if (apu_str_prefix(cmd, "CTRL:")) {
+			float dive_l = g_center_params.dive_left;
+			float dive_r = g_center_params.dive_right;
+			int   commas = apu_count_char(cmd, ',');
+			int   n;
+
+			cand = g_center_params;
+			n = sscanf(cmd,
+				   "CTRL:%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f",
+				   &cand.kp, &cand.ki, &cand.kd,
+				   &cand.heading_kp, &cand.yaw_rate_damping,
+				   &cand.integral_limit, &cand.turn_limit,
+				   &cand.base_speed, &cand.min_output, &cand.max_output,
+				   &cand.left_trim, &cand.right_trim,
+				   &cand.front_yaw_share, &cand.rear_yaw_share,
+				   &cand.front_max_output,
+				   &dive_l, &dive_r,
+				   &cand.roll_kp, &cand.roll_ki, &cand.roll_kd,
+				   &cand.roll_limit, &cand.roll_sign);
+
+			/* ⚠️ 必须用**逗号个数 + 1** = 字段个数来记，别凭"看起来像"手写数字：
+			 *    22 字段 = 21 个逗号（不是 20！）
+			 *    17 字段 = 16 个逗号
+			 *    15 字段 = 14 个逗号
+			 * ★ 2026-10-12 修正：原来 22 字段那档写成了 `commas == 20`，
+			 *   比实际少 1，导致 Web 发的 21-逗号帧永远落进 else 被整条拒绝
+			 *   （症状：ACK: REJECTED, INVALID CONTROL PARAMS，改多少次都无效）。 */
+			if ((commas == 21 && n == 22) ||
+			    (commas == 16 && n == 17) ||
+			    (commas == 14 && n == 15)) {
+				cand.dive_left  = dive_l;   /* 15 字段时这几个还是原值 */
+				cand.dive_right = dive_r;
+				/* n==17 时 roll_* 保持原值（sscanf 没写进去）；
+				 * n==22 时 sscanf 已直接写进 cand.roll_*，无需再赋值。 */
+
+				if (!apu_pipe_center_params_valid(&cand)) {
+					apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+					return 1;
+				}
+
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+
+				/* ★ 下潜正在开时，用新速度立刻重下发一次：
+				 *   Web 边调滑块边看效果，不用再按一次下潜。
+				 *   ⚠️ 必须在 g_center_params 更新**之后**调。 */
+				apu_dive_reapply();
+
+				apu_send_ack("CONTROL PARAMS UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* PID:%f,%f,%f（原项目 :735-765） */
+		if (apu_str_prefix(cmd, "PID:")) {
+			cand = g_center_params;
+			if (sscanf(cmd, "PID:%f,%f,%f",
+				   &cand.kp, &cand.ki, &cand.kd) == 3 &&
+			    apu_pipe_center_params_valid(&cand)) {
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+				AL_LOG(AL_LOG_LEVEL_INFO,
+				       "[APU1][app] 更新居中 PID -> %s",
+				       apu_fmt("Kp=%.2f, Ki=%.2f, Kd=%.2f",
+					       cand.kp, cand.ki, cand.kd));
+				apu_send_ack("CENTER PID UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* YAWD:%f（原项目 :766-789） */
+		if (apu_str_prefix(cmd, "YAWD:")) {
+			cand = g_center_params;
+			if (sscanf(cmd, "YAWD:%f", &cand.yaw_rate_damping) == 1 &&
+			    apu_pipe_center_params_valid(&cand)) {
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+				apu_send_ack("YAW DAMPING UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* TRIM:%f,%f（原项目 :790-814） */
+		if (apu_str_prefix(cmd, "TRIM:")) {
+			cand = g_center_params;
+			if (sscanf(cmd, "TRIM:%f,%f",
+				   &cand.left_trim, &cand.right_trim) == 2 &&
+			    apu_pipe_center_params_valid(&cand)) {
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+				apu_send_ack("THRUSTER TRIM UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* HEADKP:%f（原项目 :815-838） */
+		if (apu_str_prefix(cmd, "HEADKP:")) {
+			cand = g_center_params;
+			if (sscanf(cmd, "HEADKP:%f", &cand.heading_kp) == 1 &&
+			    apu_pipe_center_params_valid(&cand)) {
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+				apu_send_ack("HEADING KP UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* YAWMIX:%f,%f（原项目 :839-863） */
+		if (apu_str_prefix(cmd, "YAWMIX:")) {
+			cand = g_center_params;
+			if (sscanf(cmd, "YAWMIX:%f,%f",
+				   &cand.front_yaw_share, &cand.rear_yaw_share) == 2 &&
+			    apu_pipe_center_params_valid(&cand)) {
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+				apu_send_ack("YAW MIX UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* bs=%f,pol=%f,nol=%f（原项目 :871-900）
+		 *   base_speed / max_output / min_output */
+		if (apu_str_prefix(cmd, "bs=")) {
+			cand = g_center_params;
+			if (sscanf(cmd, "bs=%f,pol=%f,nol=%f",
+				   &cand.base_speed, &cand.max_output,
+				   &cand.min_output) == 3 &&
+			    apu_pipe_center_params_valid(&cand)) {
+				g_center_params = cand;
+				apu_pipe_center_reset(&g_center_state);
+				AL_LOG(AL_LOG_LEVEL_INFO,
+				       "[APU1][app] 更新 ESC 参数 -> %s",
+				       apu_fmt("bs=%.2f, pol=%.2f, nol=%.2f",
+					       cand.base_speed, cand.max_output,
+					       cand.min_output));
+				apu_send_ack("THRUSTER PARAMS UPDATED");
+			} else {
+				apu_send_ack("REJECTED, INVALID CONTROL PARAMS");
+			}
+			return 1;
+		}
+
+		/* 以下三个在传承项目里就是"固定回复、不做动作"（原项目 :864-870 / :901-914）
+		 * —— 照抄，不要自己发明功能 */
+		if (apu_str_prefix(cmd, "CPID:")) {
+			apu_send_ack("CPID DISABLED, CONTINUOUS CENTER MODE");
+			return 1;
+		}
+		if (apu_str_prefix(cmd, "aw=")) {
+			apu_send_ack("WEIGHT DISABLED, CONTINUOUS CENTER MODE");
+			return 1;
+		}
+		if (apu_str_prefix(cmd, "mode=")) {
+			apu_send_ack("MODE DISABLED, CONTINUOUS CENTER MODE");
+			return 1;
+		}
+	}
+
+	/* ---- 真·未知命令 ----
+	 * 🔴 文案不能以 REJECTED 开头（Linux 启动的 WakeUp 预热包会走这里） */
+	AL_LOG(AL_LOG_LEVEL_INFO, "[APU1][app] unknown cmd: %s", cmd);
+	apu_send_ack("收到未知指令 [%s]", cmd);                     /* :917 */
+	return 1;
+}
+
+/* ===========================================================================
+ * 七、状态查询
+ * =========================================================================== */
+
+uint8_t apu_app_led_state(void)
+{
+	return g_led_state;
+}
+
+uint32_t apu_app_sonar_damage(void)
+{
+	return g_sonar_damage_mask;
+}
+
+int apu_app_motor_enabled(void)
+{
+	return motor_enabled;
+}
+
+int apu_app_remote_mode(void)
+{
+	return remote_mode_flag;
+}
+
+void apu_app_get_remote_input(int *throttle_percent, int *turn_percent)
+{
+	if (throttle_percent) *throttle_percent = remote_throttle_percent;
+	if (turn_percent)     *turn_percent = remote_turn_percent;
+}
+
+float apu_app_target_yaw(void)
+{
+	return target_yaw_deg;
+}
+
+/* ★ 2026-10-12：横滚目标角（与 apu_app_target_yaw 完全对称）。
+ * 0 = 未标定过（要求水平）；按「重新标定」或「启动」后会变成当时的横滚角。 */
+float apu_app_target_roll(void)
+{
+	return target_roll_deg;
+}
+
+/* ★ 2026-10-05：下潜两路速度参数（CTRL: 第 16/17 个字段，±100）。
+ * 单独暴露给自检/控制台显示（@ctrl 会打出来）。
+ * ⚠️ 返回的是**配置值**（dive_left/right），不含横滚修正量。
+ *    实际写进 ch8/ch9 的是 config ± g_roll_corr，见 apu_app_get_roll_corr()。 */
+void apu_app_get_dive_params(float *left_pct, float *right_pct)
+{
+	if (left_pct)  *left_pct  = g_center_params.dive_left;
+	if (right_pct) *right_pct = g_center_params.dive_right;
+}
+
+/* ★ 2026-10-12：当前横滚稳定修正量（%，正 = ch8 加、ch9 减）。
+ * 增益全 0 或下潜没开时恒为 0。诊断用。 */
+float apu_app_get_roll_corr(void)
+{
+	return g_roll_corr;
+}
+
+/* 对外暴露**原始**三路（诊断/显示用 —— "探头实际读到的是多少"）。
+ *  ⚠️ 没有对外暴露"控制用的滤波值"：它只在 apu_app.c 内部喂给居中控制。 */
+void apu_app_get_sonar(int *front_mm, int *left_mm, int *right_mm)
+{
+	if (front_mm) *front_mm = (int)g_sonar_raw_front;
+	if (left_mm)  *left_mm = g_sonar_raw_left;
+	if (right_mm) *right_mm = g_sonar_raw_right;
+}
+
+void apu_app_get_attitude(float *roll, float *pitch, float *yaw)
+{
+	if (roll)  *roll = g_roll;
+	if (pitch) *pitch = g_pitch;
+	if (yaw)   *yaw = g_yaw;
+}
+
+int apu_app_imu_seen(void)
+{
+	return g_imu_seen;
+}
+
+/* ===========================================================================
+ * 八、传感器数据入口（★ **只有真实驱动会调**）
+ * =========================================================================== */
+
+void apu_app_update_attitude(float roll, float pitch, float yaw)
+{
+	g_roll  = roll;
+	g_pitch = pitch;
+	g_yaw   = yaw;
+
+	/* ★★ 2026-09-21：这里**不再做 wrap180** ★★
+	 * ---------------------------------------------------------------------------
+	 *  以前这里做 wrap，是为了让"@imu: 注入"和"真驱动"两条路结论一致。
+	 *  现在注入命令已经删掉（业务层数据只能来自真驱动），而真驱动
+	 *  apu_imu.c 解析那一行时**已经 wrap 过** —— 而且**必须**在那里 wrap：
+	 *  紧接着的 apu_nav_safety_imu_angles_valid() 要求 ±180 以内，
+	 *  不先 wrap，姿态板报的 190 会被**整行丢掉**。
+	 *  于是结构就和传承 slaver_00_example.c:979-991 完全一样了：
+	 *      parsed_yaw = PipeCenter_Wrap180(parsed_yaw);   // 解析路径里 wrap
+	 *      ... 校验 ...
+	 *      roll = parsed_roll; pitch = parsed_pitch; yaw = parsed_yaw;
+	 * --------------------------------------------------------------------------- */
+
+	g_imu_seen = 1;
+	g_imu_last_tick = apu_tick_now();   /* P5：供 NavSafety 判陈旧 */
+}
+
+/* ★★ 2026-09-21（以传承为准）：真驱动专用超声入口。
+ * ---------------------------------------------------------------------------
+ *  【背景】以前业务层的 g_sonar_* / g_sonar_seen **只被 @sonar: 注入命令写过**，
+ *          真驱动 apu_sonar.c 自己读 I2C、自己滤波、自己上报，**却从不通知业务层**
+ *          -> 接上真超声板后导航安全门永远 SONAR_NOT_READY（**F-30**）。
+ *          现在 apu_sonar.c 每次走完 读->交换->判损坏->有效性->滤波 之后调这里。
+ *
+ *  【本次修正】原来这里只收"一份最终值"（滤波值），三个消费者都用它。
+ *          但传承是**分两路**的：安全门用原始值，上报/居中控制用滤波值。
+ *          于是接口改成结构体，raw 与 filtered 分开传。
+ *
+ *  ⚠️ 这里**不判损坏、不滤波**（那些在驱动里，与传承一致）。
+ *  ⚠️ damage_mask != 0 时**只记掩码**，距离和时间戳一律不更新
+ *     —— 对应传承"判到损坏就 return"，好让安全门判 STALE。 */
+void apu_app_update_sonar(const apu_sonar_update_t *u)
+{
+	if (u == AL_NULL)
+		return;
+
+	g_sonar_damage_mask = u->damage_mask;
+
+	if (u->damage_mask != 0U)
+		return;    /* 损坏：只记掩码，不更新读数/时间戳（安全门会判 STALE） */
+
+	g_sonar_raw_front   = (uint16_t)u->front_raw;
+	g_sonar_raw_left    = u->left_raw;
+	g_sonar_raw_right   = u->right_raw;
+	g_sonar_front_valid = u->front_valid;
+	g_sonar_left_valid  = u->left_valid;
+	g_sonar_right_valid = u->right_valid;
+	g_sonar_ctrl_left   = u->ctrl_left;
+	g_sonar_ctrl_right  = u->ctrl_right;
+
+	g_sonar_seen      = 1;
+	g_sonar_last_tick = apu_tick_now();     /* 供 NavSafety 判陈旧 */
+}
+
+/* ⚪ 2026-09-25：原 `apu_app_test_expire_heartbeat()` 已删除。
+ *  它只服务于测试控制台的 `@hb:off`（人工把心跳时刻推老、逼看门狗触发），
+ *  与传承工程无关，属于测试期脚手架。
+ *  真实验证"心跳丢失会制动"的办法：直接停掉 Linux 侧的心跳线程，
+ *  或在控制台敲 `@hb` 之后就不要再敲 —— 2.5s 后必触发。 */
+
+/* ===========================================================================
+ * 九、周期上报
+ * =========================================================================== */
+
+/* ★★ 2026-09-20：改成**传承代码的做法**（slaver_00_example.c:993-1000）★★
+ * ---------------------------------------------------------------------------
+ *  传承原文：
+ *      roll = parsed_roll; pitch = parsed_pitch; yaw = parsed_yaw;
+ *      imu_last_update_tick = system_tick_10ms;
+ *      imu_seen = 1;
+ *      uart_count++;
+ *      if (uart_count < 10) continue;
+ *      uart_count = 0;
+ *      send_str_to_linux(&lept, DEVICE_CORE_SENSOR, "R:%.2f,P:%.2f,Y:%.2f", roll, pitch, yaw);
+ *  即：**在解析到位姿的那条路径里，每收满 10 行有效数据上报一次**，
+ *      不是定时器周期发。所以这个函数由 apu_imu.c 的 imu_parse_line() 调用。
+ *
+ *  顺带把「上行必须是真数据」也钉死了：
+ *      入参就是**刚解析出来的那一行**（由驱动层传进来），
+ *      注入（@imu:）走的是另一条路，**结构上不可能混进来**。
+ *
+ *  ⚠️ 唯一的保留差异：上报门 @rep 在这里仍然生效
+ *     （TEST 默认静音 / PROD 强制）。传承项目没有测试控制台所以没这个门；
+ *     我们的门是为了不刷屏，去掉它串口会被刷满。
+ * --------------------------------------------------------------------------- */
+void apu_app_report_attitude(float roll, float pitch, float yaw)
+{
+	if (!apu_msg_periodic_report_enabled())
+		return;
+
+	/* 格式必须与传承项目逐字一致：R:%.2f,P:%.2f,Y:%.2f（slaver:1000） */
+	apu_send_attitude(roll, pitch, yaw);
+}
+
+/* ⚪ 2026-09-21：原 `apu_report_sonar()` 已删除。
+ *  它当初的用途是"把业务层的 g_sonar_* 快照发出去"，只被 ⑥ 兜底块调用。
+ *  ⑥ 兜底块删除后它就没有调用者了，而且**它的信息是多余的**：
+ *    超声帧的权威发送点在 `apu_sonar.c:apu_sonar_periodic()` ⑤ ——
+ *    那里发的是"刚读、刚交换、刚判损坏、刚滤波"的**当次值**（与传承 `Sonar_Proc()` 一致），
+ *    比这里的快照更新、更准。
+ *  保留 `g_sonar_*` 本身仍然必要：它是**给导航安全门/居中控制用**的，不是给上报用的。 */
+
+/* ===========================================================================
+ * 十、开机自检打印
+ * =========================================================================== */
+
+static void apu_print_resource_map(void)
+{
+	AL_LOG(AL_LOG_LEVEL_INFO, "----- 资源分配表（最终规格） -----");
+	AL_LOG(AL_LOG_LEVEL_INFO, "调试日志 : PS UART1  DevId=1  0xf8401000  115200 8N1  (MIO48/49 -> CH342K)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "I2C0     : PS I2C0   DevId=0  0xf8414000  100kHz  -> PL IO -> CEP 3/4  Y12/Y13  = PCA9685 (0x40)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "I2C1     : PS I2C1   DevId=1  0xf8415000  100kHz  -> PL IO -> CEP 5/6  T9/U10   = STM32 超声板 (0x40)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "UART0    : PS UART0  DevId=0  0xf8400000  115200 8N1 -> PL IO -> CEP 7/8 T5/U5  = STM32 姿态板(交叉)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "左照明灯 : PL GPIO   pin=55 (bank2 bit1) -> CEP 11  U7   高电平点亮");
+	AL_LOG(AL_LOG_LEVEL_INFO, "右照明灯 : PL GPIO   pin=54 (bank2 bit0) -> CEP 9   V6   高电平点亮");
+	AL_LOG(AL_LOG_LEVEL_INFO, "         ^ 2026-10-17 按实测交换（原先假设 V6=左，实测 V6=右）");
+	AL_LOG(AL_LOG_LEVEL_INFO, "看门狗   : PS WDT0   DevId=0  0xf8410000  (纯内部，无引脚)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "时间基   : AlSys 硬件计数器 cntpct_el0 (本工程不用 TC 中断)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "--------------------------------");
+}
+
+/* ---------------------------------------------------------------------------
+ * 平台配置体检 —— **判断 BOOT.bin 是否生效的唯一客观证据**
+ * ---------------------------------------------------------------------------
+ *  背景：引脚复用 / PL IO 选择 / GPIO PLIO 使能，全是 **FSBL 启动时**写的
+ *        （alfsbl_main.c:36 调 Soc_PlatInit()）。
+ *        我们的固件里虽然链进了 soc_plat.c.o，但**没人调用它** → 是死代码。
+ *        所以"只重编 APU1 固件，引脚不会变"。
+ *
+ *  寄存器地址出处：soc_base\platform\src\soc_plat.c:1117-1175
+ *
+ *  判读：
+ *        PL_IOSEL_0/1/4 读回 0、PL_IOSEL_5 读回 1  -> FSBL 是新的，门槛已过
+ *        读回旧值（PL_IOSEL_0 == 1）              -> FSBL 还是旧的 / BOOT.bin 没生效
+ * --------------------------------------------------------------------------- */
+static void apu_check_platform_config(void)
+{
+	AL_U32 io0, io1, io4, io5, funcsel0;
+
+	AL_LOG(AL_LOG_LEVEL_INFO, "----- 平台配置体检（判断 BOOT.bin 是否生效）-----");
+
+	io0      = AL_REG32_READ(0xF8803400U);   /* PL_IOSEL_0  I2C0  */
+	io1      = AL_REG32_READ(0xF8803404U);   /* PL_IOSEL_1  I2C1  */
+	io4      = AL_REG32_READ(0xF8803410U);   /* PL_IOSEL_4  UART0 */
+	io5      = AL_REG32_READ(0xF8803414U);   /* PL_IOSEL_5  UART1 */
+	funcsel0 = AL_REG32_READ(0xF8803000U);   /* FUNCSEL_PS_IO_0   */
+
+	AL_LOG(AL_LOG_LEVEL_INFO, "PL_IOSEL_0 (I2C0)  = 0x%x   期望 bit0=0 (PL IO)",
+	       (unsigned int)(io0 & 1U));
+	AL_LOG(AL_LOG_LEVEL_INFO, "PL_IOSEL_1 (I2C1)  = 0x%x   期望 bit0=0 (PL IO)",
+	       (unsigned int)(io1 & 1U));
+	AL_LOG(AL_LOG_LEVEL_INFO, "PL_IOSEL_4 (UART0) = 0x%x   期望 bit0=0 (PL IO)",
+	       (unsigned int)(io4 & 1U));
+	AL_LOG(AL_LOG_LEVEL_INFO, "PL_IOSEL_5 (UART1) = 0x%x   期望 bit0=1 (PS IO/MIO48-49)",
+	       (unsigned int)(io5 & 1U));
+	AL_LOG(AL_LOG_LEVEL_INFO, "FUNCSEL_PS_IO_0    = 0x%x   旧配置是 0x4(GPIO)；新配置应【不是】4",
+	       (unsigned int)funcsel0);
+
+	if ((io0 & 1U) == 0U && (io1 & 1U) == 0U &&
+	    (io4 & 1U) == 0U && (io5 & 1U) == 1U) {
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "==> [OK] FSBL 是新编的，平台配置已生效，可以开始接外设");
+	} else {
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "==> [FAIL] 平台配置没生效！FSBL 还是旧的 / BOOT.bin 没烧进去。");
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "==> 必须重编 FSBL + 重做 BOOT.bin（见 _work\\BOOT.bin制作指南）");
+	}
+	AL_LOG(AL_LOG_LEVEL_INFO, "--------------------------------");
+}
+
+void apu_app_selfcheck(void)
+{
+	AL_LOG(AL_LOG_LEVEL_INFO, "========== APU1 开机自检 ==========");
+	apu_print_resource_map();
+	apu_check_platform_config();
+	AL_LOG(AL_LOG_LEVEL_INFO,
+	       "安全门状态 : 心跳门=开(宽限7.5s/超时2.5s)  超声损坏门=开  导航安全门=%s",
+	       NAV_SAFETY_BYPASS_FOR_TUNING ? "【已旁路! 比赛前改回 0】" : "开");
+
+	/* ★ 独立测试模式必备提醒：这一侧没有 Linux 喂心跳，
+	 *   开机 7.5 秒宽限期一过，心跳门就会主动制动 + 关灯。
+	 *   想测电机/灯，先在串口敲 @hb（之后每 2.5 秒内至少一次）。 */
+	AL_LOG(AL_LOG_LEVEL_INFO,
+	       "⚠️  独立测试提示: 没有 Linux 喂心跳, 7.5 秒后会自动制动。"
+	       "测电机/灯之前请先敲 @hb (每 2.5 秒内至少一次)");
+	AL_LOG(AL_LOG_LEVEL_INFO, "==================================");
+}
+
+/* ===========================================================================
+ * 十一、生命周期
+ * =========================================================================== */
+
+int apu_app_init(void)
+{
+	/* ---- 清零所有业务状态 ---- */
+	g_led_state = 0U;
+	g_sonar_damage_mask = 0U;
+	g_shutdown_req = 0;
+
+	g_hb_seen = 0;
+	g_hb_link_failed = 0;
+	g_last_hb_tick = apu_tick_now();     /* 从"现在"开始算启动宽限 */
+
+	g_imu_seen = 0;
+	g_imu_last_tick = 0U;
+	g_roll = g_pitch = g_yaw = 0.0f;
+
+	g_sonar_seen = 0;
+	g_sonar_last_tick = 0U;
+	g_sonar_raw_front = 0U;
+	g_sonar_raw_left = g_sonar_raw_right = 0;
+	g_sonar_front_valid = g_sonar_left_valid = g_sonar_right_valid = 0;
+	g_sonar_ctrl_left = g_sonar_ctrl_right = 0;
+
+	motor_enabled = 0;
+	remote_mode_flag = 0;
+	remote_throttle_percent = 0;
+	remote_turn_percent = 0;
+	target_yaw_deg = 0.0f;
+	/* ★ 2026-10-12：横滚目标默认 0（水平）—— 与航向同样在 init 里清零。
+	 *  之后每次「启动」和每次「重新标定」都会重新取当前角当基准。 */
+	target_roll_deg = 0.0f;
+
+	/* 弯道模式：上电恢复默认 4s，状态清零 */
+	g_turn_mode_ms = APU_TURN_MODE_MS_DEFAULT;
+	apu_turn_mode_reset();
+
+	g_nav_safety_fault = NAV_SAFETY_OK;
+	g_nav_reported_fault = NAV_SAFETY_OK;
+
+	g_last_print_ms = 0U;
+	/* ⚪ 2026-09-21：原 `g_last_demo_ms = 0U;` 已随兜底块删除 */
+
+	apu_pipe_center_reset(&g_center_state);
+	g_center_sched.initialized = 0;
+
+	/* ★ 2026-10-12：横滚稳定 PID 上电清零（矫正量也要归 0） */
+	apu_roll_stab_reset(&g_roll_stab);
+	g_roll_corr = 0.0f;
+
+	/* ---- 控制器默认参数（★ 逐字照抄传承项目 slaver_00_example.c:146-162） ----
+	 * ★ 2026-10-02 复原：末位由 base_front_share 回到 front_max_output（前推进器限幅 15.0）。
+	 *   四路共享直行的重构已回退，默认值与 origin\soc_sdk 逐字一致。 */
+	g_center_params.kp               = 8.0f;
+	g_center_params.ki               = 0.0f;
+	g_center_params.kd               = 1.0f;
+	g_center_params.yaw_rate_damping = 0.15f;
+	g_center_params.integral_limit   = 0.5f;
+	g_center_params.turn_limit       = 10.0f;
+	g_center_params.base_speed       = 10.0f;
+	g_center_params.min_output       = 2.0f;
+	g_center_params.max_output       = 18.0f;
+	g_center_params.heading_kp       = 0.40f;
+	g_center_params.left_trim        = 0.70f;
+	g_center_params.right_trim       = 1.00f;
+	g_center_params.front_yaw_share  = 0.80f;
+	g_center_params.rear_yaw_share   = 0.20f;
+	g_center_params.front_max_output = 15.0f;
+
+	/* ★ 2026-10-05 扩展字段：下潜两路速度（CTRL: 第 16/17 个）。
+	 * **默认 0（不转）是故意的**：万一 Web 没下发这两个字段，按 CMD:DIVE 会回
+	 * "ERR: DIVE STRENGTH ZERO" —— 一眼看出是参数没到，而不是"按了没反应"，
+	 * 更不会一上电就自己窜起来。
+	 * ⚠️ 必须在这里显式赋值：下面那次默认参数自检会把它们一起校验。 */
+	g_center_params.dive_left        = 0.0f;
+	g_center_params.dive_right       = 0.0f;
+
+	/* ★ 2026-10-12 扩展字段：横滚稳定五参数（CTRL: 第 18~22 个）。
+	 * 默认与 Web 侧 config.py 严格一致：增益全 0（= 功能关闭）、limit=20、sign=+1。
+	 * **默认关闭是故意的**：没人标定过倾角基准就自动纠平，可能把艇越纠越歪；
+	 * 上线前由 Web 的「横滚稳定」开关把 kp/ki/kd 打开再下发。 */
+	g_center_params.roll_kp          = 0.0f;
+	g_center_params.roll_ki          = 0.0f;
+	g_center_params.roll_kd          = 0.0f;
+	g_center_params.roll_limit       = 20.0f;
+	g_center_params.roll_sign        = 1.0f;
+
+	/* 开机先校验一遍默认参数，不合法要立刻发现（改默认值时容易写错） */
+	if (!apu_pipe_center_params_valid(&g_center_params)) {
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] !! DEFAULT CONTROL PARAMS ARE INVALID !! "
+		       "CTRL: commands will be rejected. Check apu_app_init().");
+	} else {
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "[APU1][app] control params OK (%s)",
+		       apu_fmt("kp=%.2f ki=%.2f kd=%.2f base=%.2f",
+			       g_center_params.kp, g_center_params.ki,
+			       g_center_params.kd, g_center_params.base_speed));
+	}
+
+/* ★ 2026-09-21：注入路径的滤波器已删除，这里不用再复位。
+ *   真驱动的三只滤波器在 apu_sonar.c 自己的 init 里复位。 */
+
+	/* =================================================================
+	 * ★★ 2026-09-25：WDT-first —— 看门狗提到外设初始化【最前】★★
+	 *
+	 *  原来 apu_wdt_init() 排在本函数**最后**。后果（上板实证）：
+	 *    putty_s6 / 实验F 日志都停在
+	 *        [APU1][sonar] ready: ...
+	 *    之后再无输出 —— 此时硬件狗**还没武装**，整机既不打印也不复位，
+	 *    只能人工拔电，崩溃现场全部丢失。
+	 *
+	 *  现在改成：先武装狗，再初始化外设。
+	 *  每一步之后调 apu_wdt_feed()，所以：
+	 *    · 正常启动 → 每步都喂 → **不会被误咬**
+	 *    · 任何一步卡死 → 连续 >4s 没喂 → **4 秒后自动复位并重新打印**
+	 *      ⇒ 以后拔电改成等 4 秒，而且日志会直接指出卡在哪一行
+	 *
+	 *  ⚠️ 超时是 4.03s（apu_wdt.h:42）。本函数里单步最久的是
+	 *     apu_pca9685_init() 内的 ESC_ARM_DELAY_MS（3s）延时，
+	 *     原本靠"每步之后喂一次"来兜 —— 但 3s 对 4.03s 只有 1s 余量，
+	 *     现场首次 I2C 通信偏慢时会擦边 ⇒ 上板日志已实测到 SWDT0 复位
+	 *     （FSBL 打印 history reset reason: 00000060）。
+	 *
+	 *  ★★ 2026-09-25：余量小的地方已改成"分片喂狗"，不再靠"整段之后补喂" ★★
+	 *     · apu_pca9685_init() 的 3s 解锁延时 → apu_wdt_delay()（1s 一片）
+	 *     · apu_led_init() 的闪灯循环 → 每轮补喂一次
+	 *     · 主循环的 apu_sonar_periodic()（I2C 阻塞读）
+	 *       / apu_control_pipeline()（I2C 阻塞写）→ 各补喂一次
+	 *     现在任何一处单次阻塞的上限都远小于 4.03s，喂狗间隔有界。
+	 * ============================================================== */
+	if (apu_wdt_init() != 0)
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][wdt] 提前武装失败 -> 后续若挂死将无人复位，只能人工拔电");
+	apu_wdt_feed();     /* 武装后立刻喂一次，从"现在"开始算 */
+
+	/* -----------------------------------------------------------------
+	 * 外设初始化（按依赖顺序）。
+	 * 每一步都判返回值：某一个失败**不能**让整个固件不起来，
+	 * 因为独立测试模式的价值就在于"能上板看看到底哪儿不对"。
+	 * ----------------------------------------------------------------- */
+
+	/* P3：照明灯（PL GPIO 54/55）。初始化里含"各闪 3 次"肉眼自检 */
+	if (apu_led_init() != 0)
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] LED init FAILED - check GPIOPL_ENABLE / FSBL");
+	apu_wdt_feed();     /* LED 自检含闪烁延时，喂一次 */
+
+	/* P2 + P4：先建 I2C 双总线，成功才做超声波初始化 */
+	if (apu_i2c_init() == 0) {
+		/* =================================================================
+		 * ★★ 2026-09-25：删除了原来的开机总线扫描（原第 1127-1128 行）★★
+		 *
+		 *      原代码：
+		 *          (void)apu_i2c_scan(APU_I2C_BUS0);
+		 *          (void)apu_i2c_scan(APU_I2C_BUS1);
+		 *
+		 *  删除理由（上板实证）：
+		 *    putty_s4_14400.log（2026-09-25 13:53）最后一行是
+		 *        [APU1][i2c] --- scanning bus0 (0x08..0x77) ---
+		 *    之后再无任何输出 —— 固件永久挂在扫描里。
+		 *    r1/r3/r4/r5 四轮日志的挂死点完全相同。
+		 *
+		 *    机制：扫描要遍历 0x08..0x77 共 112 个地址、每地址一笔读事务；
+		 *    探测到"没人应答"的地址时，SDK 的 Block 版 API 在
+		 *    AL_IIC_CMD_OPTION_STOP 分支里有两个**无超时**忙等
+		 *    （al_iic_hal.c 的 IsTxFifoCompleteEmpty / IsMasterActivity）。
+		 *    上电固有 "SCL at low"（本日志第 116/119 行，两条）时总线被拉低，
+		 *    这两个 while 永不退出 ⇒ 死循环。
+		 *
+		 *    更糟的是 apu_wdt_init() 排在外设初始化**最后**（本函数下方），
+		 *    所以挂死时硬件狗还没武装 —— 整机既不打印也不复位，只能人工断电。
+		 *
+		 *  为什么删掉没有损失：
+		 *    扫描只是**诊断手段**，不是功能路径。运行期随时可以手工扫：
+		 *        @i2c:0   /  @i2c:1          扫整条总线
+		 *        @i2cprobe:<bus>,<addr>,<reg>  探单个器件
+		 *    PCA9685 与超声波各自的 init 里本来就会真读一次并从日志确认，
+		 *    所以"器件在不在"这件事并不会失联。
+		 *
+		 *  另外这次还给 SDK 那两个忙等加了有界轮询（见 al_iic_hal.c 顶部），
+		 *  即使将来再扫，最坏也只是"这一笔失败"，不会再永久卡死。
+		 * ============================================================== */
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "[APU1][i2c] 开机总线扫描已关闭（会挂死）；"
+		       "需要时敲 @i2c:0 / @i2c:1 手工扫");
+
+		/* P4：超声波（I2C1 读 STM32 小板）。内部会先试读一次并打印结果 */
+		(void)apu_sonar_init();
+		apu_wdt_feed();     /* sonar 首次读最可能长时间阻塞，读完立刻喂 */
+
+		/* P7：PCA9685 推进器（I2C0）。内部含"回 neutral + 等 3 秒解锁" */
+		if (apu_pca9685_init() != 0)
+			AL_LOG(AL_LOG_LEVEL_ERROR,
+			       "[APU1][app] PCA9685 init FAILED - thrusters unavailable");
+		apu_wdt_feed();     /* 上一步含 3s 长延时，喂一次 */
+	} else {
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] I2C init FAILED - check I2C0PS/I2C1PS_ENABLE / FSBL; "
+		       "sonar + PCA9685 will be skipped");
+	}
+	apu_wdt_feed();         /* I2C 分支结束再喂一次 */
+
+	/* P4b：前向超声波直连 UART-D（0x8070_0000）。
+	 * 它不依赖 I2C，所以放在 I2C 分支外面；初始化只查基地址 + 清 FIFO。 */
+	if (apu_front_init() != 0)
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] front UART-D init FAILED - "
+		       "check bitstream has AXI_UARTLite_3 / soc_plat.h");
+	apu_wdt_feed();
+
+	/* P5：IMU（UART0 + 自己的环形缓冲） */
+	if (apu_imu_init() != 0)
+		AL_LOG(AL_LOG_LEVEL_ERROR,
+		       "[APU1][app] IMU init FAILED - check UART0PS_ENABLE / FSBL");
+	apu_wdt_feed();
+
+	/* =================================================================
+	 * ★★ 2026-09-25：原来这里调 apu_wdt_init()，已**移到本函数最前面** ★★
+	 *   见本函数开头"WDT-first"那段说明：
+	 *     WDT 排最后 → 挂死时狗没武装 → 既不打印也不复位 → 只能人工拔电
+	 *     WDT 排最前 → 挂死 4 秒后自动复位，日志能指出卡在哪一行
+	 * ============================================================== */
+
+	/* ★ 2026-09-21：看门狗状态分三种，别再说"HW"就以为是活的。
+	 *  HW 块起来了**不代表**超时会复位芯片（PMU 那步是 void 函数、静默失败）。 */
+	AL_LOG(AL_LOG_LEVEL_INFO,
+	       "[APU1][app] business layer init done (led=0x%x, wdt=%s)",
+	       (unsigned int)apu_led_get_state(),
+	       apu_wdt_is_active() ? "HW(reset OK)"
+	       : (apu_wdt_block_up() ? "HW(!NO-RESET!!)" : "SW-only"));
+
+	return 0;
+}
+
+void apu_app_periodic(void)
+{
+	/* ---- ① 时间基自检（P9 收尾关掉）----
+	 *  ⚠️ `now_ms` 就声明在 #if 里面 —— P9 把这个开关改成 0 时，
+	 *     不会留下一个"只赋值、没人读"的变量
+	 *     （2026-09-21：⑥ 兜底块删掉之后，这里是它唯一的使用者）。 */
+#if APU_TIME_SELFCHECK_PRINT
+	uint32_t now_ms;
+
+	now_ms = apu_time_ms();
+	if (apu_msg_periodic_report_enabled() &&
+	    (uint32_t)(now_ms - g_last_print_ms) >= APU_TIME_PRINT_PERIOD_MS) {
+		g_last_print_ms = now_ms;
+		AL_LOG(AL_LOG_LEVEL_INFO,
+		       "[APU1][tick] tick_10ms=%u  ms=%u  (1s per line)",
+		       (unsigned int)apu_tick_10ms(), (unsigned int)now_ms);
+	}
+#endif
+
+	/* ---- ② 心跳看门狗 ---- */
+	apu_host_heartbeat_watchdog_proc();
+
+	/* ---- ③ P5：IMU 收行解析（每轮都要跑，字节是中断收的）---- */
+	(void)apu_imu_poll();
+
+	/* ---- ④ P4：前向超声波（UART-D，非阻塞轮询）----
+	 *  必须放在 sonar_periodic 之前：它只收/发几个字节，不阻塞；
+	 *  sonar_periodic 再用它最近一次有效值 + 左/右 I2C 一起打包。 */
+	apu_front_poll();
+
+	/* ---- ④b P4：左/右超声波采集（驱动自己按 10Hz 节流并上报）---- */
+	(void)apu_sonar_periodic();
+
+	/* ---- ⑤ P8：控制流水线（手动遥控 / 10Hz 自动居中 / 停车）---- */
+	apu_control_pipeline();
+
+	/* ---- ⑥ （原"兜底上报"块已**整块删除**）----
+	 *  这里原来有一块 `#if APU_DEMO_SENSOR_PERIODIC` 的定时上报，两块内容都已不存在：
+	 *    · 姿态：曾是硬编码假数据 `else apu_send_attitude(1.23f,-0.45f,178.90f)` → 2026-09-20 删（F-27）
+	 *    · 超声：`if (g_sonar_seen) apu_report_sonar();`
+	 *
+	 *  ⚠️ **为什么连超声那句也要删（2026-09-21）**：
+	 *     那句话的前提是"`g_sonar_seen` 只被**注入命令**设置"，所以它是"注入专用兜底"，
+	 *     注释里也写着"接了真硬件就走 apu_sonar_periodic()，这里不重复发"。
+	 *     但**注入删除后，真驱动也会设 `g_sonar_seen = 1`**（见 `apu_app_update_sonar()`）
+	 *     ⇒ 这个前提被破坏，兜底会和驱动层**同时生效** → 每个周期发**两份 `SONAR:` 帧**。
+	 *
+	 *  **传承项目本来就没有这个兜底**：
+	 *     · 姿态：在"解析到位姿行"的路径里发（`slaver_00_example.c:993-1000`）
+	 *     · 超声：在 `Sonar_Proc()` 里发（`slaver_00_example.c:1078-1087`）
+	 *  → 所以本节按传承删空。**现在传感器帧的唯一发送点就是各自的驱动路径**：
+	 *     `apu_imu.c:imu_parse_line()` / `apu_sonar.c:apu_sonar_periodic()`。 */
+
+	/* ---- ⑦ P6：喂狗（★ 必须放最后 —— 前面都干完了才喂，
+	 *          这样任何一步卡死都会让狗咬）---- */
+	apu_wdt_feed();
+}

@@ -1,0 +1,7 @@
+# First-stage Web-only dependencies.
+# Install platform-compatible packages on the target system; do not assume
+# x86_64 virtual-machine wheels can be reused on EG400 ARM Linux.
+Flask
+opencv-python
+numpy
+pyserial

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipxact:design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ipxact="http://www.accellera.org/XMLSchema/IPXACT/1685-2014" xmlns:anlogic="http" xsi:schemaLocation="http://www.accellera.org/XMLSchema/IPXACT/1685-2014 http://www.accellera.org/XMLSchema/IPXACT/1685-2014/index.xsd">
+    <ipxact:vendor>anlogic.com</ipxact:vendor>
+    <ipxact:library>customized</ipxact:library>
+    <ipxact:name>design_design_0_AXI_UARTLite_3</ipxact:name>
+    <ipxact:version>1.2</ipxact:version>
+    <ipxact:componentInstances>
+        <ipxact:componentInstance>
+            <ipxact:instanceName>axi_uart_simple_design_0_AXI_UARTLite_3_Inst</ipxact:instanceName>
+            <ipxact:componentRef vendor="anlogic.com" library="ip" name="axi_uart_simple" version="1.2"/>
+            <ipxact:configurableElementValues>
+                <ipxact:configurableElementValue referenceId="freq_Mhz">75</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_BAUDRATE">115200</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_DATA_BITS">8</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_USE_PARITY">0</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_AXI_ACLK_FREQ_HZ">75000000</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_ODD_PARITY">1</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_FIFO_DEPTH">16</ipxact:configurableElementValue>
+                <ipxact:configurableElementValue referenceId="AL_USE_DYN_BAUDRATE">0</ipxact:configurableElementValue>
+            </ipxact:configurableElementValues>
+        </ipxact:componentInstance>
+    </ipxact:componentInstances>
+    <ipxact:adHocConnections>
+        <ipxact:adHocConnection>
+            <ipxact:name>aclk</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="aclk"/>
+                <ipxact:externalPortReference portRef="aclk"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>aresetn</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="aresetn"/>
+                <ipxact:externalPortReference portRef="aresetn"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>interrupt</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="interrupt"/>
+                <ipxact:externalPortReference portRef="interrupt"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_awaddr</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_awaddr"/>
+                <ipxact:externalPortReference portRef="us_axi_awaddr"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_awvalid</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_awvalid"/>
+                <ipxact:externalPortReference portRef="us_axi_awvalid"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_awready</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_awready"/>
+                <ipxact:externalPortReference portRef="us_axi_awready"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_wdata</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_wdata"/>
+                <ipxact:externalPortReference portRef="us_axi_wdata"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_wstrb</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_wstrb"/>
+                <ipxact:externalPortReference portRef="us_axi_wstrb"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_wvalid</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_wvalid"/>
+                <ipxact:externalPortReference portRef="us_axi_wvalid"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_wready</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_wready"/>
+                <ipxact:externalPortReference portRef="us_axi_wready"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_bresp</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_bresp"/>
+                <ipxact:externalPortReference portRef="us_axi_bresp"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_bvalid</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_bvalid"/>
+                <ipxact:externalPortReference portRef="us_axi_bvalid"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_bready</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_bready"/>
+                <ipxact:externalPortReference portRef="us_axi_bready"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_araddr</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_araddr"/>
+                <ipxact:externalPortReference portRef="us_axi_araddr"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_arvalid</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_arvalid"/>
+                <ipxact:externalPortReference portRef="us_axi_arvalid"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_arready</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_arready"/>
+                <ipxact:externalPortReference portRef="us_axi_arready"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_rdata</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_rdata"/>
+                <ipxact:externalPortReference portRef="us_axi_rdata"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_rresp</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_rresp"/>
+                <ipxact:externalPortReference portRef="us_axi_rresp"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_rvalid</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_rvalid"/>
+                <ipxact:externalPortReference portRef="us_axi_rvalid"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>us_axi_rready</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="us_axi_rready"/>
+                <ipxact:externalPortReference portRef="us_axi_rready"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>rx</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="rx"/>
+                <ipxact:externalPortReference portRef="rx"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+        <ipxact:adHocConnection>
+            <ipxact:name>tx</ipxact:name>
+            <ipxact:portReferences>
+                <ipxact:internalPortReference componentRef="axi_uart_simple_design_0_AXI_UARTLite_3_Inst" portRef="tx"/>
+                <ipxact:externalPortReference portRef="tx"/>
+            </ipxact:portReferences>
+        </ipxact:adHocConnection>
+    </ipxact:adHocConnections>
+    <ipxact:vendorExtensions>
+        <anlogic:device>DR1M90GEG400</anlogic:device>
+        <anlogic:displayname>AXI UARTLite</anlogic:displayname>
+        <anlogic:ipGenVersion value="193873 2026/03/31">1.0</anlogic:ipGenVersion>
+    </ipxact:vendorExtensions>
+</ipxact:design>

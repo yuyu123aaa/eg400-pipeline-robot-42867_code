@@ -1,0 +1,7 @@
+﻿=== syntax check start ===
+include count = 35
+----- FS: C:/qiansai_FPGA/my_cpu_npu/soc_sdk/my_work/src/machine/common/apu_app.c -----
+EXITCODE=0
+----- FS: C:/qiansai_FPGA/my_cpu_npu/soc_sdk/my_work/src/machine/common/apu_pipe_center.c -----
+EXITCODE=0
+=== syntax check done ===

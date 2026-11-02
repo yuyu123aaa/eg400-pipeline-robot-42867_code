@@ -1,0 +1,147 @@
+#[INFO] design_integrator V2026.05 (APP main), Windows 64bit (Release), Build 197563 2026/05/12, 13:37:10 May 12 2026 on WIN10-204
+#[INFO] Run at Thu Oct 15 20:45:54 2026
+#[INFO] The Design.xml (C:/qiansai_FPGA/my_cpu_npu/soc_prj/al_ip/Design.xml) does not exist.
+#[INFO] The Design.xml (C:/qiansai_FPGA/my_cpu_npu/soc_prj/ip_repo_v20/Design.xml) does not exist.
+#[INFO] The Design.xml (C:/qiansai_FPGA/my_cpu_npu/soc_prj/log/Design.xml) does not exist.
+#[INFO] The Design.xml (C:/qiansai_FPGA/my_cpu_npu/soc_prj/soc_prj_Runs/Design.xml) does not exist.
+#[INFO] The Design.xml (C:/qiansai_FPGA/my_cpu_npu/soc_prj/src/Design.xml) does not exist.
+si_select_window DesignIntegrator
+si_resize_window DesignIntegrator 1920 991
+si_select_dialog Open_Design_ProgressDialog
+#[INFO] si_open_design C:/qiansai_FPGA/my_cpu_npu/soc_prj/design_0
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -899
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView vertical -120
+si_select_window DesignIntegrator
+si_design_diagram_select_inst design_0.DesignDiagram ARM_Processor_System_0 1
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView vertical -39
+#si_select_dialog AL_HintBox #Customize Ip
+#[INFO] PSGUI-001 : The IP files have been generated successfully.:{DR1M90GEG400(C:/qiansai_FPGA/my_cpu_npu/soc_prj/design_0/ip/design_0_ARM_Processor_System_0/DesignTmp.xml)}
+#si_select_dialog AL_HintBox #Process IP
+#[INFO] GUI-2000 : The IP files have been generated successfully. :{DR1M90GEG400(C:/qiansai_FPGA/my_cpu_npu/soc_prj/design_0/ip/design_0_ARM_Processor_System_0/design_0_ARM_Processor_System_0.xml)}
+si_click_tree_item design_0.DesignDiagram AddressBrowser.AddressEditorTree /VDMA_0 0 #si_change_current_tree_item
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -403
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView vertical 18
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -215
+si_design_diagram_select_node design_0.DesignDiagram w_net__pl_gpio_in 1
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -2597
+si_design_diagram_node_popup_menu design_0.DesignDiagram w_net__pl_gpio_in
+si_click_menu_item DesignIntegrator Diagram.Delete
+si_select_dialog StandardMessageBox #Delete Connection
+si_close_popup_menu
+si_click_push_button StandardMessageBox Yes
+#[INFO] si_design_remove_connection w_net__pl_gpio_in
+si_select_window DesignIntegrator
+si_design_diagram_select_design_port design_0.DesignDiagram pl_gpio_in 1
+si_design_diagram_design_port_popup_menu design_0.DesignDiagram pl_gpio_in
+si_click_menu_item DesignIntegrator Diagram.Delete
+si_select_dialog StandardMessageBox #Delete Design Port
+si_close_popup_menu
+si_click_push_button StandardMessageBox Yes
+#[INFO] si_design_remove_port pl_gpio_in
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -2565
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -96
+si_design_diagram_select design_0.DesignDiagram 1
+si_design_diagram_popup_menu design_0.DesignDiagram
+si_close_popup_menu
+si_design_diagram_select_node design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_oe 1
+si_design_diagram_node_popup_menu design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_oe
+si_click_menu_item DesignIntegrator Diagram.Delete
+si_select_dialog StandardMessageBox #Delete Connection
+si_close_popup_menu
+si_click_push_button StandardMessageBox Yes
+#[INFO] si_design_remove_connection w_net__ARM_Processor_System_0__pl_gpio_oe
+si_select_window DesignIntegrator
+si_design_diagram_select design_0.DesignDiagram 1
+si_design_diagram_select_node design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_out 1
+si_design_diagram_node_popup_menu design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_out
+si_click_menu_item DesignIntegrator Diagram.Delete
+si_select_dialog StandardMessageBox #Delete Connection
+si_close_popup_menu
+si_click_push_button StandardMessageBox Yes
+#[INFO] si_design_remove_connection w_net__ARM_Processor_System_0__pl_gpio_out
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal 1088
+si_design_diagram_select_design_port design_0.DesignDiagram pl_gpio_oe 1
+si_design_diagram_design_port_popup_menu design_0.DesignDiagram pl_gpio_oe
+si_click_menu_item DesignIntegrator Diagram.Delete
+si_select_dialog StandardMessageBox #Delete Design Port
+si_close_popup_menu
+si_click_push_button StandardMessageBox Yes
+#[INFO] si_design_remove_port pl_gpio_oe
+si_select_window DesignIntegrator
+si_design_diagram_select_design_port design_0.DesignDiagram i2c1_scl_oe 1
+si_design_diagram_select_design_port design_0.DesignDiagram pl_gpio_out 1
+si_design_diagram_design_port_popup_menu design_0.DesignDiagram pl_gpio_out
+si_close_popup_menu
+si_design_diagram_select_design_port design_0.DesignDiagram pl_gpio_out 1
+si_design_diagram_design_port_popup_menu design_0.DesignDiagram pl_gpio_out
+si_click_menu_item DesignIntegrator Diagram.Delete
+si_select_dialog StandardMessageBox #Delete Design Port
+si_close_popup_menu
+si_click_push_button StandardMessageBox Yes
+#[INFO] si_design_remove_port pl_gpio_out
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -520
+si_design_diagram_select design_0.DesignDiagram 1
+si_design_diagram_select_port design_0.DesignDiagram ARM_Processor_System_0 pl_gpio_in 1
+si_design_diagram_port_popup_menu design_0.DesignDiagram ARM_Processor_System_0 pl_gpio_in
+si_click_menu_item design_0.DesignDiagram Diagram.AddDesignPort
+si_select_dialog Design_Add_Port
+si_close_popup_menu
+si_click_push_button Design_Add_Port AddDesignPort.Add
+#[INFO] si_design_add_port -dir input -from 4 -to 0 pl_gpio_in
+#[INFO] si_design_add_connection ARM_Processor_System_0.pl_gpio_in pl_gpio_in
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -2492
+si_click_push_button Design_Add_Port AddDesignPort.Close
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -394
+si_design_diagram_select_port design_0.DesignDiagram ARM_Processor_System_0 pl_gpio_oe 1
+si_design_diagram_select_inst design_0.DesignDiagram ARM_Processor_System_0 1
+si_design_diagram_port_popup_menu design_0.DesignDiagram ARM_Processor_System_0 pl_gpio_oe
+si_click_menu_item design_0.DesignDiagram Diagram.AddDesignPort
+si_select_dialog Design_Add_Port
+si_close_popup_menu
+si_click_push_button Design_Add_Port AddDesignPort.Add
+#[INFO] si_design_add_port -dir output -from 4 -to 0 pl_gpio_oe
+#[INFO] si_design_add_connection ARM_Processor_System_0.pl_gpio_oe pl_gpio_oe
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal 951
+si_click_push_button Design_Add_Port AddDesignPort.Close
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -256
+si_design_diagram_select design_0.DesignDiagram 1
+si_design_diagram_select_inst design_0.DesignDiagram ARM_Processor_System_0 1
+si_design_diagram_select_port design_0.DesignDiagram ARM_Processor_System_0 pl_gpio_out 1
+si_design_diagram_port_popup_menu design_0.DesignDiagram ARM_Processor_System_0 pl_gpio_out
+si_click_menu_item design_0.DesignDiagram Diagram.AddDesignPort
+si_select_dialog Design_Add_Port
+si_close_popup_menu
+si_click_push_button Design_Add_Port AddDesignPort.Add
+#[INFO] si_design_add_port -dir output -from 4 -to 0 pl_gpio_out
+#[INFO] si_design_add_connection ARM_Processor_System_0.pl_gpio_out pl_gpio_out
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal 961
+si_click_push_button Design_Add_Port AddDesignPort.Close
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -383
+si_design_diagram_select_node design_0.DesignDiagram w_net__pl_gpio_in 1
+si_design_diagram_select_node design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_oe 1
+si_design_diagram_select design_0.DesignDiagram 1
+si_design_diagram_select_node design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_out 1
+si_design_diagram_select design_0.DesignDiagram 1
+si_close_window DesignIntegrator
+si_select_dialog ExitDesignIntegrator
+si_click_push_button ExitDesignIntegrator Cancel
+si_select_window DesignIntegrator
+si_graphics_view_scroll design_0.DesignDiagram DesignDiagram.GraphicsView horizontal -498
+si_design_diagram_select design_0.DesignDiagram 1
+si_design_diagram_select_node design_0.DesignDiagram w_net__pl_gpio_in 1
+si_design_diagram_select_node design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_oe 1
+si_design_diagram_select_node design_0.DesignDiagram w_net__ARM_Processor_System_0__pl_gpio_out 1
+si_close_window DesignIntegrator
+si_click_tree_item ExitDesignIntegrator exitDiDialogDesignTree These_designs_need_to_be_regenerated 0 UnChecked
+si_select_dialog ExitDesignIntegrator
+si_click_push_button ExitDesignIntegrator Exit
+#[INFO] si_design_save
+si_exit
+#[INFO] Exit 0

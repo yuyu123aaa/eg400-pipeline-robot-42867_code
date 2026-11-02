@@ -1,0 +1,10 @@
+path: D:/GXU_Files/BS/嵌入式/2026FPGA/2026/.training_archive/new_layout_FGH_20261020/dataset
+train: images/train
+val: images/val
+names:
+  0: spall
+  1: crack
+  2: hole
+  3: root
+  4: sediment
+

@@ -1,0 +1,231 @@
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_0::US_AXI::us_axi_awuser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_0::US_AXI::us_axi_awqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_0::US_AXI::us_axi_wuser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_0::US_AXI::us_axi_aruser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_0::US_AXI::us_axi_arqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:ARM_Processor_System_0::S_AXI_HP0::slave_hp0_axi_arqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:ARM_Processor_System_0::S_AXI_HP0::slave_hp0_axi_awqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:ARM_Processor_System_0::TC0::tc0_clk0_in
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:ARM_Processor_System_0::TC0::tc0_clk1_in
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:ARM_Processor_System_0::TC0::tc0_clk2_in
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In1[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In7[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In8[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In9[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In10[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In11[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In12[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In13[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:Concat_0::In14[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:rst_n_75m::external_reset
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:rst_n_75m::system_rst
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:rstn_150m::external_reset
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:rstn_150m::system_rst
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:rstn_npu::external_reset
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:rstn_npu::system_rst
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::US_AXI0::us0_awqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::US_AXI0::us0_arqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_awready
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_wready
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_bid[12:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_bresp[1:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_bvalid
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_arready
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_rid[12:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_rdata[31:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_rresp[1:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_rlast
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_1::DS_AXI1::ds1_rvalid
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_1::US_AXI::us_axi_awuser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_1::US_AXI::us_axi_wuser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Protocol_Converter_1::US_AXI::us_axi_aruser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::S_AXIS_S2MM::s_axis_s2mm_tdata[31:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::S_AXIS_S2MM::s_axis_s2mm_tkeep[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::S_AXIS_S2MM::s_axis_s2mm_tuser[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::S_AXIS_S2MM::s_axis_s2mm_tvalid
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::S_AXIS_S2MM::s_axis_s2mm_tlast
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::m_axi_s2mm_aclk
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::s_axis_s2mm_aclk
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::mm2s_fsync
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::s2mm_fsync
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::M_AXI_S2MM::m_axi_s2mm_awready
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::M_AXI_S2MM::m_axi_s2mm_wready
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::M_AXI_S2MM::m_axi_s2mm_bresp[1:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:VDMA_0::M_AXI_S2MM::m_axi_s2mm_bvalid
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI4_Stream_to_Video_Out_0::fid
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI4_Stream_to_Video_Out_0::vid_io_out_reset
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI4_Stream_to_Video_Out_0::vtg_field_id
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_arid[4:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_arlock[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_arqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awaddr[31:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awburst[1:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awcache[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awid[4:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awlen[7:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awlock[0:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awprot[2:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awqos[3:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awsize[2:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_awvalid
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_bready
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_wdata[63:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_wlast
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_wstrb[7:0]
+
+[warn - InstPort] input port lack of connection
+    SocInstPort input:AXI_Matrix_2::US_AXI0::us0_wvalid
+
+[error - InstPort] port lack of driver
+    SocInstPort input:VDMA_0::m_axi_s2mm_aclk
+
+[error - InstPort] port lack of driver
+    SocInstPort input:VDMA_0::s_axis_s2mm_aclk
+

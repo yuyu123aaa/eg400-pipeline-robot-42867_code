@@ -1,0 +1,305 @@
+/*
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * apu_pipe_center.c —— 管道居中控制实现
+ * ===========================================================================
+ *  逐行对照传承项目 pipe_center_control.c（241 行）写成，**逻辑零改动**。
+ *  只做了改名（PipeCenter_* -> apu_pipe_center_*）和类型名调整。
+ * ===========================================================================
+ */
+
+#include <math.h>
+#include <string.h>
+
+#include "apu_pipe_center.h"
+
+static float clampf(float value, float minimum, float maximum)
+{
+	if (value < minimum)
+		return minimum;
+	if (value > maximum)
+		return maximum;
+	return value;
+}
+
+float apu_pipe_center_wrap180(float angle_deg)
+{
+	if (!isfinite(angle_deg))
+		return angle_deg;
+
+	while (angle_deg > 180.0f)
+		angle_deg -= 360.0f;
+	while (angle_deg < -180.0f)
+		angle_deg += 360.0f;
+	return angle_deg;
+}
+
+int apu_pipe_center_params_valid(const apu_pipe_center_params_t *params)
+{
+	/* 与传承项目逐条一致 —— 少一条都可能让非法参数混进来 */
+	return params != 0 &&
+	       isfinite(params->kp) && params->kp >= 0.0f && params->kp <= 100.0f &&
+	       isfinite(params->ki) && params->ki >= 0.0f && params->ki <= 20.0f &&
+	       isfinite(params->kd) && params->kd >= 0.0f && params->kd <= 20.0f &&
+	       isfinite(params->yaw_rate_damping) &&
+	       params->yaw_rate_damping >= 0.0f && params->yaw_rate_damping <= 2.0f &&
+	       isfinite(params->integral_limit) && params->integral_limit >= 0.0f &&
+	       isfinite(params->turn_limit) && params->turn_limit > 0.0f &&
+	       isfinite(params->base_speed) && params->base_speed >= 0.0f &&
+	       isfinite(params->min_output) &&
+	       isfinite(params->max_output) &&
+	       isfinite(params->heading_kp) &&
+	       params->heading_kp >= 0.0f && params->heading_kp <= 2.0f &&
+	       isfinite(params->left_trim) &&
+	       params->left_trim >= 0.50f && params->left_trim <= 1.00f &&
+	       isfinite(params->right_trim) &&
+	       params->right_trim >= 0.50f && params->right_trim <= 1.00f &&
+	       isfinite(params->front_yaw_share) &&
+	       params->front_yaw_share >= 0.0f && params->front_yaw_share <= 1.0f &&
+	       isfinite(params->rear_yaw_share) &&
+	       params->rear_yaw_share >= 0.0f && params->rear_yaw_share <= 1.0f &&
+	       isfinite(params->base_front_share) &&
+	       params->base_front_share >= 0.0f && params->base_front_share <= 1.0f &&
+	       /* 前后分配比例必须加起来等于 1 */
+	       fabsf(params->front_yaw_share + params->rear_yaw_share - 1.0f) <= 0.001f &&
+	       /* 速度包络必须自洽 */
+	       params->min_output <= params->base_speed &&
+	       params->base_speed <= params->max_output &&
+	       params->turn_limit <= params->max_output - params->min_output;
+}
+
+void apu_pipe_center_reset(apu_pipe_center_state_t *state)
+{
+	if (state != 0)
+		memset(state, 0, sizeof(*state));
+}
+
+apu_pipe_center_output_t apu_pipe_center_update(
+	apu_pipe_center_state_t *state,
+	const apu_pipe_center_params_t *params,
+	const apu_pipe_center_input_t *input,
+	float dt_s)
+{
+	apu_pipe_center_output_t output;
+	float distance_sum;
+	float center_output;
+
+	memset(&output, 0, sizeof(output));
+
+	/* ---- 入口检查（任何一项不合法就返回 valid=0，上层会当故障处理） ---- */
+	if (state == 0 || input == 0 ||
+	    !apu_pipe_center_params_valid(params) ||
+	    !isfinite(input->left_mm) ||
+	    !isfinite(input->right_mm) ||
+	    !isfinite(input->yaw_deg) ||
+	    !isfinite(input->target_yaw_deg) ||
+	    input->left_mm <= 0.0f ||
+	    input->right_mm <= 0.0f ||
+	    !isfinite(dt_s) || dt_s <= 0.0f)
+		return output;
+
+	distance_sum = input->left_mm + input->right_mm;
+	if (!isfinite(distance_sum) || distance_sum <= 0.0f)
+		return output;
+
+	/* ---- ① 居中误差：正 = 偏右（左边更远） ---- */
+	output.center_error = (input->left_mm - input->right_mm) / distance_sum;
+
+	if (state->center_history_valid)
+		output.center_rate =
+			(output.center_error - state->last_center_error) / dt_s;
+	state->last_center_error = output.center_error;
+	state->center_history_valid = 1;
+
+	/* ---- ② 偏航角速度（用 Wrap180 防跨 ±180 跳变） ---- */
+	if (state->yaw_history_valid)
+		output.yaw_rate_dps =
+			apu_pipe_center_wrap180(input->yaw_deg - state->last_yaw_deg) / dt_s;
+	state->last_yaw_deg = input->yaw_deg;
+	state->yaw_history_valid = 1;
+
+	/* ---- ③ 积分（带限幅，防止积分饱和） ---- */
+	state->integral += output.center_error * dt_s;
+	state->integral = clampf(state->integral,
+				 -params->integral_limit, params->integral_limit);
+
+	center_output = params->kp * output.center_error +
+			params->ki * state->integral +
+			params->kd * output.center_rate;
+
+	/* ---- ④ 航向保持 + 阻尼 ---- */
+	output.heading_error_deg =
+		apu_pipe_center_wrap180(input->target_yaw_deg - input->yaw_deg);
+
+	output.turn_output = center_output +
+			     params->heading_kp * output.heading_error_deg -
+			     params->yaw_rate_damping * output.yaw_rate_dps;
+	output.turn_output = clampf(output.turn_output,
+				    -params->turn_limit, params->turn_limit);
+
+	/* ---- ⑤ 四路推进器分配（★ 2026-10-01 重构） ----
+	 * ===========================================================================
+	 *  【改之前的问题】
+	 *      后推 = base_speed ∓ rear_turn      ← 独扛全部直行
+	 *      前推 = ∓ front_turn                ← 只有转向分量，直行时**恒为 0**
+	 *    上板现象：前进时前两个桨几乎不出力，"四推进器"实际只用了两个。
+	 *
+	 *  【改之后：四路都出直行、四路都出转向】
+	 *      每路输出 = ( 直行基线 ∓ 转向差动量 ) × 左右trim ，再限幅
+	 *    · 直行基线按 base_front_share 在前/后之间分配：
+	 *          前路 = base_speed × base_front_share
+	 *          后路 = base_speed × (1 - base_front_share)
+	 *      base_front_share = 0.5 ⇒ 四路完全等权出力（默认）
+	 *    · 转向：左减右加（= 向左转），前后各按 yaw_share 出自己那份
+	 *    · 转向项**不乘 trim**，所以左右完全对称（这是 09-28 修的缺陷）
+	 *
+	 *  【左右怎么转 —— 以左转(turn_output > 0)为例】
+	 *      左前 减、左后 减、右前 加、右后 加
+	 *      ⇒ 左侧被往后拽、右侧被往前推 ⇒ 船头向左转 ✔
+	 *      （左前/右后 与 右前/左后 构成对角对，四路一起产生同向偏航力矩）
+	 *
+	 *  【参数单位说明（重要）】
+	 *      base_speed 现在是**每一路**的基准百分比（旧版是"两路后推各自的值"）。
+	 *      旧版总推力 ≈ 2 × base_speed × trim；新版 ≈ base_speed × Σtrim。
+	 *      默认 trim = 0.70/1.00，所以两版总推力基本相当，不用重标 base_speed。
+	 * =========================================================================== */
+	{
+		float base_front = params->base_speed * params->base_front_share;
+		float base_rear  = params->base_speed * (1.0f - params->base_front_share);
+
+		/* 名义直行基线：min_output 在这里就生效（它本来就是"电调死区补偿"）
+		 * ⚠️ min_output 只作用于**基准段**，不作用在转向下降段 —— 见下方说明。 */
+		float nom_lf = clampf(base_front * params->left_trim,
+				      params->min_output, params->max_output);
+		float nom_rf = clampf(base_front * params->right_trim,
+				      params->min_output, params->max_output);
+		float nom_lr = clampf(base_rear  * params->left_trim,
+				      params->min_output, params->max_output);
+		float nom_rr = clampf(base_rear  * params->right_trim,
+				      params->min_output, params->max_output);
+
+		/* ---- 转向饱和：左右两个方向分别求可用幅值，取【较小者】作为统一上限 ----
+		 *  设 turn_output = ±turn_mag（turn_mag ≥ 0）。
+		 *  左转(turn_mag>0)：左路下降、右路上升
+		 *      左路下降余量 = nom_L              （降到 0）
+		 *      右路上升余量 = max_output − nom_R （升到上限）
+		 *  右转(turn_mag<0)：右路下降、左路上升，对称地同理。
+		 *  每路的转向分量幅值 = turn_mag × 该路 yaw_share，所以
+		 *      该路允许的 turn_mag = 余量 / yaw_share
+		 *  对四路取最小，就得到这一方向真正可用的 turn_mag。
+		 *
+		 *  ★ 关键：最后要取 |左转上限| 与 |右转上限| 的**较小者**。为什么？
+		 *    两个方向的上限天然不同（左前 nom=3.5、右前 nom=5.0，因为 trim 不同），
+		 *    不取小的话左转能到 4.375、右转能到 6.25，差分就会差 19%（实测）。
+		 *    取较小者 ⇒ 两个方向**完全对称**，代价是舍弃较强方向的富余能力。
+		 *
+		 *  注：上升侧的余量（max_output−nom）通常远大于下降侧，所以真正的瓶颈
+		 *      一般落在"下降侧到 0"上 —— 也就是**转向能力 ≈ 该路的名义基线**。
+		 *      想让转向更有力，就加大 base_speed（提高 nom）而不是加大 turn_limit。 */
+		{
+			float cap_pos = params->turn_limit;   /* 左转可用幅值 */
+			float cap_neg = params->turn_limit;   /* 右转可用幅值 */
+
+			struct { float nom, share; int left; } ln[4];
+			int i;
+
+			ln[0].nom = nom_lf; ln[0].share = params->front_yaw_share; ln[0].left = 1;
+			ln[1].nom = nom_rf; ln[1].share = params->front_yaw_share; ln[1].left = 0;
+			ln[2].nom = nom_lr; ln[2].share = params->rear_yaw_share;  ln[2].left = 1;
+			ln[3].nom = nom_rr; ln[3].share = params->rear_yaw_share;  ln[3].left = 0;
+
+			for (i = 0; i < 4; i++) {
+				float sh = ln[i].share;
+				float desc, asc, lim;
+
+				if (sh <= 0.0f)
+					continue;
+
+				desc = ln[i].nom;                          /* 下降：到 0 */
+				asc  = params->max_output - ln[i].nom;     /* 上升：到上限 */
+
+				/* 左转(turn>0)：左路下降、右路上升 → 受 desc（左）/ asc（右）限制 */
+				lim = ln[i].left ? desc : asc;
+				if (lim / sh < cap_pos)
+					cap_pos = lim / sh;
+
+				/* 右转(turn<0)：右路下降、左路上升 */
+				lim = ln[i].left ? asc : desc;
+				if (lim / sh < cap_neg)
+					cap_neg = lim / sh;
+			}
+
+			/* ★ 取两个方向的较小者 ⇒ 左右完全对称 */
+			{
+				float cap = (cap_pos < cap_neg) ? cap_pos : cap_neg;
+				float mag = output.turn_output;
+				float amag;
+
+				if (cap < 0.0f)
+					cap = 0.0f;
+
+				amag = (mag < 0.0f) ? -mag : mag;
+				if (amag > cap)
+					amag = cap;                /* 超了就削平（左右同时削，仍对称） */
+
+				output.turn_output = (mag < 0.0f) ? -amag : amag;
+			}
+		}
+
+		{
+			float ft = output.turn_output * params->front_yaw_share;
+			float rt = output.turn_output * params->rear_yaw_share;
+
+			/* 左减右加 ⇒ 左转；下限 0（拖回转速），上限 max_output */
+			output.left_front  = clampf(nom_lf - ft, 0.0f, params->max_output);
+			output.right_front = clampf(nom_rf + ft, 0.0f, params->max_output);
+			output.left_rear   = clampf(nom_lr - rt, 0.0f, params->max_output);
+			output.right_rear  = clampf(nom_rr + rt, 0.0f, params->max_output);
+		}
+	}
+
+	output.valid = 1;
+	return output;
+}
+
+/* ---------------------------------------------------------------------------
+ * 10Hz 调度
+ * --------------------------------------------------------------------------- */
+void apu_pipe_center_schedule_reset(apu_pipe_center_schedule_t *schedule,
+				    uint32_t now_tick,
+				    int run_immediately)
+{
+	if (schedule == 0)
+		return;
+
+	/* 想"立刻跑一次"就把 last_tick 往前推一个周期 */
+	schedule->last_tick = run_immediately
+				      ? (now_tick - PIPE_CENTER_CONTROL_PERIOD_TICKS)
+				      : now_tick;
+	schedule->initialized = 1;
+}
+
+int apu_pipe_center_schedule_is_due(apu_pipe_center_schedule_t *schedule,
+				    uint32_t now_tick)
+{
+	uint32_t elapsed;
+	uint32_t elapsed_periods;
+
+	if (schedule == 0)
+		return 0;
+
+	if (!schedule->initialized) {
+		apu_pipe_center_schedule_reset(schedule, now_tick, 0);
+		return 0;
+	}
+
+	elapsed = now_tick - schedule->last_tick;
+	if (elapsed < PIPE_CENTER_CONTROL_PERIOD_TICKS)
+		return 0;
+
+	/* ★ 对齐到整周期，而不是直接 last_tick = now_tick
+	 *   —— 这样即使某轮晚了几毫秒，长期也不会累积漂移（原项目就是这么做的） */
+	elapsed_periods = elapsed / PIPE_CENTER_CONTROL_PERIOD_TICKS;
+	schedule->last_tick += elapsed_periods * PIPE_CENTER_CONTROL_PERIOD_TICKS;
+	return 1;
+}

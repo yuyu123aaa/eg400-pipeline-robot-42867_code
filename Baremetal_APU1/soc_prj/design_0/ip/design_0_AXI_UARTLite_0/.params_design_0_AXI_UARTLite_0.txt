@@ -1,0 +1,10 @@
+freq_Mhz : 75 : U : En :  : 10 : 300
+AL_BAUDRATE : 9600 : U : En : 110;;300;;1200;;2400;;4800;;9600;;19200;;38400;;57600;;115200;;128000;;230400;;460800;;921600 :  : 
+AL_DATA_BITS : 8 : U : En :  : 5 : 8
+AL_USE_PARITY : 0 : U : En :  :  : 
+ODD : 1 : U : Dis :  :  : 
+EVEN : 0 : U : Dis :  :  : 
+AL_AXI_ACLK_FREQ_HZ : 75000000 : G : En :  :  : 
+AL_ODD_PARITY : 1 : G : En :  :  : 
+AL_FIFO_DEPTH : 16 : U : En : 16;;32;;64 :  : 
+AL_USE_DYN_BAUDRATE : 0 : U : En :  :  : 

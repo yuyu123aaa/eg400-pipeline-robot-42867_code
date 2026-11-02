@@ -1,0 +1,11 @@
+Test-NetConnection 192.168.137.101 -Port 22
+启动web：
+$Board = 'root@192.168.137.101'
+ssh $Board 'cd /opt/eg400_linux_app && EG400_WEB_HOST=0.0.0.0 EG400_WEB_PORT=5000 EG400_WEB_ONLY=1 EG400_SIMULATION_MODE=1 EG400_HARDWARE_CONTROL_ENABLED=0 sh scripts/run_web_smoke.sh'
+
+
+停止web:
+ssh $Board 'cd /opt/eg400_linux_app; if [ -f logs/web_smoke.pid ]; then kill "$(cat logs/web_smoke.pid)" 2>/dev/null || true; rm -f logs/web_smoke.pid; fi'
+
+
+http://192.168.137.101:5000/

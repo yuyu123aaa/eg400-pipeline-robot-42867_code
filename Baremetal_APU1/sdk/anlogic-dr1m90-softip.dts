@@ -1,0 +1,140 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+
+&soc {
+    	axi_vdma0: vdma@80200000{
+        	/* VDMA: VDMA_0 */
+        	status = "okay";
+        	reg = <0x0 0x80200000 0x0 0x1000>;
+        	interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>;
+        	#dma-cells = <1>;
+        	compatible = "anlogic,axi-vdma";
+        	interrupt-parent = <&gic>;
+        	anlogic,flush-fsync = <0x1>;
+        	anlogic,addrwidth = <0x20>;
+        	anlogic,num-fstores = <0x3>;
+
+        	dma-channel@80200000{
+            		interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>;
+            		compatible = "anlogic,axi-vdma-mm2s-channel";
+            		anlogic,datawidth = <0x18>;
+
+        	};
+
+
+    	};
+
+	soft_npu0: soft_npu@1f0000000{
+        	/* Video_NPU: Video_NPU_0 */
+        	status = "okay";
+        	reg = <0x1 0xf0000000 0x0 0x10000>;
+        	interrupts = <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
+        	compatible = "anlogic,soft_npu";
+
+
+
+    	};
+
+	mipicam: mipicam@80300000 {
+		compatible = "anlogic,mipicam";
+		reg = <0x0 0x80300000 0x0 0x00010000>;
+		interrupts = <GIC_SPI 82 IRQ_TYPE_LEVEL_HIGH>;
+	};
+
+	
+	vdmafb@80100000 {                         // base address is from td project
+		compatible = "anlogic,vdmafb";
+		reg = <0x0 0x80100000 0x0 0x1000>;    // base address is from td project, range is:0x1000
+		dmas = <&axi_vdma0 0>;                // The name must match the name in the soc_plat_pl.dtsi(included in hpf), especially when using multiple VDMA.
+		dma-names = "vdma";
+		status = "okay";
+		pixel-format = "RGB888";
+		display-timings {
+			native-mode = <&timing_1920x1080>; // Resolution selection 
+			timing_800x480: timing0 {
+				clock-frequency = <25000000>;
+				hactive = <800>;
+				vactive = <480>;
+				hback-porch = <30>;
+				hfront-porch = <80>;
+				hsync-len = <10>;
+				vback-porch = <10>;
+				vfront-porch = <25>;
+				vsync-len = <5>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <1>;
+				pixelclk-active = <0>;
+			};
+			timing_1920x1080: timing1 {
+				clock-frequency = <150000000>;
+				hactive = <1920>;
+				vactive = <1080>;
+				hback-porch = <148>;
+				hfront-porch = <88>;
+				hsync-len = <44>;
+				vback-porch = <36>;
+				vfront-porch = <4>;
+				vsync-len = <5>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <1>;
+				pixelclk-active = <0>;
+			};
+			timing_1280x720: timing2 {
+				clock-frequency = <75000000>;
+				hactive = <1280>;
+				vactive = <720>;
+				hback-porch = <220>;
+				hfront-porch = <110>;
+				hsync-len = <40>;
+				vback-porch = <20>;
+				vfront-porch = <5>;
+				vsync-len = <5>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <1>;
+				pixelclk-active = <0>;
+			};
+			timing_800x600: timing3 {
+				clock-frequency = <40000000>;
+				hactive = <800>;
+				vactive = <600>;
+				hback-porch = <88>;
+				hfront-porch = <40>;
+				hsync-len = <128>;
+				vback-porch = <23>;
+				vfront-porch = <1>;
+				vsync-len = <4>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <1>;
+				pixelclk-active = <0>;
+			};
+			timing_1920x1080_60: timing4 {
+				clock-frequency = <148500000>;
+				hactive = <1920>;
+				vactive = <1080>;
+				hback-porch = <148>;
+				hfront-porch = <88>;
+				hsync-len = <44>;
+				vback-porch = <36>;
+				vfront-porch = <4>;
+				vsync-len = <5>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <1>;
+				pixelclk-active = <0>;
+			};
+		};
+	};
+
+	axi_dynclk@80101000 {                  // base address = vdmafb base address + 0x1000
+		compatible = "anlogic,dynclk";    
+		reg = <0x0 0x80101000 0x0 0x1000>; // base address = vdmafb base address + 0x1000, range = 0x1000
+		refclk = <50000000>;			   // ref clock frequency
+		expclk = <150000000>;              // Pixel clock frequency
+		};
+
+};
+
+

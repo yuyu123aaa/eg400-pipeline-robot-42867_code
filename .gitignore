@@ -1,0 +1,45 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# ===== 编译中间产物 =====
+*.o
+*.d
+*.su
+*.gcda
+*.gcno
+*.log
+*.logw
+
+# ===== FPGA / EDA 运行产物 =====
+soc_prj/**/soc_prj_Runs/
+*.db
+*.pdom
+*.rpt
+*.summary
+.vivado/
+*.jou
+*.str
+
+# ===== Eclipse / IDE =====
+.metadata/
+.vscode/
+.idea/
+*.swp
+*~
+
+# ===== 运行数据（巡检照片/视频/日志，会越来越大）=====
+Linux_APU0/logs/
+Linux_APU0/data/
+视觉_NPU/11111/yolo/runs/
+视觉_NPU/11111/yolo/dataset/
+
+# ===== 系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
